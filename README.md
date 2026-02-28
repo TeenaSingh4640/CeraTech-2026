@@ -141,17 +141,4 @@ The design engine performs:
 - **Export Options**: Multiple format support
 
 ---
-
-## 🚧 Roadmap
-
-### Coming Soon
-- ✅ PDF Export functionality
-- ✅ Advanced 3D viewer with WebGL
-- ✅ Cloud storage integration
-- ✅ Multi-user collaboration
-- ✅ Mobile app (iOS/Android)
-- ✅ BIM integration
-- ✅ Real-time cost database updates
-- ✅ Machine learning-based optimization
-
 </div>
