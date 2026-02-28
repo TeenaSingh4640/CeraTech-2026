@@ -1,0 +1,410 @@
+═══════════════════════════════════════════════════════════════════════════════
+   PROFESSIONAL 3D ARCHITECTURAL RENDERING PROMPTS
+   Ultra-Realistic Building Visualization Templates
+═══════════════════════════════════════════════════════════════════════════════
+
+Version: 2.0 | Date: 2026-02-26
+Compatible with: Midjourney, DALL-E 3, Stable Diffusion XL, Firefly, Ideogram
+Use Case: Photorealistic architectural visualization from design parameters
+
+═══════════════════════════════════════════════════════════════════════════════
+MASTER TEMPLATE - ULTRA-REALISTIC RENDERING
+═══════════════════════════════════════════════════════════════════════════════
+
+Ultra-realistic 3D architectural rendering of a [X]-storey [building type] 
+on a [plot size] site, modern structural concrete frame, 
+clear column grid alignment, climate-responsive façade, 
+realistic materials, balconies, window grid symmetry, 
+professional architectural visualization, 
+natural daylight, high detail, 4K resolution.
+
+═══════════════════════════════════════════════════════════════════════════════
+COMPLETE RENDERING PROMPT STRUCTURE
+═══════════════════════════════════════════════════════════════════════════════
+
+[VIEWING ANGLE] + [BUILDING DESCRIPTION] + [STRUCTURAL ELEMENTS] + 
+[FACADE DETAILS] + [MATERIALS] + [CONTEXT] + [LIGHTING] + 
+[ATMOSPHERE] + [TECHNICAL QUALITY]
+
+
+COMPONENT BREAKDOWN:
+══════════════════════════════════════════════════════════════════════════════
+
+1. VIEWING ANGLE OPTIONS:
+   - "Eye-level perspective view"
+   - "Low-angle dramatic view from street level"
+   - "Aerial 45-degree isometric view"
+   - "Bird's eye view from above"
+   - "Entrance-focused frontal view"
+   - "Corner perspective showing two facades"
+   - "Worm's eye view emphasizing height"
+
+2. BUILDING DESCRIPTION:
+   - "[X]-storey [residential/commercial/institutional] building"
+   - "[Height]m tall [contemporary/modern/brutalist] structure"
+   - "[L×W×H] meter [mixed-use/office] complex"
+   - "High-rise [apartment/office] tower with podium"
+
+3. STRUCTURAL ELEMENTS:
+   - "exposed reinforced concrete structural frame"
+   - "clear column grid alignment at [X]m spacing"
+   - "visible beam-column connections"
+   - "structural grid expressed in facade"
+   - "cantilevered floor slabs"
+   - "transfer beams at podium level"
+
+4. FACADE DETAILS:
+   - "climate-responsive facade with [shading strategy]"
+   - "window grid symmetry, [X]m module repetition"
+   - "floor-to-floor glass curtain wall with aluminum mullions"
+   - "recessed balconies with glass railings"
+   - "horizontal banding spandrels"
+   - "vertical fins for solar control"
+   - "deep overhangs and canopies"
+
+5. MATERIALS SPECIFICATION:
+   - "fair-faced concrete with smooth formwork finish"
+   - "double-glazed low-E glass with slight blue tint"
+   - "brushed aluminum window frames"
+   - "natural stone cladding at podium"
+   - "white painted render on selected surfaces"
+   - "exposed aggregate concrete texture"
+
+6. CONTEXT & SITE:
+   - "on [plot size] urban site"
+   - "landscaped green plaza at ground level"
+   - "tree-lined street with pedestrian walkway"
+   - "adjacent [context buildings] visible"
+   - "paved entrance forecourt"
+   - "integrated parking ramp"
+
+7. LIGHTING CONDITIONS:
+   - "natural daylight, golden hour soft shadows"
+   - "midday sun with crisp shadows"
+   - "overcast diffused lighting"
+   - "dusk blue hour with interior lights glowing"
+   - "early morning side lighting"
+
+8. ATMOSPHERE & SCALE:
+   - "people walking at ground level for scale"
+   - "cars parked along street"
+   - "clear blue sky with wispy clouds"
+   - "urban skyline in background"
+   - "professional architectural photography style"
+
+9. TECHNICAL QUALITY:
+   - "photorealistic rendering, high detail"
+   - "4K resolution, sharp focus"
+   - "realistic material textures and reflections"
+   - "accurate perspective and proportions"
+   - "architectural visualization quality"
+   - "Unreal Engine 5 quality render"
+
+═══════════════════════════════════════════════════════════════════════════════
+READY-TO-USE PROMPT TEMPLATES
+═══════════════════════════════════════════════════════════════════════════════
+
+TEMPLATE 1: RESIDENTIAL HIGH-RISE
+───────────────────────────────────────────────────────────────────────────────
+Ultra-realistic 3D architectural rendering of a 15-storey residential apartment 
+building on a 50m × 30m urban site, modern reinforced concrete structural frame 
+with 4.5m column grid clearly visible, climate-responsive facade with deep 
+1.5m overhangs and vertical solar fins, fair-faced concrete structure with 
+glass curtain walls, recessed balconies with glass railings on every floor, 
+repetitive window module grid symmetry, ground floor double-height entrance 
+lobby with full glazing, landscaped plaza with trees, people walking for scale, 
+professional architectural visualization, natural midday lighting with soft 
+shadows, clear blue sky, photorealistic materials and textures, 4K resolution, 
+architectural photography style, high detail, eye-level corner perspective view.
+
+TEMPLATE 2: COMMERCIAL OFFICE BUILDING  
+───────────────────────────────────────────────────────────────────────────────
+Photorealistic architectural rendering of an 8-storey commercial office building 
+with 2-storey podium, 60m × 40m plot, exposed reinforced concrete structural 
+grid at 6m spacing, floor-to-floor glass curtain wall facade with horizontal 
+aluminum mullions, climate-responsive design with external horizontal louvers, 
+ground level retail with full-height glazing, entrance canopy projection, 
+rooftop with visible HVAC equipment and solar panels, fair-faced concrete 
+columns and beams expressed on facade, brushed aluminum window frames, 
+tree-lined street context, cars and pedestrians for scale, golden hour 
+natural lighting with warm glow, urban background, professional architectural 
+visualization, 4K ultra-high detail, low-angle perspective emphasizing scale.
+
+TEMPLATE 3: INSTITUTIONAL/EDUCATIONAL
+───────────────────────────────────────────────────────────────────────────────
+Ultra-realistic 3D rendering of a 4-storey educational institutional building, 
+80m × 50m campus site, modern concrete frame structure with clear 6m × 6m 
+column grid, climate-responsive facade with deep shaded corridors and 
+cross-ventilation, white painted concrete with large operable windows, 
+repetitive bay rhythm creating visual symmetry, ground floor open colonnade 
+with exposed columns, central courtyard visible, clay tile sloped roof sections, 
+natural stone base cladding, landscaped green surroundings with mature trees, 
+students and faculty for scale, soft overcast natural daylight, tropical 
+climate context, professional architectural photography, photorealistic 
+materials, 4K resolution, aerial 45-degree isometric perspective view.
+
+TEMPLATE 4: MIXED-USE DEVELOPMENT
+───────────────────────────────────────────────────────────────────────────────
+Photorealistic architectural visualization of a 20-storey mixed-use tower, 
+residential upper floors over commercial podium, 55m × 35m footprint, 
+structural concrete frame with expressed column grid, differentiated facade 
+treatment between podium and tower, ground floor retail with full glazing, 
+residential floors with balconies and window grid symmetry, glass and concrete 
+materiality, aluminum window frames, horizontal banding spandrels, rooftop 
+terrace amenity space visible, busy urban street context with cars and people, 
+natural daylight golden hour, soft shadows, clear sky, photorealistic textures 
+and reflections, 4K ultra-high detail, corner perspective showing main facade 
+and side elevation.
+
+TEMPLATE 5: BRUTALIST EXPRESSION
+───────────────────────────────────────────────────────────────────────────────
+Ultra-realistic 3D architectural rendering of a 12-storey brutalist concrete 
+building, bold geometric massing, exposed board-formed concrete with visible 
+tie holes and formwork texture, deep recessed windows creating strong shadow 
+patterns, cantilevered floor plates, structural columns and beams prominently 
+expressed, minimal glazing with heavy concrete frames, rooftop mechanical 
+equipment visible, raw concrete materiality throughout, dramatic low-angle view 
+emphasizing monumentality, people at ground level for scale contrast, harsh 
+midday lighting creating dramatic shadows, clear blue sky, professional 
+architectural photography, photorealistic concrete aging and weathering, 
+4K resolution, high detail texture work.
+
+TEMPLATE 6: GLASS & STEEL CONTEMPORARY
+───────────────────────────────────────────────────────────────────────────────
+Photorealistic rendering of a 10-storey contemporary glass and steel office 
+building, 70m × 45m site, structural steel frame with concealed connections, 
+full-height curtain wall facade, floor-to-ceiling glazing with minimal 
+mullions, reflective blue-tinted glass, expressed horizontal floor plates, 
+ground floor transparent lobby with visible interior, external steel bracing 
+as architectural feature, cantilevered entrance canopy, polished granite 
+plaza, water feature at entrance, modern urban context, glass reflections 
+showing sky and surroundings, dusk blue hour lighting with interior lights 
+glowing warmly, professional visualization, photorealistic glass and steel 
+materials, 4K resolution, eye-level perspective from plaza.
+
+═══════════════════════════════════════════════════════════════════════════════
+VIEW-SPECIFIC RENDERING PROMPTS
+═══════════════════════════════════════════════════════════════════════════════
+
+PERSPECTIVE VIEW (Main Hero Shot):
+───────────────────────────────────────────────────────────────────────────────
+Eye-level corner perspective 3D rendering of [building description], showing 
+two facades simultaneously, [structural details], [facade treatment], 
+[materials], foreground with landscaping and people for scale, middle-ground 
+showing building entrance and ground floor activity, background with urban 
+context, natural [lighting condition], photorealistic, 4K detail, professional 
+architectural visualization.
+
+ENTRANCE VIEW (Human Scale):
+───────────────────────────────────────────────────────────────────────────────
+Ground-level frontal view of [building] entrance, showcasing [height] double-
+height lobby with full glazing, structural columns framing entrance, [material] 
+canopy projection, people entering and exiting for scale, detailed ground plane 
+with paving pattern, planters, street furniture, shallow depth of field with 
+entrance in sharp focus, natural daylight, welcoming atmosphere, photorealistic 
+rendering, 4K resolution, architectural photography style.
+
+AERIAL VIEW (Urban Context):
+───────────────────────────────────────────────────────────────────────────────
+Aerial isometric 3D rendering at 45-degree angle showing [building] in urban 
+context, [plot dimensions] site clearly visible, rooftop details including 
+mechanical equipment, solar panels, terrace spaces, full building massing and 
+form, surrounding streets and adjacent buildings, site boundary and setbacks 
+visible, landscaping layout, parking access, [structural grid] expressed in 
+plan, natural daylight from above, soft shadows, urban planning view style, 
+photorealistic, 4K resolution, high detail.
+
+DUSK VIEW (Atmospheric):
+───────────────────────────────────────────────────────────────────────────────
+Dusk blue hour 3D rendering of [building], interior lights glowing warmly 
+through windows creating rhythm pattern, facade lighting highlighting 
+architectural features, deep blue sky gradient, street lights illuminated, 
+silhouette of building against evening sky, [structural and material details], 
+atmospheric haze, romantic architectural visualization, people visible as 
+silhouettes, professional night photography style, photorealistic lighting 
+and materials, 4K resolution, eye-level perspective.
+
+DETAIL VIEW (Material Focus):
+───────────────────────────────────────────────────────────────────────────────
+Close-up detail 3D rendering showing [building] facade module, structural 
+concrete frame connection detail, [column size] column to [beam size] beam 
+junction, curtain wall mullion system, glass-to-frame interface, balcony 
+railing detail, material transitions between concrete and glass, weathering 
+and texture of materials, realistic shadows and depth, professional 
+architectural detail photography, macro perspective, photorealistic textures, 
+4K ultra-high resolution, sharp focus on connection details.
+
+═══════════════════════════════════════════════════════════════════════════════
+CLIMATE-SPECIFIC RENDERING VARIATIONS
+═══════════════════════════════════════════════════════════════════════════════
+
+TROPICAL CLIMATE:
+───────────────────────────────────────────────────────────────────────────────
+[Base prompt] + deep 1.5-2m roof overhangs casting strong shadows, vertical 
+solar fins on east-west facades, cross-ventilation visible through operable 
+windows, lush tropical landscaping with palm trees, humid atmosphere with 
+slight haze, intense natural sunlight with harsh shadows, bright clear sky, 
+outdoor ceiling fans visible, shaded ground floor colonnade, monsoon-ready 
+drainage visible, tropical architectural vernacular integration.
+
+ARID/DESERT CLIMATE:
+───────────────────────────────────────────────────────────────────────────────
+[Base prompt] + compact building form minimizing surface area, minimal glazing 
+with deep recessed windows, thick walls visible, thermal mass concrete 
+construction, horizontal sun shading, courtyard visible for stack ventilation, 
+desert landscape with sparse vegetation, intense bright sunlight with dark 
+shadows, clear blue cloudless sky, sand-colored earth tones, heat shimmer 
+effect in distance, water conservation features visible, harsh climate response.
+
+TEMPERATE CLIMATE:
+───────────────────────────────────────────────────────────────────────────────
+[Base prompt] + balanced glazing-to-wall ratio 40-50%, operable windows for 
+natural ventilation, deciduous trees in landscape changing with season, 
+moderate overhangs, four-season design with both heating and cooling 
+considerations, comfortable outdoor spaces at ground level, mixed sky with 
+clouds, soft natural lighting, green surroundings, rain drainage systems 
+visible, balconies designed for seasonal use.
+
+COLD CLIMATE:
+───────────────────────────────────────────────────────────────────────────────
+[Base prompt] + triple-glazed windows with minimal frames, compact building 
+form for heat retention, south-facing glazing for solar gain, minimal north 
+openings, insulated facade panels visible, snow on roof and ground, evergreen 
+trees in landscape, covered entrance to protect from snow, heating system 
+vents visible, cold blue winter light, overcast sky, snow removal equipment 
+access, winter architectural photography style.
+
+═══════════════════════════════════════════════════════════════════════════════
+ARCHITECTURAL STYLE VARIATIONS
+═══════════════════════════════════════════════════════════════════════════════
+
+MODERN MINIMALIST:
+───────────────────────────────────────────────────────────────────────────────
+Clean geometric forms, flat roofs, white painted surfaces, large floor-to-
+ceiling glass panels, minimal ornamentation, expressed structural grid, 
+horizontal emphasis, cantilevered elements, integration of indoor-outdoor 
+spaces, simple material palette (concrete, glass, steel), rational proportions.
+
+BRUTALIST/RAW CONCRETE:
+───────────────────────────────────────────────────────────────────────────────
+Massive concrete forms, board-formed or bush-hammered concrete texture, 
+sculptural bold geometry, deep shadow recesses, heavy structural expression, 
+minimal windows with thick concrete frames, monolithic appearance, exposed 
+concrete throughout, dramatic cantilevered masses, monumental scale.
+
+CONTEMPORARY GLASS:
+───────────────────────────────────────────────────────────────────────────────
+Extensive curtain wall glazing, transparent and translucent surfaces, reflective 
+glass showing sky and context, minimal visible structure, sleek aluminum or 
+steel frames, lightweight appearance, floor-to-ceiling transparency, expressed 
+floor slabs as horizontal lines, modern high-tech aesthetic.
+
+SUSTAINABLE/GREEN:
+───────────────────────────────────────────────────────────────────────────────
+Green walls and vertical gardens, rooftop garden visible, solar panels 
+integrated, natural ventilation chimneys, rainwater harvesting visible, 
+recycled materials, timber elements, passive design features, wind turbines, 
+extensive landscaping, biophilic design elements, LEED/green building aesthetic.
+
+═══════════════════════════════════════════════════════════════════════════════
+TECHNICAL PARAMETERS FOR IMAGE GENERATION
+═══════════════════════════════════════════════════════════════════════════════
+
+MIDJOURNEY SPECIFIC:
+--ar 16:9 --style raw --stylize 250 --v 6 
+
+STABLE DIFFUSION SETTINGS:
+Steps: 50-80
+CFG Scale: 7-9
+Sampler: DPM++ 2M Karras
+Resolution: 1024x1024 or 1920x1080
+
+QUALITY KEYWORDS:
+- photorealistic rendering
+- architectural visualization
+- 4K resolution
+- ultra high detail
+- professional photography
+- Unreal Engine 5 quality
+- ray traced lighting
+- physically accurate materials
+- sharp focus
+- architectural photography style
+
+NEGATIVE PROMPTS (What to Avoid):
+- distorted perspective
+- cartoon style
+- unrealistic proportions
+- blurry
+- low quality
+- amateur
+- oversaturated
+- fake materials
+- wrong scale
+
+═══════════════════════════════════════════════════════════════════════════════
+RENDERING SERIES WORKFLOW
+═══════════════════════════════════════════════════════════════════════════════
+
+COMPLETE BUILDING DOCUMENTATION SET:
+
+1. Hero Shot - Corner perspective at eye level (golden hour)
+2. Entrance View - Ground level, human scale (midday)
+3. Aerial Context - 45° isometric from above (noon)
+4. Side Elevation - Straight-on orthographic style (overcast)
+5. Dusk Atmosphere - Same angle as hero shot (blue hour)
+6. Detail Shot - Facade module close-up (soft lighting)
+7. Interior-Exterior - View through entrance showing inside (day)
+8. Street Context - Building in urban setting (morning)
+
+Use consistent camera angles and lighting for series coherence.
+
+═══════════════════════════════════════════════════════════════════════════════
+EXAMPLE USAGE WITH YOUR DESIGN INTERFACE
+═══════════════════════════════════════════════════════════════════════════════
+
+After generating design in design_interface.html, use these prompts:
+
+INPUT FROM INTERFACE:
+- 15 floors
+- Residential
+- 50m × 30m plot  
+- Mumbai, Tropical
+- Modern style
+
+OUTPUT RENDERING PROMPT:
+
+Ultra-realistic 3D architectural rendering of a 15-storey residential apartment 
+building on a 50m × 30m urban site in Mumbai, modern reinforced concrete 
+structural frame with 4.5m × 4.5m column grid clearly visible, climate-
+responsive tropical facade with deep 1.8m overhangs for monsoon protection 
+and vertical solar fins on east-west faces, fair-faced concrete structural 
+frame with glass curtain walls, cross-ventilation through operable windows, 
+recessed balconies with glass railings on every floor creating rhythm pattern, 
+repetitive window module grid symmetry, ground floor double-height entrance 
+lobby with full glazing and covered drop-off, lush tropical landscaping with 
+palm trees and native plants, people walking at ground level for scale, 
+professional architectural visualization, natural golden hour lighting with 
+soft warm shadows, humid tropical atmosphere, clear sky with few clouds, 
+photorealistic materials with accurate concrete texture and glass reflections, 
+4K ultra-high resolution, architectural photography style, eye-level corner 
+perspective showing two facades, Mumbai urban context in background.
+
+═══════════════════════════════════════════════════════════════════════════════
+TIPS FOR BEST RESULTS
+═══════════════════════════════════════════════════════════════════════════════
+
+✓ Be specific about building dimensions and proportions
+✓ Include structural grid spacing for technical accuracy
+✓ Specify material finishes precisely
+✓ Add scale elements (people, cars, trees) with actual sizes
+✓ Define lighting condition clearly (time of day, weather)
+✓ Include context appropriate to location
+✓ Mention technical quality explicitly (4K, photorealistic, etc.)
+✓ Use architectural terminology correctly
+✓ Specify viewing angle and camera position
+✓ Include climate-appropriate details
+
+═══════════════════════════════════════════════════════════════════════════════
+END OF RENDERING PROMPT GUIDE
+═══════════════════════════════════════════════════════════════════════════════

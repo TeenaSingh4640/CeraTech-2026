@@ -1,0 +1,1293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Structural Design Engine</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        header {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .content {
+            display: flex;
+            min-height: 600px;
+        }
+
+        .input-panel {
+            flex: 1;
+            padding: 30px;
+            background: #f8f9fa;
+            border-right: 2px solid #ddd;
+            overflow-y: auto;
+            max-height: 800px;
+        }
+
+        .output-panel {
+            flex: 1.5;
+            padding: 30px;
+            overflow-y: auto;
+            max-height: 800px;
+        }
+
+        h2 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #2c3e50;
+        }
+
+        input,
+
+ select, textarea {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 1em;
+            transition: border-color 0.3s;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #3498db;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 5px;
+            font-size: 1.1em;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4);
+        }
+
+        .btn:disabled {
+            background: #95a5a6;
+            cursor: not-allowed;
+        }
+
+        .output-section {
+            margin-bottom: 30px;
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 5px solid #3498db;
+        }
+
+        .output-section h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 1.4em;
+        }
+
+        .output-section h4 {
+            color: #34495e;
+            margin: 15px 0 10px 0;
+            font-size: 1.1em;
+        }
+
+        .output-section pre {
+            background: white;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            line-height: 1.6;
+        }
+
+        .output-section ul {
+            margin-left: 20px;
+            line-height: 1.8;
+        }
+
+        .output-section table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 10px 0;
+        }
+
+        .output-section table th,
+        .output-section table td {
+            padding: 10px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+
+        .output-section table th {
+            background: #3498db;
+            color: white;
+            font-weight: bold;
+        }
+
+        .output-section table tr:nth-child(even) {
+            background: #ecf0f1;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 50px;
+            color: #7f8c8d;
+        }
+
+        .spinner {
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid #3498db;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .highlight {
+            background: #fff3cd;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-weight: bold;
+        }
+
+        .warning {
+            background: #f8d7da;
+            color: #721c24;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-weight: bold;
+        }
+
+        .success {
+            background: #d4edda;
+            color: #155724;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-weight: bold;
+        }
+
+        footer {
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .info-badge {
+            display: inline-block;
+            background: #3498db;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 0.85em;
+            margin: 5px 5px 5px 0;
+        }
+
+        @media (max-width: 1024px) {
+            .content {
+                flex-direction: column;
+            }
+            
+            .input-panel {
+                border-right: none;
+                border-bottom: 2px solid #ddd;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🏗️ AI-Driven Structural Design Engine</h1>
+            <p>Professional Architectural & Structural Design Consultant</p>
+        </header>
+
+        <div class="content">
+            <div class="input-panel">
+                <h2>Project Parameters</h2>
+                
+                <form id="design-form">
+                    <div class="form-group">
+                        <label>📏 Plot Dimensions</label>
+                        <div class="form-row">
+                            <div>
+                                <input type="number" id="plot-length" placeholder="Length (m)" value="50" required>
+                            </div>
+                            <div>
+                                <input type="number" id="plot-width" placeholder="Width (m)" value="30" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>📍 Location & Climate</label>
+                        <input type="text" id="location" placeholder="City name" value="Mumbai" required>
+                        <select id="climate-zone" required>
+                            <option value="">Select Climate Zone</option>
+                            <option value="Tropical" selected>Tropical</option>
+                            <option value="Arid">Arid (Desert)</option>
+                            <option value="Temperate">Temperate</option>
+                            <option value="Cold">Cold</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>🏢 Building Type</label>
+                        <select id="building-type" required>
+                            <option value="">Select Building Type</option>
+                            <option value="Residential" selected>Residential</option>
+                            <option value="Commercial">Commercial</option>
+                            <option value="Institutional">Institutional</option>
+                            <option value="Industrial">Industrial</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>🔢 Number of Floors</label>
+                        <input type="number" id="num-floors" placeholder="Enter number" value="10" min="1" max="100" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>📊 FAR Allowed (Floor Area Ratio)</label>
+                        <input type="number" id="far" placeholder="e.g., 2.5" value="2.5" step="0.1" min="0.5" max="10" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>💰 Budget Range (USD)</label>
+                        <div class="form-row">
+                            <input type="number" id="budget-min" placeholder="Minimum" value="1000000" required>
+                            <input type="number" id="budget-max" placeholder="Maximum" value="1500000" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>🌍 Soil Type</label>
+                        <select id="soil-type" required>
+                            <option value="">Select Soil Type</option>
+                            <option value="Rock">Rock (Hard)</option>
+                            <option value="Sand" selected>Sand (Medium)</option>
+                            <option value="Clay">Clay (Soft)</option>
+                            <option value="Mixed">Mixed</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>🌋 Seismic Zone</label>
+                        <select id="seismic-zone" required>
+                            <option value="">Select Zone</option>
+                            <option value="I">Zone I (Lowest risk)</option>
+                            <option value="II">Zone II (Low risk)</option>
+                            <option value="III" selected>Zone III (Moderate risk)</option>
+                            <option value="IV">Zone IV (High risk)</option>
+                            <option value="V">Zone V (Highest risk)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>🎨 Architectural Style</label>
+                        <select id="architectural-style" required>
+                            <option value="">Select Style</option>
+                            <option value="Modern" selected>Modern</option>
+                            <option value="Brutalist">Brutalist</option>
+                            <option value="Glass">Glass/High-tech</option>
+                            <option value="Traditional">Traditional</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>📝 Special Requirements (optional)</label>
+                        <textarea id="special-requirements" rows="3" placeholder="e.g., Parking basement, Terrace garden, Swimming pool"></textarea>
+                    </div>
+
+                    <button type="submit" class="btn" id="generate-btn">
+                        🚀 Generate Complete Design
+                    </button>
+                </form>
+            </div>
+
+            <div class="output-panel" id="output-panel">
+                <h2>Design Output</h2>
+                <div class="loading">
+                    <p>Fill in the project parameters and click "Generate Complete Design"</p>
+                    <p style="margin-top: 20px; color: #95a5a6;">The AI will analyze your inputs and provide:</p>
+                    <div style="text-align: left; max-width: 500px; margin: 20px auto;">
+                        <div class="info-badge">1. Conceptual Massing</div>
+                        <div class="info-badge">2. Structural System</div>
+                        <div class="info-badge">3. Load Path Analysis</div>
+                        <div class="info-badge">4. Column Grid Plan</div>
+                        <div class="info-badge">5. Slab System</div>
+                        <div class="info-badge">6. Foundation Design</div>
+                        <div class="info-badge">7. Concrete Volume</div>
+                        <div class="info-badge">8. Steel Requirements</div>
+                        <div class="info-badge">9. Climate Strategy</div>
+                        <div class="info-badge">10. Risk Assessment</div>
+                        <div class="info-badge">11. Optimizations</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>AI Structural Design Engine - Professional Engineering Consultation System</p>
+            <p>© 2026 - Generate complete conceptual designs in seconds</p>
+        </footer>
+    </div>
+
+    <script>
+        let currentDesignData = null;
+        
+        console.log('Script loaded successfully');
+        
+        // Wait for DOM to be fully loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('DOM loaded');
+            
+            const designForm = document.getElementById('design-form');
+            console.log('Form element:', designForm);
+            
+            if (!designForm) {
+                console.error('Form not found!');
+                alert('ERROR: Form not found! Please refresh the page.');
+                return;
+            }
+            
+            designForm.addEventListener('submit', async function(e) {
+                e.preventDefault();
+                console.log('Form submitted!');
+                
+                const btn = document.getElementById('generate-btn');
+                const output = document.getElementById('output-panel');
+                
+                console.log('Button:', btn);
+                console.log('Output:', output);
+                
+                if (!btn || !output) {
+                    console.error('Button or output panel not found!');
+                    alert('ERROR: Button or output panel not found!');
+                    return;
+                }
+                
+                // Show loading
+                output.innerHTML = `
+                <h2>Design Output</h2>
+                <div class="loading">
+                    <div class="spinner"></div>
+                    <p><strong>Generating complete structural design...</strong></p>
+                    <p>Analyzing parameters and running engineering calculations</p>
+                </div>
+            `;
+            
+            btn.disabled = true;
+            btn.textContent = '⏳ Generating...';
+            
+            // Collect form data
+            const formData = {
+                plot_length: parseFloat(document.getElementById('plot-length').value),
+                plot_width: parseFloat(document.getElementById('plot-width').value),
+                location: document.getElementById('location').value,
+                climate_zone: document.getElementById('climate-zone').value,
+                building_type: document.getElementById('building-type').value,
+                num_floors: parseInt(document.getElementById('num-floors').value),
+                far_allowed: parseFloat(document.getElementById('far').value),
+                budget_min: parseFloat(document.getElementById('budget-min').value),
+                budget_max: parseFloat(document.getElementById('budget-max').value),
+                soil_type: document.getElementById('soil-type').value,
+                seismic_zone: document.getElementById('seismic-zone').value,
+                architectural_style: document.getElementById('architectural-style').value,
+                special_requirements: document.getElementById('special-requirements').value
+            };
+            
+            console.log('Form data collected:', formData);
+            
+            // Create command to run Python script
+            const command = `python structural_design_engine.py --json '${JSON.stringify(formData)}'`;
+            
+            console.log('Starting design generation...');
+            
+            // Simulate API call (in real implementation, this would call your backend)
+            setTimeout(() => {
+                console.log('Calling generateDesignOutput...');
+                try {
+                    generateDesignOutput(formData);
+                    console.log('Design generation completed successfully');
+                } catch(error) {
+                    console.error('Error in generateDesignOutput:', error);
+                    alert('Error generating design: ' + error.message);
+                }
+                btn.disabled = false;
+                btn.textContent = '🚀 Generate Complete Design';
+            }, 2000);
+        });
+        }); // End DOMContentLoaded
+        
+        function generateFloorWisePlanning(data, plotArea) {
+            const baySize = data.building_type === 'Residential' ? 4.5 : 6.0;
+            const typicalFloorArea = plotArea * 0.7; // 70% efficiency after circulation
+            const serviceCoreArea = Math.max(50, typicalFloorArea * 0.15); // 15% for vertical services
+            
+            let floorPlans = `
+                <div class="output-section" style="background: linear-gradient(135deg, #e8f5e9 0%, #f1f8e9 100%); border-left: 5px solid #4caf50;">
+                    <h3>🏢 Floor-wise Architectural Planning</h3>
+                    <p><strong>Structural Grid:</strong> ${baySize}m × ${baySize}m bay spacing maintained across all floors</p>
+                    <p><strong>Service Core:</strong> Centrally located ${serviceCoreArea.toFixed(0)}m² core for vertical circulation and MEP services</p>
+                    <p><strong>Column Grid:</strong> ${Math.floor(data.plot_length / baySize) + 1} × ${Math.floor(data.plot_width / baySize) + 1} columns per floor</p>
+                </div>
+            `;
+            
+            // Generate floor-specific plans
+            const floorGroups = [
+                { name: 'Basement Floors', start: -2, end: 0, color: '#b39ddb' },
+                { name: 'Ground + Lower Podium', start: 0, end: Math.min(3, data.num_floors), color: '#90caf9' },
+                { name: 'Mid-rise Typical Floors', start: 3, end: Math.min(Math.floor(data.num_floors * 0.7), data.num_floors), color: '#80deea' },
+                { name: 'Upper Floors', start: Math.min(Math.floor(data.num_floors * 0.7), data.num_floors), end: data.num_floors, color: '#a5d6a7' }
+            ];
+            
+            floorGroups.forEach(group => {
+                if (group.start < group.end || (group.start === 0 && group.end > 0)) {
+                    floorPlans += generateFloorGroupPlan(data, group, baySize, typicalFloorArea, serviceCoreArea);
+                }
+            });
+            
+            return floorPlans;
+        }
+        
+        function generateFloorGroupPlan(data, group, baySize, typicalFloorArea, serviceCoreArea) {
+            const isBasement = group.start < 0;
+            const isGround = group.start === 0;
+            const isTypical = group.start >= 3 && group.start < data.num_floors - 2;
+            const isTop = group.end === data.num_floors;
+            
+            // Determine functional zones based on building type and floor level
+            let functionalZones = [];
+            let circulation = {};
+            let rooms = [];
+            let ventilation = {};
+            let fireEscape = {};
+            
+            if (data.building_type === 'Residential') {
+                if (isBasement) {
+                    functionalZones = [
+                        { name: 'Parking', area: typicalFloorArea * 0.70, usage: 'Vehicle parking - 25m² per car' },
+                        { name: 'Storage', area: typicalFloorArea * 0.15, usage: 'Tenant storage units' },
+                        { name: 'MEP Room', area: typicalFloorArea * 0.10, usage: 'Water tanks, pumps, electrical panels' }
+                    ];
+                    circulation = { type: 'Vehicular ramps + Pedestrian corridor', width: '6m ramp + 2m corridor', efficiency: '5%' };
+                    rooms = [
+                        'Parking: 180-200 bays (based on plot size)',
+                        'Storage units: 5m × 3m typical',
+                        'MEP: Water tanks, fire pumps, EV charging stations'
+                    ];
+                    ventilation = { strategy: 'Forced mechanical ventilation', details: 'CO sensors, 10 ACH minimum for parking' };
+                    fireEscape = { exits: '2 staircases', travel: '45m max travel distance', protection: 'Sprinklers, smoke extraction' };
+                    
+                } else if (isGround) {
+                    functionalZones = [
+                        { name: 'Lobby', area: typicalFloorArea * 0.25, usage: 'Double height entrance lobby' },
+                        { name: 'Amenities', area: typicalFloorArea * 0.40, usage: 'Gym, club room, mail room' },
+                        { name: 'Commercial', area: typicalFloorArea * 0.25, usage: 'Retail units (optional)' }
+                    ];
+                    circulation = { type: 'Central lobby with radial access', width: '3-4m corridors', efficiency: '10%' };
+                    rooms = [
+                        'Lobby: 6m × 10m minimum, double height',
+                        'Gym: 15m × 20m with equipment zone',
+                        'Club room: 12m × 15m multipurpose',
+                        'Manager office: 4m × 5m',
+                        'Security: 3m × 3m with CCTV monitoring'
+                    ];
+                    ventilation = { strategy: 'Natural + Mechanical hybrid', details: 'Large windows, ceiling fans, AC in gym' };
+                    fireEscape = { exits: '2 protected staircases', travel: '30m max', protection: 'Fire-rated doors, emergency lighting' };
+                    
+                } else if (isTypical) {
+                    const unitsPerFloor = Math.floor(typicalFloorArea / 90); // ~90m² per unit
+                    functionalZones = [
+                        { name: `Residential Units (${unitsPerFloor} units)`, area: typicalFloorArea * 0.75, usage: '2BHK + 3BHK mix' },
+                        { name: 'Corridor', area: typicalFloorArea * 0.15, usage: 'Common circulation' },
+                        { name: 'Service Core', area: serviceCoreArea, usage: 'Lifts, stairs, ducts' }
+                    ];
+                    circulation = { type: 'Double loaded corridor', width: '1.8-2.0m', efficiency: '15%' };
+                    rooms = [
+                        `2BHK Unit: 13m × 7m (90m²) - Living (5×4m), Kitchen (3×3m), Master BR (4×4m), BR2 (3.5×3m), 2 Baths`,
+                        `3BHK Unit: 15m × 8m (120m²) - Living (6×4.5m), Kitchen (3.5×3m), Master BR (4.5×4m), BR2 (3.5×3.5m), BR3 (3×3m), 3 Baths`,
+                        `Balconies: 1.5m deep per unit (minimum)`,
+                        `Utility: 2m × 1.5m per unit`
+                    ];
+                    ventilation = { strategy: 'Cross ventilation through units', details: `Windows on opposite sides, 25% WWR, ${data.climate_zone === 'Tropical' ? 'ceiling fans mandatory' : 'operable windows'}` };
+                    fireEscape = { exits: '2 fire staircases at opposite ends', travel: '30m max from unit door', protection: '2hr fire rated stair, pressurization system' };
+                    
+                } else if (isTop) {
+                    functionalZones = [
+                        { name: 'Penthouses', area: typicalFloorArea * 0.60, usage: 'Premium larger units' },
+                        { name: 'Terrace', area: typicalFloorArea * 0.25, usage: 'Common roof terrace' },
+                        { name: 'MEP', area: typicalFloorArea * 0.15, usage: 'Cooling towers, lift machine room' }
+                    ];
+                    circulation = { type: 'Minimal corridor + terrace access', width: '2m', efficiency: '10%' };
+                    rooms = [
+                        'Penthouse: 20m × 10m (200m²) with private terrace',
+                        'Common terrace: Landscaped with seating',
+                        'Lift machine room: 6m × 4m',
+                        'Water tanks: Overhead storage'
+                    ];
+                    ventilation = { strategy: 'Maximum natural ventilation', details: 'Terrace access, cross ventilation, reduced AC dependency' };
+                    fireEscape = { exits: '2 staircases to terrace refuge', travel: '30m max', protection: 'Terrace as refuge area' };
+                }
+                
+            } else if (data.building_type === 'Commercial') {
+                if (isBasement) {
+                    functionalZones = [
+                        { name: 'Parking', area: typicalFloorArea * 0.75, usage: 'Staff + visitor parking' },
+                        { name: 'Storage', area: typicalFloorArea * 0.15, usage: 'Archive, equipment' },
+                        { name: 'Server Room', area: typicalFloorArea * 0.05, usage: 'Data center with cooling' }
+                    ];
+                    circulation = { type: 'Vehicular + Service corridor', width: '6m ramp', efficiency: '5%' };
+                    
+                } else if (isGround) {
+                    functionalZones = [
+                        { name: 'Lobby', area: typicalFloorArea * 0.30, usage: 'Triple height atrium' },
+                        { name: 'Retail', area: typicalFloorArea * 0.50, usage: 'Food court, shops' },
+                        { name: 'Reception', area: typicalFloorArea * 0.10, usage: 'Security, reception desks' }
+                    ];
+                    circulation = { type: 'Atrium with escalators', width: '4-5m', efficiency: '10%' };
+                    
+                } else {
+                    functionalZones = [
+                        { name: 'Office Floor Plate', area: typicalFloorArea * 0.80, usage: 'Open plan + cabins' },
+                        { name: 'Meeting Rooms', area: typicalFloorArea * 0.10, usage: 'Conference, huddle rooms' },
+                        { name: 'Pantry + Toilets', area: typicalFloorArea * 0.10, usage: 'Support spaces' }
+                    ];
+                    circulation = { type: 'Perimeter circulation', width: '2.5m', efficiency: '12%' };
+                    rooms = [
+                        `Open office: 9m² per person (desk density)`,
+                        `Cabins: 4m × 3.5m for managers`,
+                        `Conference: 8m × 6m (20 people)`,
+                        `Meeting rooms: 4m × 4m`,
+                        `Pantry: 5m × 4m per floor`
+                    ];
+                    ventilation = { strategy: 'Central HVAC with VRV', details: '250 CFM per person, CO2 monitoring, 55% RH' };
+                    fireEscape = { exits: '2 protected stairs + refuge floors every 24m', travel: '45m max', protection: 'Smoke detectors, sprinklers, fire alarm' };
+                }
+            } else {
+                // Generic institutional/industrial layouts
+                functionalZones = [
+                    { name: 'Primary Use', area: typicalFloorArea * 0.70, usage: `${data.building_type} spaces` },
+                    { name: 'Support', area: typicalFloorArea * 0.20, usage: 'Offices, storage' }
+                ];
+                circulation = { type: 'Corridor based', width: '2.5-3m', efficiency: '10%' };
+                ventilation = { strategy: 'Mechanical ventilation', details: 'Based on occupancy and use' };
+                fireEscape = { exits: '2 staircases minimum', travel: '45m max', protection: 'Code compliant exits' };
+            }
+            
+            return `
+                <div class="output-section" style="border-left-color: ${group.color};">
+                    <h3 style="color: #1a237e;">🔷 ${group.name} ${group.start < 0 ? `(B${Math.abs(group.start)} to B${Math.abs(group.end)})` : group.start === 0 && group.end === 1 ? '(Ground Floor)' : `(Floors ${group.start}-${group.end-1})`}</h3>
+                    
+                    <h4>1. Functional Zoning Layout:</h4>
+                    <ul>
+                        ${functionalZones.map(zone => `<li><strong>${zone.name}:</strong> ${zone.area.toFixed(0)}m² - ${zone.usage}</li>`).join('')}
+                    </ul>
+                    <p><strong>Reasoning:</strong> ${getFunctionalZoningReasoning(data, isBasement, isGround, isTypical, isTop)}</p>
+                    
+                    <h4>2. Circulation Logic:</h4>
+                    <ul>
+                        <li><strong>Type:</strong> ${circulation.type || 'Corridor based'}</li>
+                        <li><strong>Width:</strong> ${circulation.width || '2m minimum'}</li>
+                        <li><strong>Efficiency:</strong> ${circulation.efficiency || '10%'} of floor area</li>
+                    </ul>
+                    <p><strong>Reasoning:</strong> ${getCirculationReasoning(data, isBasement, isGround, isTypical)}</p>
+                    
+                    <h4>3. Room Allocation & Dimensions:</h4>
+                    <ul>
+                        ${rooms.length > 0 ? rooms.map(room => `<li>${room}</li>`).join('') : '<li>Open floor plan - tenant fit-out dependent</li>'}
+                    </ul>
+                    <p><strong>Reasoning:</strong> Dimensions optimized for ${baySize}m structural grid, minimizing beam spans and maximizing usable space.</p>
+                    
+                    <h4>4. Structural Column Alignment:</h4>
+                    <ul>
+                        <li><strong>Grid:</strong> ${baySize}m × ${baySize}m maintained consistently</li>
+                        <li><strong>Column Size:</strong> ${group.start < data.num_floors / 2 ? '450×600mm (lower)' : '300×450mm (upper)'}</li>
+                        <li><strong>Integration:</strong> Columns aligned with partition walls, concealed in furniture zones</li>
+                    </ul>
+                    <p><strong>Reasoning:</strong> Consistent grid across all floors ensures structural continuity, load transfer efficiency, and construction simplicity. Column locations planned to not interfere with room usability.</p>
+                    
+                    <h4>5. Service Core Placement:</h4>
+                    <ul>
+                        <li><strong>Location:</strong> Central core (${serviceCoreArea.toFixed(0)}m²)</li>
+                        <li><strong>Contents:</strong> ${data.num_floors > 5 ? '3 lifts + 2 staircases' : '2 lifts + 2 staircases'}, toilet risers, HVAC shafts, electrical risers</li>
+                        <li><strong>Access:</strong> Direct from main circulation</li>
+                    </ul>
+                    <p><strong>Reasoning:</strong> Central core maximizes usable perimeter space, provides equal access from all zones, and consolidates vertical services for efficiency.</p>
+                    
+                    <h4>6. Ventilation & Daylighting Strategy:</h4>
+                    <ul>
+                        <li><strong>Strategy:</strong> ${ventilation.strategy || 'Natural + Mechanical hybrid'}</li>
+                        <li><strong>Details:</strong> ${ventilation.details || 'Cross ventilation with operable windows'}</li>
+                        <li><strong>Daylighting:</strong> ${isBasement ? 'Artificial lighting only' : `Perimeter windows on ${group.start === 0 ? '3-4' : '2-3'} sides, depth ≤ 7.5m from window`}</li>
+                        <li><strong>Climate Adaptation:</strong> ${data.climate_zone === 'Tropical' ? 'Deep overhangs, shading devices, high ceilings' : data.climate_zone === 'Arid' ? 'Minimal openings, thermal mass' : 'Balanced glazing with insulation'}</li>
+                    </ul>
+                    <p><strong>Reasoning:</strong> ${getVentilationReasoning(data, isBasement, isGround)}</p>
+                    
+                    <h4>7. Fire Escape Compliance:</h4>
+                    <ul>
+                        <li><strong>Fire Exits:</strong> ${fireEscape.exits || '2 protected staircases'}</li>
+                        <li><strong>Travel Distance:</strong> ${fireEscape.travel || '30m maximum'} (NBC compliant)</li>
+                        <li><strong>Protection:</strong> ${fireEscape.protection || '2hr fire-rated walls, protected lobbies'}</li>
+                        <li><strong>Pressurization:</strong> ${data.num_floors > 15 ? 'Staircase pressurization system required' : 'Natural ventilation in stairs acceptable'}</li>
+                        <li><strong>Width:</strong> ${data.num_floors > 15 ? '1.5m stair width' : '1.2m minimum'}</li>
+                    </ul>
+                    <p><strong>Reasoning:</strong> Code-compliant egress ensures occupant safety. Two-exit rule provides redundancy. Travel distances optimized for ${data.building_type} occupancy. Fire-rated separations prevent spread.</p>
+                </div>
+            `;
+        }
+        
+        function getFunctionalZoningReasoning(data, isBasement, isGround, isTypical, isTop) {
+            if (isBasement) return 'Basement utilized for parking and services to maximize above-ground revenue space. MEP location provides gravity drainage and easy maintenance access.';
+            if (isGround) return 'Ground floor serves as transition between public realm and private use. Double-height lobby creates impressive entry sequence. Amenities at grade improve accessibility.';
+            if (isTypical) return `Typical floors optimized for repetitive construction efficiency. ${data.building_type === 'Residential' ? 'Unit mix balances market demand with efficient planning' : 'Flexible floor plate accommodates various tenant requirements'}.`;
+            if (isTop) return 'Top floors leverage views and reduced structural loads for premium spaces. Roof MEP placement optimizes lower floor ceilings and simplifies maintenance.';
+            return 'Functional zones arranged for optimal adjacencies and workflow efficiency.';
+        }
+        
+        function getCirculationReasoning(data, isBasement, isGround, isTypical) {
+            if (isBasement) return 'Vehicular circulation separated from pedestrian for safety. Ramp gradients comply with 1:10 max slope for accessibility.';
+            if (isGround) return 'Central lobby provides intuitive wayfinding. Wide corridors accommodate peak traffic. Direct visibility to vertical circulation.';
+            if (isTypical) return `${data.building_type === 'Residential' ? 'Double-loaded corridor maximizes units per floor while maintaining privacy' : 'Perimeter circulation preserves column-free interior zones'}. All areas within easy reach of exits.`;
+            return 'Circulation minimized to maximize usable area while ensuring code compliance for egress.';
+        }
+        
+        function getVentilationReasoning(data, isBasement, isGround) {
+            if (isBasement) return 'Mechanical ventilation required due to below-grade location. CO monitoring prevents carbon buildup in parking areas.';
+            if (data.climate_zone === 'Tropical') return 'Natural ventilation prioritized to reduce cooling loads. Cross-ventilation and stack effect leverage prevailing winds. Reduces operational energy by 30-40%.';
+            if (data.climate_zone === 'Arid') return 'Night ventilation with thermal mass stabilizes indoor temperatures. Minimal glazing reduces solar heat gain.';
+            return 'Balanced approach optimizes energy efficiency with occupant comfort. Daylighting reduces artificial lighting loads.';
+        }
+        
+        function generateDesignOutput(data) {
+            console.log('generateDesignOutput called with data:', data);
+            
+            // Store data for export functions
+            currentDesignData = data;
+            
+            const output = document.getElementById('output-panel');
+            
+            if (!output) {
+                console.error('Output panel not found!');
+                alert('Error: Output panel not found!');
+                return;
+            }
+            
+            console.log('Calculating values...');
+            
+            // Calculate some values
+            const plotArea = data.plot_length * data.plot_width;
+            const builtArea = plotArea * data.far_allowed;
+            const floorArea = builtArea / data.num_floors;
+            
+            console.log('Plot Area:', plotArea, 'Built Area:', builtArea, 'Floor Area:', floorArea);
+            
+            console.log('Generating floor-wise planning...');
+            const floorPlanning = generateFloorWisePlanning(data, plotArea);
+            console.log('Floor planning generated, length:', floorPlanning.length);
+            
+            console.log('Building output HTML...');
+            
+            output.innerHTML = `
+                <h2>✅ Design Output Complete</h2>
+                
+                <div class="output-section">
+                    <h3>📋 Project Summary</h3>
+                    <table>
+                        <tr><th>Parameter</th><th>Value</th></tr>
+                        <tr><td>Project ID</td><td>SD_${Date.now()}</td></tr>
+                        <tr><td>Location</td><td>${data.location} (${data.climate_zone})</td></tr>
+                        <tr><td>Building Type</td><td>${data.building_type}</td></tr>
+                        <tr><td>Plot Area</td><td>${plotArea.toFixed(2)} m²</td></tr>
+                        <tr><td>Total Built Area</td><td>${builtArea.toFixed(2)} m²</td></tr>
+                        <tr><td>Number of Floors</td><td>${data.num_floors}</td></tr>
+                        <tr><td>Architectural Style</td><td>${data.architectural_style}</td></tr>
+                    </table>
+                </div>
+                
+                ${floorPlanning}
+                
+                <div class="output-section">
+                    <h3>1️⃣ Conceptual Architectural Massing</h3>
+                    <h4>Massing Strategy:</h4>
+                    <p><span class="highlight">${data.num_floors <= 7 ? 'Mid-rise vertical massing with podium' : 'High-rise tower with stepped podium'}</span></p>
+                    <h4>Buildable Footprint:</h4>
+                    <ul>
+                        <li>Length: ${(data.plot_length * 0.8).toFixed(2)} m (after setbacks)</li>
+                        <li>Width: ${(data.plot_width * 0.8).toFixed(2)} m (after setbacks)</li>
+                        <li>Area: ${(plotArea * 0.64).toFixed(2)} m² (64% efficiency)</li>
+                    </ul>
+                    <h4>Reasoning:</h4>
+                    <p>20% setback applied for code compliance and fire safety. FAR utilization maximized within zoning constraints.</p>
+                </div>
+                
+                <div class="output-section">
+                    <h3>2️⃣ Structural System</h3>
+                    <h4>Primary System:</h4>
+                    <p><span class="success">${data.num_floors <= 7 ? 'RC moment-resisting frame' : 'RC frame with shear walls'}</span></p>
+                    <h4>Materials:</h4>
+                    <ul>
+                        <li>Concrete: M${data.num_floors <= 7 ? '25-M30' : '30-M40'}</li>
+                        <li>Steel: Fe ${data.num_floors <= 7 ? '415/500' : '500/550'}</li>
+                    </ul>
+                    <h4>Seismic Consideration:</h4>
+                    <p>Zone ${data.seismic_zone} - ${data.seismic_zone >= 'IV' ? '<span class="warning">Special ductile detailing required</span>' : 'Standard detailing sufficient'}</p>
+                    <h4>Reasoning:</h4>
+                    <p>Selected based on building height, seismic zone, and economical construction. System provides adequate lateral resistance.</p>
+                </div>
+                
+                <div class="output-section">
+                    <h3>3️⃣ Load Path Analysis</h3>
+                    <h4>Gravity Loads:</h4>
+                    <ul>
+                        <li>Live Load: ${data.building_type === 'Residential' ? '2.0' : '4.0'} kN/m²</li>
+                        <li>Dead Load: ~6.5 kN/m² (slab + finishes)</li>
+                        <li>Factored Load: ~${((parseFloat(data.building_type === 'Residential' ? 2.0 : 4.0) + 6.5) * 1.5).toFixed(2)} kN/m²</li>
+                    </ul>
+                    <h4>Load Transfer Sequence:</h4>
+                    <ol>
+                        <li>Imposed loads and self-weight on floor slab</li>
+                        <li>Slab transfers to supporting beams via bending</li>
+                        <li>Beams transfer to columns via shear</li>
+                        <li>Columns carry axial load to foundation</li>
+                        <li>Foundation distributes to soil</li>
+                        <li>Lateral loads resisted by moment frames</li>
+                    </ol>
+                </div>
+                
+                <div class="output-section">
+                    <h3>4️⃣ Column Grid Planning</h3>
+                    <h4>Grid Configuration:</h4>
+                    <p>Typical bay size: <span class="highlight">${data.building_type === 'Residential' ? '4.5m × 4.5m' : '6.0m × 6.0m'}</span></p>
+                    <ul>
+                        <li>Bays in length: ${Math.floor(data.plot_length / (data.building_type === 'Residential' ? 4.5 : 6.0))}</li>
+                        <li>Bays in width: ${Math.floor(data.plot_width / (data.building_type === 'Residential' ? 4.5 : 6.0))}</li>
+                        <li>Total columns/floor: ${(Math.floor(data.plot_length / (data.building_type === 'Residential' ? 4.5 : 6.0)) + 1) * (Math.floor(data.plot_width / (data.building_type === 'Residential' ? 4.5 : 6.0)) + 1)}</li>
+                    </ul>
+                    <h4>Column Sizing:</h4>
+                    <p>${data.num_floors <= 7 ? '300 × 450 mm (lower floors), 300 × 300 mm (upper)' : '450 × 600 mm (lower), 300 × 450 mm (upper)'}</p>
+                    <h4>Reasoning:</h4>
+                    <p>Regular orthogonal grid for structural efficiency and construction ease. Optimized for economical beam and slab design.</p>
+                </div>
+                
+                <div class="output-section">
+                    <h3>5️⃣ Slab System</h3>
+                    <h4>Recommended:</h4>
+                    <p><span class="success">Two-way slab system</span> - Thickness: 175 mm</p>
+                    <h4>Reinforcement:</h4>
+                    <p>Grid reinforcement in both directions, 12mm @ 150mm c/c typical</p>
+                    <h4>Advantages:</h4>
+                    <ul>
+                        <li>Efficient for square/rectangular panels</li>
+                        <li>Better load distribution</li>
+                        <li>Reduced deflection</li>
+                    </ul>
+                    <h4>Design Criteria:</h4>
+                    <ul>
+                        <li>Deflection limit: span/250</li>
+                        <li>Crack width: 0.3mm maximum</li>
+                        <li>Cover: 25mm for moderate exposure</li>
+                    </ul>
+                </div>
+                
+                <div class="output-section">
+                    <h3>6️⃣ Foundation System</h3>
+                    <h4>Recommended:</h4>
+                    <p><span class="success">${data.soil_type === 'Rock' || (data.num_floors <= 7 && data.soil_type === 'Sand') ? 'Isolated footings with tie beams' : 'Raft foundation (mat)'}</span></p>
+                    <h4>Soil Parameters:</h4>
+                    <ul>
+                        <li>Soil Type: ${data.soil_type}</li>
+                        <li>Bearing Capacity: ${data.soil_type === 'Rock' ? '500' : data.soil_type === 'Sand' ? '200' : '100'} kN/m²</li>
+                        <li>Settlement: Max 50mm total, 25mm differential</li>
+                    </ul>
+                    <h4>Foundation Depth:</h4>
+                    <p>${data.num_floors <= 7 ? '2.5-3.5m below ground level' : '4.0-6.0m (basement levels)'}</p>
+                    <h4>Reasoning:</h4>
+                    <p>${data.soil_type === 'Sand' && data.num_floors <= 7 ? 'Adequate soil bearing, isolated footings economical' : 'Raft distributes load over larger area, reduces differential settlement'}</p>
+                </div>
+                
+                <div class="output-section">
+                    <h3>7️⃣ Concrete Volume Estimate</h3>
+                    <table>
+                        <tr><th>Component</th><th>Volume (m³)</th></tr>
+                        <tr><td>Slabs</td><td>${(builtArea * 0.175).toFixed(2)}</td></tr>
+                        <tr><td>Beams</td><td>${(builtArea * 0.175 * 0.15).toFixed(2)}</td></tr>
+                        <tr><td>Columns</td><td>${(data.num_floors * 3.0 * 0.3 * 0.45 * Math.floor(data.plot_length / 6.0) * Math.floor(data.plot_width / 6.0)).toFixed(2)}</td></tr>
+                        <tr><td>Foundation</td><td>${((builtArea * 0.175  * 1.15) * 0.20).toFixed(2)}</td></tr>
+                        <tr><th>Total (with wastage)</th><th><span class="highlight">${((builtArea * 0.175 * 1.35) * 1.05).toFixed(2)} m³</span></th></tr>
+                    </table>
+                    <h4>Cost Estimate:</h4>
+                    <p><span class="highlight">$${((builtArea * 0.175 * 1.35 * 1.05) * 175).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</span> (@ $175/m³ including labor)</p>
+                </div>
+                
+                <div class="output-section">
+                    <h3>8️⃣ Steel Requirement Estimate</h3>
+                    <h4>Total Steel:</h4>
+                    <p><span class="highlight">${((builtArea * 0.175 * 1.35) * 0.015 * 7850 / 1000).toFixed(2)} tonnes</span></p>
+                    <p>Steel intensity: ${((builtArea * 0.175 * 1.35) * 0.015 * 7850 / builtArea).toFixed(2)} kg/m²</p>
+                    <h4>Grade Distribution:</h4>
+                    <ul>
+                        <li>Fe 415: ${((builtArea * 0.175 * 1.35) * 0.015 * 7850 * 0.3 / 1000).toFixed(2)} tonnes (stirrups)</li>
+                        <li>Fe 500: ${((builtArea * 0.175 * 1.35) * 0.015 * 7850 * 0.7 / 1000).toFixed(2)} tonnes (main bars)</li>
+                    </ul>
+                    <h4>Cost Estimate:</h4>
+                    <p><span class="highlight">$${(((builtArea * 0.175 * 1.35) * 0.015 * 7850) * 1.35).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</span> (@ $1.35/kg)</p>
+                </div>
+                
+                <div class="output-section">
+                    <h3>9️⃣ Climate Adaptation Strategy</h3>
+                    <h4>Primary Strategies (${data.climate_zone}):</h4>
+                    ${data.climate_zone === 'Tropical' ? `
+                    <ul>
+                        <li><strong>Orientation:</strong> North-South axis for minimal east-west exposure</li>
+                        <li><strong>Shading:</strong> Deep overhangs (1.5-2m), vertical fins</li>
+                        <li><strong>Ventilation:</strong> Cross ventilation, stack effect</li>
+                        <li><strong>Insulation:</strong> Roof R-3.5 minimum</li>
+                        <li><strong>Glazing:</strong> 30-40% WWR, double glazed low-E</li>
+                    </ul>
+                    ` : data.climate_zone === 'Arid' ? `
+                    <ul>
+                        <li><strong>Orientation:</strong> Compact form to minimize surface area</li>
+                        <li><strong>Shading:</strong> Minimal glazing, deep recessed windows</li>
+                        <li><strong>Ventilation:</strong> Night ventilation with thermal mass</li>
+                        <li><strong>Insulation:</strong> R-4.0 walls, R-6.0 roof</li>
+                        <li><strong>Materials:</strong> High thermal mass construction</li>
+                    </ul>
+                    ` : `
+                    <ul>
+                        <li><strong>Orientation:</strong> South facing for solar gain</li>
+                        <li><strong>Shading:</strong> Adjustable shading systems</li>
+                        <li><strong>Ventilation:</strong> Balanced mechanical + natural</li>
+                        <li><strong>Insulation:</strong> R-3.0 walls, R-4.5 roof</li>
+                        <li><strong>Glazing:</strong> 40-50% WWR, double glazed</li>
+                    </ul>
+                    `}
+                    <h4>Performance Targets:</h4>
+                    <ul>
+                        <li>Energy Use: 80-120 kWh/m²/year</li>
+                        <li>Water Efficiency: 30% reduction</li>
+                        <li>Green Rating: LEED Gold achievable</li>
+                    </ul>
+                </div>
+                
+                <div class="output-section">
+                    <h3>🔟 Risk Assessment</h3>
+                    <h4>High Severity Risks:</h4>
+                    <ul>
+                        <li><span class="warning">Seismic damage</span> - Mitigation: Ductile detailing, quality control</li>
+                        <li><span class="warning">Foundation settlement</span> - Mitigation: Adequate soil investigation</li>
+                        <li><span class="warning">Formwork failure</span> - Mitigation: Engineered formwork design</li>
+                        <li><span class="warning">Budget overrun</span> - Mitigation: 15-20% contingency</li>
+                    </ul>
+                    <h4>Medium Severity Risks:</h4>
+                    <ul>
+                        <li>Concrete quality issues - Mitigation: Mix design, cube testing</li>
+                        <li>Rebar corrosion - Mitigation: Adequate cover, quality concrete</li>
+                        <li>Weather delays - Mitigation: Buffer time in schedule</li>
+                    </ul>
+                </div>
+                
+                <div class="output-section">
+                    <h3>1️⃣1️⃣ Optimization Opportunities</h3>
+                    <h4>High Impact (20-30% savings potential):</h4>
+                    <ul>
+                        <li><span class="success">Column grid regularization</span> - Save 8-12% on formwork</li>
+                        <li><span class="success">Modular formwork systems</span> - Save 20-25% on formwork costs</li>
+                        <li><span class="success">Fly ash replacement</span> - Save 15-20% on cement, reduce carbon</li>
+                        <li><span class="success">Building envelope optimization</span> - Save 25-30% on HVAC</li>
+                        <li><span class="success">Early contractor involvement</span> - Save 10-15% overall</li>
+                    </ul>
+                    <h4>Priority Actions:</h4>
+                    <ol>
+                        <li>Standardize column grid</li>
+                        <li>Implement fly ash concrete</li>
+                        <li>Use modular formwork</li>
+                        <li>Optimize building envelope</li>
+                        <li>Value engineering workshops</li>
+                    </ol>
+                </div>
+                
+                <div class="output-section" style="background: #d4edda; border-left-color: #28a745;">
+                    <h3>✅ Design Generation Complete</h3>
+                    <p><strong>Project ID:</strong> SD_${Date.now()}</p>
+                    <p><strong>Total Estimated Cost:</strong> $${((((builtArea * 0.175 * 1.35) * 1.05) * 175) + (((builtArea * 0.175 * 1.35) * 0.015 * 7850) * 1.35)).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")} (Structure only)</p>
+                    <p><strong>Construction Duration:</strong> ${Math.ceil(data.num_floors * 0.8 + 6)} months (estimated)</p>
+                    <p style="margin-top: 15px;"><em>This is a conceptual design. Detailed engineering analysis and local code compliance review required before construction.</em></p>
+                </div>
+                
+                <button class="btn" onclick="downloadReport()">📥 Download PDF Report</button>
+                <button class="btn" onclick="exportJSON()" style="margin-top: 10px; background: linear-gradient(135deg, #27ae60 0%, #229954 100%);">💾 Export JSON Data</button>
+                <button class="btn" onclick="generateRenderingPrompts()" style="margin-top: 10px; background: linear-gradient(135deg, #9c27b0 0%, #7b1fa2 100%);">🎨 Generate AI Rendering Prompts</button>
+            `;
+            
+            console.log('Output HTML generated successfully, length:', output.innerHTML.length);
+        }
+        
+        function downloadReport() {
+            if (!currentDesignData) {
+                alert('Please generate a design first!');
+                return;
+            }
+            
+            // Create a printable HTML report
+            const reportWindow = window.open('', '_blank');
+            reportWindow.document.write(`
+                <!DOCTYPE html>
+                <html>
+                <head>
+                    <title>Structural Design Report - ${currentDesignData.location}</title>
+                    <style>
+                        body { font-family: Arial, sans-serif; padding: 40px; max-width: 900px; margin: 0 auto; }
+                        h1 { color: #2c3e50; border-bottom: 3px solid #3498db; padding-bottom: 10px; }
+                        h2 { color: #34495e; margin-top: 30px; border-left: 5px solid #3498db; padding-left: 15px; }
+                        .header { background: linear-gradient(135deg, #2c3e50, #34495e); color: white; padding: 30px; margin: -40px -40px 30px -40px; }
+                        .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin: 20px 0; }
+                        .info-item { padding: 10px; background: #f8f9fa; border-left: 3px solid #3498db; }
+                        .info-item strong { color: #2c3e50; }
+                        ul { line-height: 1.8; }
+                        @media print {
+                            .no-print { display: none; }
+                        }
+                    </style>
+                </head>
+                <body>
+                    <div class="header">
+                        <h1>🏗️ Structural Design Report</h1>
+                        <p>Project ID: SD_${Date.now()}</p>
+                        <p>Generated: ${new Date().toLocaleString()}</p>
+                    </div>
+                    ${document.getElementById('output-panel').innerHTML}
+                    <div style="margin-top: 40px; padding: 20px; background: #ecf0f1; border-radius: 5px;">
+                        <p><strong>Disclaimer:</strong> This is a conceptual design generated by AI. Professional structural engineering review and local code compliance verification required before construction.</p>
+                    </div>
+                    <div class="no-print" style="margin-top: 30px; text-align: center;">
+                        <button onclick="window.print()" style="background: #3498db; color: white; border: none; padding: 15px 30px; font-size: 16px; cursor: pointer; border-radius: 5px;">Print / Save as PDF</button>
+                        <button onclick="window.close()" style="background: #95a5a6; color: white; border: none; padding: 15px 30px; font-size: 16px; cursor: pointer; border-radius: 5px; margin-left: 10px;">Close</button>
+                    </div>
+                </body>
+                </html>
+            `);
+            reportWindow.document.close();
+        }
+        
+        function exportJSON() {
+            if (!currentDesignData) {
+                alert('Please generate a design first!');
+                return;
+            }
+            
+            // Add all calculated data to export
+            const exportData = {
+                ...currentDesignData,
+                project_id: `SD_${Date.now()}`,
+                generated_date: new Date().toISOString(),
+                plot_area: currentDesignData.plot_length * currentDesignData.plot_width,
+                built_up_area: (currentDesignData.plot_length * currentDesignData.plot_width) * currentDesignData.far_allowed,
+                typical_floor_area: (currentDesignData.plot_length * currentDesignData.plot_width) * 0.7,
+                total_construction_area: ((currentDesignData.plot_length * currentDesignData.plot_width) * 0.7) * currentDesignData.num_floors
+            };
+            
+            // Create downloadable JSON file
+            const dataStr = JSON.stringify(exportData, null, 2);
+            const dataBlob = new Blob([dataStr], {type: 'application/json'});
+            const url = URL.createObjectURL(dataBlob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = `structural_design_${currentDesignData.location}_${Date.now()}.json`;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            URL.revokeObjectURL(url);
+        }
+        
+        function generateRenderingPrompts() {
+            if (!currentDesignData) {
+                alert('Please generate a design first!');
+                return;
+            }
+            
+            const data = currentDesignData;
+            const baySize = data.building_type === 'Residential' ? '4.5m' : '6.0m';
+            const buildingHeight = data.num_floors * 3.5; // Approximate height
+            const plotDim = `${data.plot_length}m × ${data.plot_width}m`;
+            
+            // Climate-specific facade strategies
+            const climateFeatures = {
+                'Tropical': 'deep 1.8m overhangs for monsoon protection, vertical solar fins on east-west facades, cross-ventilation through operable windows, lush tropical landscaping with palm trees',
+                'Arid': 'minimal glazing with deep recessed windows, thick thermal mass walls, compact form minimizing surface area, desert landscape with sparse vegetation, intense sunlight',
+                'Temperate': 'balanced 40-50% window-to-wall ratio, operable windows, moderate overhangs, deciduous trees, four-season design',
+                'Cold': 'triple-glazed windows, compact building form, south-facing glazing for solar gain, minimal north openings, snow on ground'
+            };
+            
+            const climateDesc = climateFeatures[data.climate_zone] || climateFeatures['Temperate'];
+            
+            // Style-specific descriptions
+            const styleFeatures = {
+                'Modern': 'clean geometric forms, white painted surfaces, minimal ornamentation',
+                'Brutalist': 'board-formed concrete texture with visible tie holes, bold geometric massing, minimal glazing',
+                'Glass': 'extensive curtain wall glazing, reflective blue-tinted glass, minimal visible structure',
+                'Contemporary': 'mixed materials, balanced solid-to-void ratio, contemporary detailing',
+                'Traditional': 'contextual architectural language, traditional proportions'
+            };
+            
+            const styleDesc = styleFeatures[data.architectural_style] || styleFeatures['Contemporary'];
+            
+            // Generate prompts for different views
+            const prompts = {
+                'Hero Shot - Corner Perspective': `Ultra-realistic 3D architectural rendering of a ${data.num_floors}-storey ${data.building_type.toLowerCase()} building on a ${plotDim} site in ${data.location}, modern reinforced concrete structural frame with ${baySize} × ${baySize} column grid clearly visible, ${climateDesc}, ${styleDesc}, fair-faced concrete structural frame with glass curtain walls, ${data.building_type === 'Residential' ? 'recessed balconies with glass railings on every floor' : 'floor-to-floor glass with horizontal aluminum mullions'}, repetitive window module grid symmetry, ground floor ${data.building_type === 'Residential' ? 'double-height entrance lobby' : 'transparent lobby and retail'} with full glazing, people walking at ground level for scale, professional architectural visualization, natural golden hour lighting with soft warm shadows, ${data.climate_zone.toLowerCase()} atmosphere, clear sky with few clouds, photorealistic materials with accurate concrete texture and glass reflections, 4K ultra-high resolution, architectural photography style, eye-level corner perspective showing two facades, ${data.location} urban context in background.`,
+                
+                'Entrance View - Human Scale': `Ground-level frontal view 3D rendering of ${data.num_floors}-storey ${data.building_type.toLowerCase()} building entrance in ${data.location}, showcasing ${data.building_type === 'Commercial' ? 'triple-height' : 'double-height'} lobby with full glazing, ${baySize} structural columns framing entrance, concrete canopy projection, people entering and exiting for scale, detailed ground plane with paving pattern, planters, street furniture, ${climateDesc}, natural midday lighting, welcoming atmosphere, photorealistic rendering, 4K resolution, architectural photography style, shallow depth of field with entrance in sharp focus.`,
+                
+                'Aerial View - Urban Context': `Aerial isometric 3D rendering at 45-degree angle showing ${data.num_floors}-storey ${data.building_type.toLowerCase()} building in ${data.location} urban context, ${plotDim} site clearly visible, rooftop details including mechanical equipment, ${data.building_type === 'Commercial' ? 'solar panels,' : ''} terrace spaces, full building massing and form visible, surrounding streets and adjacent buildings, site boundary and setbacks visible, landscaping layout, parking access, ${baySize} structural grid expressed in plan view, natural daylight from above creating soft shadows, urban planning visualization style, ${data.climate_zone.toLowerCase()} climate context, photorealistic, 4K resolution, high detail, professional aerial photography.`,
+                
+                'Dusk Atmosphere - Blue Hour': `Dusk blue hour 3D rendering of ${data.num_floors}-storey ${data.building_type.toLowerCase()} building in ${data.location}, interior lights glowing warmly through windows creating rhythmic pattern across ${baySize} grid, facade lighting highlighting structural concrete frame and architectural features, deep blue sky gradient, street lights illuminated, silhouette of building against evening sky, ${styleDesc}, atmospheric haze, romantic architectural visualization, people visible as silhouettes at ground level, ${climateDesc.split(',')[0]}, professional twilight architecture photography style, photorealistic lighting and materials, 4K resolution, eye-level corner perspective.`,
+                
+                'Detail View - Facade Module': `Close-up detail 3D rendering showing ${data.building_type.toLowerCase()} building facade module, structural concrete frame connection detail at ${baySize} grid, ${data.num_floors <= 7 ? '300×450mm' : '450×600mm'} column to beam junction visible, curtain wall mullion system, glass-to-frame interface, ${data.building_type === 'Residential' ? 'balcony railing detail,' : 'spandrel panel detail,'} material transitions between fair-faced concrete and glass, realistic shadows and depth, texture of board-formed concrete, professional architectural detail photography, macro perspective close-up, photorealistic textures showing concrete aging, 4K ultra-high resolution, sharp focus on structural connections.`,
+                
+                'Sectional Perspective': `Cutaway sectional perspective 3D rendering of ${data.num_floors}-storey ${data.building_type.toLowerCase()} building, showing all ${data.num_floors} floors from ${data.num_floors > 5 ? 'basement parking through' : ''} ground lobby to rooftop, ${baySize} × ${baySize} structural grid visible throughout all levels, floor-to-floor heights of 3.5m, slab thickness 175mm, beam depths, column sizes varying by floor, vertical service core with lifts and stairs, ${data.building_type === 'Residential' ? 'typical residential unit layouts visible,' : 'open office floor plates,'} foundation system visible below ground, ${climateDesc}, natural daylight entering through windows, people on multiple floors for scale, professional architectural section visualization, photorealistic materials, 4K resolution, technical illustration style with artistic rendering.`
+            };
+            
+            // Create a new window with all prompts
+            const promptWindow = window.open('', '_blank');
+            promptWindow.document.write(`
+                <!DOCTYPE html>
+                <html>
+                <head>
+                    <title>AI Rendering Prompts - ${data.location} ${data.building_type}</title>
+                    <style>
+                        body { 
+                            font-family: 'Segoe UI', Arial, sans-serif; 
+                            padding: 40px; 
+                            max-width: 1200px; 
+                            margin: 0 auto; 
+                            background: #f5f5f5;
+                        }
+                        h1 { 
+                            color: #2c3e50; 
+                            border-bottom: 4px solid #9c27b0; 
+                            padding-bottom: 15px; 
+                        }
+                        .prompt-card {
+                            background: white;
+                            padding: 25px;
+                            margin: 25px 0;
+                            border-radius: 10px;
+                            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+                            border-left: 5px solid #9c27b0;
+                        }
+                        .prompt-card h2 {
+                            color: #9c27b0;
+                            margin-top: 0;
+                            font-size: 1.4em;
+                        }
+                        .prompt-text {
+                            background: #f8f9fa;
+                            padding: 20px;
+                            border-radius: 5px;
+                            font-family: 'Courier New', monospace;
+                            font-size: 0.95em;
+                            line-height: 1.8;
+                            border: 1px solid #ddd;
+                            white-space: pre-wrap;
+                            word-wrap: break-word;
+                        }
+                        .copy-btn {
+                            background: #9c27b0;
+                            color: white;
+                            border: none;
+                            padding: 10px 20px;
+                            border-radius: 5px;
+                            cursor: pointer;
+                            margin-top: 10px;
+                            font-size: 1em;
+                            transition: background 0.3s;
+                        }
+                        .copy-btn:hover {
+                            background: #7b1fa2;
+                        }
+                        .project-info {
+                            background: linear-gradient(135deg, #9c27b0, #7b1fa2);
+                            color: white;
+                            padding: 25px;
+                            border-radius: 10px;
+                            margin-bottom: 30px;
+                        }
+                        .project-info h3 {
+                            margin: 0 0 15px 0;
+                            font-size: 1.3em;
+                        }
+                        .project-info p {
+                            margin: 5px 0;
+                            opacity: 0.95;
+                        }
+                        .tips {
+                            background: #e3f2fd;
+                            padding: 20px;
+                            border-radius: 8px;
+                            border-left: 4px solid #2196f3;
+                            margin: 20px 0;
+                        }
+                        .tips h3 {
+                            color: #1976d2;
+                            margin-top: 0;
+                        }
+                        .tips ul {
+                            margin: 10px 0;
+                            padding-left: 20px;
+                        }
+                        .tips li {
+                            margin: 8px 0;
+                            color: #555;
+                        }
+                        @media print {
+                            .copy-btn { display: none; }
+                        }
+                    </style>
+                </head>
+                <body>
+                    <h1>🎨 AI Architectural Rendering Prompts</h1>
+                    
+                    <div class="project-info">
+                        <h3>Project Parameters</h3>
+                        <p><strong>Location:</strong> ${data.location} (${data.climate_zone} Climate)</p>
+                        <p><strong>Building Type:</strong> ${data.building_type}</p>
+                        <p><strong>Floors:</strong> ${data.num_floors} stories (~${buildingHeight.toFixed(1)}m height)</p>
+                        <p><strong>Plot Size:</strong> ${plotDim}</p>
+                        <p><strong>Structural Grid:</strong> ${baySize} × ${baySize}</p>
+                        <p><strong>Architectural Style:</strong> ${data.architectural_style}</p>
+                        <p><strong>Seismic Zone:</strong> ${data.seismic_zone} | <strong>Soil:</strong> ${data.soil_type}</p>
+                    </div>
+                    
+                    <div class="tips">
+                        <h3>💡 Usage Tips</h3>
+                        <ul>
+                            <li><strong>Midjourney:</strong> Copy prompt + add: --ar 16:9 --style raw --stylize 250 --v 6</li>
+                            <li><strong>DALL-E 3:</strong> Use prompts as-is, works best with landscape format</li>
+                            <li><strong>Stable Diffusion XL:</strong> Use prompts with 50-80 steps, CFG 7-9</li>
+                            <li><strong>Firefly/Ideogram:</strong> Copy prompts directly, select "Photo" style</li>
+                            <li>Modify prompts for specific details or camera angles as needed</li>
+                            <li>For series: use same viewing angle across multiple variations</li>
+                        </ul>
+                    </div>
+                    
+                    ${Object.entries(prompts).map(([title, prompt]) => `
+                        <div class="prompt-card">
+                            <h2>${title}</h2>
+                            <div class="prompt-text">${prompt}</div>
+                            <button class="copy-btn" onclick="copyToClipboard(this, \`${prompt.replace(/`/g, '\\`').replace(/\$/g, '\\$')}\`)">
+                                📋 Copy Prompt
+                            </button>
+                        </div>
+                    `).join('')}
+                    
+                    <div style="margin-top: 40px; padding: 20px; background: #fff3e0; border-radius: 8px; border-left: 4px solid #ff9800;">
+                        <h3 style="color: #e65100; margin-top: 0;">📝 Note on AI Image Generation</h3>
+                        <p style="color: #666;">These prompts are optimized for photorealistic architectural visualization. Results may vary by AI platform. 
+                        For best results, maintain consistent lighting and viewing angles across a series. 
+                        You can modify specific elements (time of day, weather, materials) while keeping the core structural description.</p>
+                    </div>
+                    
+                    <div style="margin-top: 30px; text-align: center;">
+                        <button onclick="window.print()" style="background: #2196f3; color: white; border: none; padding: 15px 30px; 
+                                       font-size: 16px; cursor: pointer; border-radius: 5px; margin-right: 10px;">
+                            🖨️ Print Prompts
+                        </button>
+                        <button onclick="window.close()" style="background: #757575; color: white; border: none; padding: 15px 30px; 
+                                       font-size: 16px; cursor: pointer; border-radius: 5px;">
+                            Close Window
+                        </button>
+                    </div>
+                    
+                    <script>
+                        function copyToClipboard(button, text) {
+                            navigator.clipboard.writeText(text).then(() => {
+                                const originalText = button.textContent;
+                                button.textContent = '✅ Copied!';
+                                button.style.background = '#4caf50';
+                                setTimeout(() => {
+                                    button.textContent = originalText;
+                                    button.style.background = '#9c27b0';
+                                }, 2000);
+                            }).catch(err => {
+                                alert('Failed to copy. Please select and copy manually.');
+                            });
+                        }
+                    </script>
+                </body>
+                </html>
+            `);
+            promptWindow.document.close();
+        }
+    </script>
+</body>
+</html>

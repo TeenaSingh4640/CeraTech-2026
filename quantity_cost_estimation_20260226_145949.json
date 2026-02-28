@@ -1,0 +1,542 @@
+{
+  "project_parameters": {
+    "plot_length_m": 50.0,
+    "plot_width_m": 30.0,
+    "num_floors": 10,
+    "building_type": "Commercial",
+    "location": "Mumbai",
+    "analysis_date": "2026-02-26 14:59:49"
+  },
+  "1_built_up_areas": {
+    "gross_floor_area_per_floor_m2": 1500.0,
+    "total_gross_floor_area_m2": 15000.0,
+    "carpet_area_per_floor_m2": 975.0,
+    "total_carpet_area_m2": 9750.0,
+    "core_area_per_floor_m2": 180.0,
+    "total_core_area_m2": 1800.0,
+    "circulation_area_per_floor_m2": 335.0,
+    "total_circulation_area_m2": 3350.0,
+    "column_area_per_floor_m2": 10.0,
+    "total_column_area_m2": 100.0,
+    "super_builtup_per_floor_m2": 1121.25,
+    "total_super_builtup_m2": 11212.5,
+    "saleable_area_per_floor_m2": 953.06,
+    "total_saleable_area_m2": 9530.62,
+    "efficiency_ratio": 0.77,
+    "fsi_consumed": 10.0,
+    "plot_area_m2": 1500.0,
+    "assumptions": {
+      "core_percentage": "12.0%",
+      "efficiency_ratio": "77.0%",
+      "common_area_loading": "15%",
+      "saleable_from_super_builtup": "85%"
+    }
+  },
+  "2_concrete_volumes": {
+    "columns": {
+      "total_column_volume_m3": 397.04,
+      "with_wastage_m3": 416.89,
+      "floor_wise": [
+        {
+          "floor": 1,
+          "column_size_m": 0.7,
+          "volume_m3": 68.6
+        },
+        {
+          "floor": 2,
+          "column_size_m": 0.66,
+          "volume_m3": 60.98
+        },
+        {
+          "floor": 3,
+          "column_size_m": 0.62,
+          "volume_m3": 53.82
+        },
+        {
+          "floor": 4,
+          "column_size_m": 0.58,
+          "volume_m3": 47.1
+        },
+        {
+          "floor": 5,
+          "column_size_m": 0.54,
+          "volume_m3": 40.82
+        },
+        {
+          "floor": 6,
+          "column_size_m": 0.5,
+          "volume_m3": 35.0
+        },
+        {
+          "floor": 7,
+          "column_size_m": 0.46,
+          "volume_m3": 29.62
+        },
+        {
+          "floor": 8,
+          "column_size_m": 0.42,
+          "volume_m3": 24.7
+        },
+        {
+          "floor": 9,
+          "column_size_m": 0.38,
+          "volume_m3": 20.22
+        },
+        {
+          "floor": 10,
+          "column_size_m": 0.34,
+          "volume_m3": 16.18
+        }
+      ],
+      "assumptions": {
+        "num_columns": 40,
+        "floor_height_m": 3.5,
+        "wastage_factor": "5.000000000000004%"
+      }
+    },
+    "beams": {
+      "beam_width_m": 0.25,
+      "beam_depth_m": 0.3,
+      "beam_cross_section_m2": 0.075,
+      "primary_beam_length_per_floor_m": 160.0,
+      "secondary_beam_length_per_floor_m": 390.0,
+      "total_beam_length_per_floor_m": 550.0,
+      "total_beam_length_all_floors_m": 5500.0,
+      "total_beam_volume_m3": 412.5,
+      "with_wastage_m3": 433.12,
+      "assumptions": {
+        "grid_configuration": "7\u00d74 bays",
+        "wastage_factor": "5.000000000000004%"
+      }
+    },
+    "slabs": {
+      "slab_thickness_m": 0.3,
+      "gross_slab_area_per_floor_m2": 1500.0,
+      "column_deduction_per_floor_m2": 10.0,
+      "net_slab_area_per_floor_m2": 1490.0,
+      "total_slab_area_m2": 14900.0,
+      "total_slab_volume_m3": 4470.0,
+      "with_wastage_m3": 4693.5,
+      "assumptions": {
+        "column_deduction": "40 columns \u00d7 0.5m\u00b2",
+        "wastage_factor": "5.000000000000004%"
+      }
+    },
+    "shear_walls": {
+      "shear_wall_thickness_m": 0.3,
+      "total_shear_wall_length_m": 32.0,
+      "building_height_m": 35.0,
+      "total_shear_wall_volume_m3": 336.0,
+      "with_wastage_m3": 352.8,
+      "assumptions": {
+        "wall_length_percentage": "20% of perimeter",
+        "wall_thickness": "300mm",
+        "wastage_factor": "5.000000000000004%"
+      }
+    },
+    "foundation": {
+      "raft_foundation": {
+        "area_m2": 1500.0,
+        "thickness_m": 1.0,
+        "volume_m3": 1500.0
+      },
+      "piles": {
+        "number_of_piles": 40,
+        "pile_diameter_m": 0.6,
+        "pile_depth_m": 15.0,
+        "total_pile_volume_m3": 169.65
+      },
+      "pile_caps": {
+        "number": 40,
+        "cap_size_m": 1.5,
+        "cap_depth_m": 0.8,
+        "total_cap_volume_m3": 72.0
+      },
+      "total_foundation_volume_m3": 1741.65,
+      "with_wastage_m3": 1915.81,
+      "assumptions": {
+        "foundation_type": "Piled Raft",
+        "raft_thickness": "1.0m",
+        "pile_configuration": "1 pile per column",
+        "wastage_factor": "10%"
+      }
+    },
+    "summary": {
+      "total_column_volume_m3": 397.04,
+      "total_beam_volume_m3": 412.5,
+      "total_slab_volume_m3": 4470.0,
+      "total_shear_wall_volume_m3": 336.0,
+      "total_superstructure_m3": 5615.54,
+      "total_substructure_m3": 1741.65,
+      "total_concrete_volume_m3": 7357.19,
+      "total_with_wastage_m3": 7812.12,
+      "percentage_breakdown": {
+        "columns": "5.4%",
+        "beams": "5.6%",
+        "slabs": "60.8%",
+        "shear_walls": "4.6%",
+        "foundation": "23.7%"
+      }
+    }
+  },
+  "3_steel_requirement": {
+    "reinforcement_ratios_kg_per_m3": {
+      "columns": 180,
+      "beams": 140,
+      "slabs": 90,
+      "shear_walls": 55,
+      "foundation": 100
+    },
+    "steel_by_component": {
+      "columns_kg": 71467.2,
+      "beams_kg": 57750.0,
+      "slabs_kg": 402300.0,
+      "shear_walls_kg": 18480.0,
+      "foundation_kg": 174165.0
+    },
+    "total_basic_steel_kg": 724162.2,
+    "total_basic_steel_tonnes": 724.16,
+    "with_laps_kg": 796578.42,
+    "with_laps_tonnes": 796.58,
+    "with_wastage_kg": 860304.69,
+    "with_wastage_tonnes": 860.3,
+    "steel_by_diameter_kg": {
+      "8mm": 86030.47,
+      "10mm": 129045.7,
+      "12mm": 172060.94,
+      "16mm": 215076.17,
+      "20mm": 172060.94,
+      "25mm": 86030.47
+    },
+    "material_grade": "Fe 500",
+    "assumptions": {
+      "lap_factor": "10.000000000000009%",
+      "wastage_factor": "8.000000000000007%",
+      "steel_density": "7850 kg/m\u00b3",
+      "typical_distribution": "8mm to 25mm bars"
+    }
+  },
+  "4_formwork_area": {
+    "formwork_by_component_m2": {
+      "columns": 2800.0,
+      "beams": 4675.0,
+      "slabs": 14900.0,
+      "shear_walls": 2240.0,
+      "foundation": 346.92
+    },
+    "total_formwork_basic_m2": 24961.92,
+    "total_formwork_with_edges_m2": 28706.21,
+    "actual_formwork_required_m2": 4100.89,
+    "formwork_reuse_factor": 7,
+    "percentage_breakdown": {
+      "columns": "11.2%",
+      "beams": "18.7%",
+      "slabs": "59.7%",
+      "shear_walls": "9.0%",
+      "foundation": "1.4%"
+    },
+    "assumptions": {
+      "edge_form_factor": "14.999999999999991%",
+      "formwork_reuse": "7 times",
+      "formwork_type": "Aluminum/Steel formwork system"
+    }
+  },
+  "5_cost_estimation": {
+    "structure_cost": {
+      "concrete_cost_inr": {
+        "columns_m50": 3771880.0,
+        "others_m30": 52201125.0,
+        "total": 55973005.0
+      },
+      "steel_cost_inr": 55919500.0,
+      "formwork_cost_inr": 1435311.5,
+      "material_subtotal_inr": 113327816.5,
+      "labor_cost_inr": 33998344.95,
+      "total_structure_cost_inr": 147326161.45,
+      "cost_breakdown_percentage": {
+        "concrete": "38.0%",
+        "steel": "38.0%",
+        "formwork": "1.0%",
+        "labor": "23.1%"
+      }
+    },
+    "finishing_cost": {
+      "flooring_cost_inr": 12000000.0,
+      "plastering_cost_inr": 562500.0,
+      "painting_cost_inr": 360000.0,
+      "false_ceiling_cost_inr": 2400000.0,
+      "doors_windows_cost_inr": 2700000.0,
+      "total_finishing_cost_inr": 18022500.0,
+      "cost_breakdown_percentage": {
+        "flooring": "66.6%",
+        "plastering": "3.1%",
+        "painting": "2.0%",
+        "ceiling": "13.3%",
+        "doors_windows": "15.0%"
+      }
+    },
+    "mep_cost_inr": 29762759.06,
+    "contingency_inr": 19511142.05,
+    "project_cost_summary": {
+      "structure_cost_inr": 147326161.45,
+      "finishing_cost_inr": 18022500.0,
+      "mep_cost_inr": 29762759.06,
+      "subtotal_inr": 195111420.51,
+      "contingency_inr": 19511142.05,
+      "grand_total_inr": 214622562.56,
+      "grand_total_million_inr": 214.62,
+      "cost_per_m2_inr": 14308.17
+    },
+    "percentage_distribution": {
+      "structure": "68.6%",
+      "finishing": "8.4%",
+      "mep": "13.9%",
+      "contingency": "9.1%"
+    },
+    "benchmarks": {
+      "typical_structure_percentage": "55-60%",
+      "typical_finishing_percentage": "25-30%",
+      "typical_mep_percentage": "15-20%",
+      "actual_structure": "68.6%",
+      "actual_finishing": "8.4%",
+      "actual_mep": "13.9%"
+    }
+  },
+  "6_cost_drivers": {
+    "ranked_cost_drivers": [
+      {
+        "component": "Concrete",
+        "cost_inr": 55973005.0,
+        "percentage": 26.1,
+        "impact": "CRITICAL"
+      },
+      {
+        "component": "Steel Reinforcement",
+        "cost_inr": 55919500.0,
+        "percentage": 26.1,
+        "impact": "CRITICAL"
+      },
+      {
+        "component": "Labor",
+        "cost_inr": 33998344.95,
+        "percentage": 15.8,
+        "impact": "MEDIUM"
+      },
+      {
+        "component": "MEP Systems",
+        "cost_inr": 29762759.06,
+        "percentage": 13.9,
+        "impact": "HIGH"
+      },
+      {
+        "component": "Finishing",
+        "cost_inr": 18022500.0,
+        "percentage": 8.4,
+        "impact": "HIGH"
+      },
+      {
+        "component": "Formwork",
+        "cost_inr": 1435311.5,
+        "percentage": 0.7,
+        "impact": "MEDIUM"
+      }
+    ],
+    "top_3_drivers": {
+      "driver_1": {
+        "component": "Concrete",
+        "cost_inr": 55973005.0,
+        "percentage": 26.1,
+        "impact": "CRITICAL"
+      },
+      "driver_2": {
+        "component": "Steel Reinforcement",
+        "cost_inr": 55919500.0,
+        "percentage": 26.1,
+        "impact": "CRITICAL"
+      },
+      "driver_3": {
+        "component": "Labor",
+        "cost_inr": 33998344.95,
+        "percentage": 15.8,
+        "impact": "MEDIUM"
+      },
+      "combined_percentage": 68.0
+    },
+    "optimization_focus": "Top 3 drivers account for majority of costs"
+  },
+  "7_optimization_strategies": {
+    "optimization_strategies": [
+      {
+        "category": "Concrete Optimization",
+        "strategies": [
+          {
+            "strategy": "Use fly ash replacement (30%)",
+            "savings_percentage": "15-20%",
+            "impact": "\u20b9 saving on concrete cost",
+            "implementation": "Replace 30% cement with GGBS/fly ash",
+            "payback": "Immediate",
+            "sustainability": "Reduces CO2 by 30%"
+          },
+          {
+            "strategy": "Optimize slab thickness",
+            "savings_percentage": "10-15%",
+            "impact": "Reduce concrete volume by 10%",
+            "implementation": "Use post-tensioning for longer spans",
+            "payback": "3-6 months",
+            "sustainability": "Lower embodied carbon"
+          },
+          {
+            "strategy": "Use high-strength concrete selectively",
+            "savings_percentage": "8-12%",
+            "impact": "Reduce column sizes",
+            "implementation": "M60 in lower floors only",
+            "payback": "Immediate (area gained)",
+            "sustainability": "Less material, smaller footprint"
+          }
+        ],
+        "potential_savings_inr": 8395950.75,
+        "priority": "CRITICAL"
+      },
+      {
+        "category": "Steel Optimization",
+        "strategies": [
+          {
+            "strategy": "Use Fe 550 in columns",
+            "savings_percentage": "12-15%",
+            "impact": "18% less steel by weight",
+            "implementation": "Switch to higher grade",
+            "payback": "Immediate",
+            "sustainability": "Lower steel consumption"
+          },
+          {
+            "strategy": "Optimize reinforcement detailing",
+            "savings_percentage": "8-10%",
+            "impact": "Reduce wastage and laps",
+            "implementation": "Bar bending schedule optimization",
+            "payback": "Immediate",
+            "sustainability": "Less waste"
+          },
+          {
+            "strategy": "Use welded wire mesh in slabs",
+            "savings_percentage": "5-8%",
+            "impact": "Faster installation, less wastage",
+            "implementation": "Replace conventional bars",
+            "payback": "1-2 months (labor savings)",
+            "sustainability": "Prefabricated, less site waste"
+          }
+        ],
+        "potential_savings_inr": 6710340.0,
+        "priority": "CRITICAL"
+      },
+      {
+        "category": "Formwork Optimization",
+        "strategies": [
+          {
+            "strategy": "Aluminum formwork system",
+            "savings_percentage": "20-25%",
+            "impact": "80+ reuses vs 6-8 for timber",
+            "implementation": "Use modern formwork",
+            "payback": "4-6 floors",
+            "sustainability": "Reusability"
+          },
+          {
+            "strategy": "Standardize member sizes",
+            "savings_percentage": "10-15%",
+            "impact": "Maximize formwork reuse",
+            "implementation": "Use 3-4 column sizes only",
+            "payback": "Immediate",
+            "sustainability": "Less fabrication"
+          },
+          {
+            "strategy": "Jump formwork for core",
+            "savings_percentage": "15-20%",
+            "impact": "Faster construction",
+            "implementation": "Self-climbing system",
+            "payback": "3-4 floors",
+            "sustainability": "Safer, faster"
+          }
+        ],
+        "potential_savings_inr": 287062.3,
+        "priority": "HIGH"
+      },
+      {
+        "category": "Design Optimization",
+        "strategies": [
+          {
+            "strategy": "Optimize grid spacing",
+            "savings_percentage": "8-12%",
+            "impact": "Reduce beam/column count",
+            "implementation": "7.5-9m spans for commercial",
+            "payback": "Design stage (no extra cost)",
+            "sustainability": "Less material overall"
+          },
+          {
+            "strategy": "Use flat slab system",
+            "savings_percentage": "10-15%",
+            "impact": "Eliminate beams, reduce height",
+            "implementation": "Flat slab with drop panels",
+            "payback": "Immediate (area gained)",
+            "sustainability": "Faster construction"
+          },
+          {
+            "strategy": "Precast elements",
+            "savings_percentage": "15-20%",
+            "impact": "Reduce site labor, faster",
+            "implementation": "Precast stairs, facades",
+            "payback": "5-6 months",
+            "sustainability": "Factory quality control"
+          }
+        ],
+        "potential_savings_inr": 21462256.26,
+        "priority": "HIGH"
+      },
+      {
+        "category": "Construction Methodology",
+        "strategies": [
+          {
+            "strategy": "Early strength concrete",
+            "savings_percentage": "Time savings",
+            "impact": "Formwork removal in 3 days vs 7",
+            "implementation": "Accelerators/admixtures",
+            "payback": "1-2 months (faster cycle)",
+            "sustainability": "Faster construction"
+          },
+          {
+            "strategy": "Ready-mix concrete",
+            "savings_percentage": "Quality + speed",
+            "impact": "Consistent quality, no site batching",
+            "implementation": "Use RMC for all concrete",
+            "payback": "Immediate",
+            "sustainability": "Better quality control"
+          },
+          {
+            "strategy": "Prefabricated rebar",
+            "savings_percentage": "8-10%",
+            "impact": "Reduce site labor and wastage",
+            "implementation": "Factory-cut and bent",
+            "payback": "Immediate",
+            "sustainability": "Less site waste"
+          }
+        ],
+        "potential_savings_inr": 5099751.74,
+        "priority": "MEDIUM"
+      }
+    ],
+    "summary": {
+      "total_optimization_potential_inr": 41955361.05,
+      "total_optimization_potential_million_inr": 41.96,
+      "percentage_of_project_cost": 19.5,
+      "implementation_priority": "Focus on Concrete and Steel (70% of savings)",
+      "quick_wins": [
+        "Fly ash replacement (immediate, 15-20% concrete savings)",
+        "Fe 550 steel in columns (immediate, 12-15% steel savings)",
+        "Aluminum formwork (payback in 4-6 floors)"
+      ],
+      "strategic_initiatives": [
+        "Flat slab system (10-15% overall savings)",
+        "Precast elements (15-20% labor + time savings)",
+        "Optimize grid to 7.5-9m spans (8-12% savings)"
+      ]
+    }
+  }
+}

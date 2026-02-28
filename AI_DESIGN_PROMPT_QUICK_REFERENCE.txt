@@ -1,0 +1,199 @@
+═══════════════════════════════════════════════════════════════════════════════
+   AI ARCHITECTURAL DESIGN ENGINE - QUICK REFERENCE
+   Essential Prompts for Rapid Design Generation
+═══════════════════════════════════════════════════════════════════════════════
+
+BASIC PROMPT TEMPLATE:
+═══════════════════════════════════════════════════════════════════════════════
+
+You are an AI architectural and structural design engine. Generate a complete 
+building design with floor plans, structural system, and technical drawings.
+
+Project: [Building Type] | [Floors] | [Location]
+Plot: [Length]m × [Width]m | FAR: [Ratio]
+Climate: [Zone] | Seismic: [Zone] | Soil: [Type]
+Budget: $[Range] | Style: [Architectural Style]
+
+Deliver:
+1. Concept narrative & massing
+2. Floor-wise architectural planning (all floors)
+   - Functional zones, circulation, room dimensions
+   - Service core, ventilation, fire escape
+3. Structural system & grid
+4. Material quantities & costs
+5. 3D + 2D technical drawing descriptions
+   - Perspective, elevations, plans, section
+
+Ensure structural grid consistency and code compliance.
+
+═══════════════════════════════════════════════════════════════════════════════
+
+USAGE EXAMPLES:
+═══════════════════════════════════════════════════════════════════════════════
+
+EXAMPLE 1: RESIDENTIAL HIGH-RISE
+───────────────────────────────────────────────────────────────────────────────
+Project: Residential Apartment Building | 15 Floors | Mumbai, India
+Plot: 50m × 30m | FAR: 2.5
+Climate: Tropical | Seismic: Zone III | Soil: Medium Sand
+Budget: $1.2M - $1.5M | Style: Contemporary Glass & Concrete
+
+Generate complete design including basement parking, ground floor lobby, 
+typical residential floors with 2BHK/3BHK units, and rooftop amenities.
+
+
+EXAMPLE 2: COMMERCIAL OFFICE
+───────────────────────────────────────────────────────────────────────────────
+Project: Corporate Office Building | 8 Floors + 2 Basements | Dubai, UAE
+Plot: 60m × 40m | FAR: 3.0
+Climate: Arid (Hot-dry) | Seismic: Zone II | Soil: Rock
+Budget: $2M - $2.5M | Style: Modern Glass with Solar Shading
+
+Include ground retail, office floors with flexible layouts, and rooftop solar.
+
+
+EXAMPLE 3: INSTITUTIONAL BUILDING
+───────────────────────────────────────────────────────────────────────────────
+Project: Educational Institute | 4 Floors | Bangalore, India
+Plot: 80m × 50m | FAR: 1.8
+Climate: Temperate | Seismic: Zone II | Soil: Clay
+Budget: $800K - $1M | Style: Contextual with Natural Ventilation
+
+Design with classrooms, labs, library, admin offices, and open courtyards.
+
+
+═══════════════════════════════════════════════════════════════════════════════
+
+FOCUSED PROMPTS FOR SPECIFIC TASKS:
+═══════════════════════════════════════════════════════════════════════════════
+
+FLOOR PLANNING ONLY:
+───────────────────────────────────────────────────────────────────────────────
+Generate detailed floor-wise architectural planning for a [X]-floor [building type]:
+
+For each floor provide:
+- Functional zoning with areas
+- Circulation strategy and widths  
+- Specific room dimensions aligned to [X]m structural grid
+- Service core placement and size
+- Ventilation and daylighting approach
+- Fire escape compliance (travel distances, exit count)
+
+Building: [Details]
+
+
+STRUCTURAL DESIGN ONLY:
+───────────────────────────────────────────────────────────────────────────────
+Design structural system for:
+Plot: [X]m × [Y]m | [N] floors | [Soil type] | [Seismic zone]
+
+Provide:
+- Structural system selection with reasoning
+- Column grid spacing
+- Slab system and thickness
+- Foundation type and depth
+- Concrete and steel quantities
+- Cost estimate
+
+
+TECHNICAL DRAWINGS ONLY:
+───────────────────────────────────────────────────────────────────────────────
+Describe technical drawings for [building type], [N] floors, [X]m × [Y]m:
+
+1. 3D perspective view description (for AI image generation)
+2. Front elevation with all dimensions
+3. Side elevation  
+4. Roof plan
+5. Ground floor plan with column grid
+6. Typical floor plan
+7. Section cut through central core
+
+Include all dimensions, materials, and structural elements.
+
+
+═══════════════════════════════════════════════════════════════════════════════
+
+KEY PARAMETERS CHECKLIST:
+═══════════════════════════════════════════════════════════════════════════════
+
+SITE DATA:
+□ Plot dimensions (Length × Width)
+□ Location and climate zone
+□ Soil type and bearing capacity
+□ Seismic zone
+□ Wind speed
+
+PROGRAM:
+□ Building type and use
+□ Number of floors
+□ FAR / Ground coverage
+□ Parking requirement
+□ Special features
+
+DESIGN:
+□ Architectural style
+□ Budget range
+□ Timeline
+□ Sustainability goals
+
+═══════════════════════════════════════════════════════════════════════════════
+
+TYPICAL OUTPUT SECTIONS YOU'LL RECEIVE:
+═══════════════════════════════════════════════════════════════════════════════
+
+1. Project Summary
+2. Concept Narrative  
+3. Massing Strategy
+4. FLOOR-WISE PLANS (Basement, Ground, Typical, Top floors)
+   - Functional zoning + reasoning
+   - Circulation logic
+   - Room dimensions
+   - Column alignment
+   - Service cores
+   - Ventilation strategy
+   - Fire escape compliance
+5. Structural System
+6. Load Analysis
+7. Column Grid
+8. Slab System
+9. Foundation Design
+10. Material Quantities
+11. Cost Estimates
+12. Technical Drawing Descriptions
+13. Risk Assessment
+14. Optimization Opportunities
+
+═══════════════════════════════════════════════════════════════════════════════
+
+TIPS FOR BEST RESULTS:
+═══════════════════════════════════════════════════════════════════════════════
+
+✓ Be specific with plot dimensions and constraints
+✓ Mention any special requirements upfront
+✓ Specify if you need more detail on certain aspects
+✓ Request modifications to focus on specific floors
+✓ Ask for alternative options if needed
+✓ Request cost breakdowns by component
+✓ Ask for step-by-step reasoning if needed
+
+═══════════════════════════════════════════════════════════════════════════════
+
+FOLLOW-UP PROMPTS:
+═══════════════════════════════════════════════════════════════════════════════
+
+Expand the ground floor plan with detailed furniture layout and landscaping.
+
+Provide alternative structural systems (steel vs RC) with cost comparison.
+
+Generate 5 alternative massing concepts for the same program.
+
+Detail the typical floor plan—show 3 different unit type options.
+
+Optimize the design to reduce cost by 15% without compromising quality.
+
+Create material specifications and finishes schedule.
+
+Generate rendering prompts for photorealistic visualization.
+
+═══════════════════════════════════════════════════════════════════════════════
+EOF

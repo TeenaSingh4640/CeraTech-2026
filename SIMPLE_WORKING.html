@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CeraTech Design Tool - ULTRA SIMPLE WORKING VERSION</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body style="font-family: Inter, Arial, sans-serif; margin: 0; padding: 20px; background: #f7fafc;">
+    
+    <div style="max-width: 1200px; margin: 0 auto;">
+        <h1 style="color: #00C9A7; margin-bottom: 30px;">🏗️ CeraTech Structural Design Tool</h1>
+        
+        <div style="display: grid; grid-template-columns: 400px 1fr; gap: 30px;">
+            <!-- LEFT: INPUT FORM -->
+            <div style="background: white; padding: 30px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                <h2 style="margin-top: 0;">Project Input</h2>
+                
+                <div style="margin-bottom: 15px;">
+                    <label style="display: block; margin-bottom: 5px; font-weight: 600;">Plot Length (m):</label>
+                    <input type="number" id="plotLength" value="50" style="width: 100%; padding: 10px; border: 2px solid #e2e8f0; border-radius: 6px; font-size: 14px;">
+                </div>
+                
+                <div style="margin-bottom: 15px;">
+                    <label style="display: block; margin-bottom: 5px; font-weight: 600;">Plot Width (m):</label>
+                    <input type="number" id="plotWidth" value="30" style="width: 100%; padding: 10px; border: 2px solid #e2e8f0; border-radius: 6px; font-size: 14px;">
+                </div>
+                
+                <div style="margin-bottom: 15px;">
+                    <label style="display: block; margin-bottom: 5px; font-weight: 600;">Number of Floors:</label>
+                    <input type="number" id="numFloors" value="10" style="width: 100%; padding: 10px; border: 2px solid #e2e8f0; border-radius: 6px; font-size: 14px;">
+                </div>
+                
+                <div style="margin-bottom: 15px;">
+                    <label style="display: block; margin-bottom: 5px; font-weight: 600;">FAR (Floor Area Ratio):</label>
+                    <input type="number" id="far" value="2.5" step="0.1" style="width: 100%; padding: 10px; border: 2px solid #e2e8f0; border-radius: 6px; font-size: 14px;">
+                </div>
+                
+                <div style="margin-bottom: 15px;">
+                    <label style="display: block; margin-bottom: 5px; font-weight: 600;">Building Type:</label>
+                    <select id="buildingType" style="width: 100%; padding: 10px; border: 2px solid #e2e8f0; border-radius: 6px; font-size: 14px;">
+                        <option>Residential</option>
+                        <option>Commercial</option>
+                        <option>Industrial</option>
+                    </select>
+                </div>
+                
+                <button onclick="generateDesign()" style="width: 100%; padding: 15px; background: #00C9A7; color: white; border: none; border-radius: 8px; font-size: 16px; font-weight: 700; cursor: pointer; margin-top: 10px;">
+                    <i class="fas fa-magic"></i> GENERATE DESIGN
+                </button>
+            </div>
+            
+            <!-- RIGHT: RESULTS -->
+            <div id="results" style="background: white; padding: 30px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); display: none;">
+                <h2 style="margin-top: 0; color: #00C9A7;">✅ Design Results</h2>
+                
+                <!-- Stats -->
+                <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; margin-bottom: 30px;">
+                    <div style="background: #f7fafc; padding: 20px; border-radius: 8px; text-align: center;">
+                        <div style="font-size: 12px; color: #718096; text-transform: uppercase; margin-bottom: 5px;">Built Area</div>
+                        <div id="statArea" style="font-size: 24px; font-weight: 700; color: #2d3748;">0</div>
+                        <div style="font-size: 11px; color: #718096;">m²</div>
+                    </div>
+                    <div style="background: #f7fafc; padding: 20px; border-radius: 8px; text-align: center;">
+                        <div style="font-size: 12px; color: #718096; text-transform: uppercase; margin-bottom: 5px;">Floors</div>
+                        <div id="statFloors" style="font-size: 24px; font-weight: 700; color: #2d3748;">0</div>
+                        <div style="font-size: 11px; color: #718096;">stories</div>
+                    </div>
+                    <div style="background: #f7fafc; padding: 20px; border-radius: 8px; text-align: center;">
+                        <div style="font-size: 12px; color: #718096; text-transform: uppercase; margin-bottom: 5px;">Concrete</div>
+                        <div id="statConcrete" style="font-size: 24px; font-weight: 700; color: #2d3748;">0</div>
+                        <div style="font-size: 11px; color: #718096;">m³</div>
+                    </div>
+                    <div style="background: #f7fafc; padding: 20px; border-radius: 8px; text-align: center;">
+                        <div style="font-size: 12px; color: #718096; text-transform: uppercase; margin-bottom: 5px;">Total Cost</div>
+                        <div id="statCost" style="font-size: 24px; font-weight: 700; color: #00C9A7;">$0</div>
+                    </div>
+                </div>
+                
+                <!-- Details -->
+                <div style="margin-bottom: 20px;">
+                    <h3>📋 Project Details</h3>
+                    <table style="width: 100%; border-collapse: collapse;">
+                        <tr style="border-bottom: 1px solid #e2e8f0;">
+                            <td style="padding: 10px; font-weight: 600;">Plot Area</td>
+                            <td style="padding: 10px;" id="detailPlot">-</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid #e2e8f0;">
+                            <td style="padding: 10px; font-weight: 600;">Built Area</td>
+                            <td style="padding: 10px;" id="detailBuilt">-</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid #e2e8f0;">
+                            <td style="padding: 10px; font-weight: 600;">Building Height</td>
+                            <td style="padding: 10px;" id="detailHeight">-</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid #e2e8f0;">
+                            <td style="padding: 10px; font-weight: 600;">Structural System</td>
+                            <td style="padding: 10px;" id="detailSystem">-</td>
+                        </tr>
+                    </table>
+                </div>
+                
+                <!-- Cost Breakdown -->
+                <div>
+                    <h3>💰 Cost Breakdown</h3>
+                    <table style="width: 100%; border-collapse: collapse;">
+                        <tr style="background: #f7fafc;">
+                            <th style="padding: 10px; text-align: left;">Item</th>
+                            <th style="padding: 10px; text-align: right;">Quantity</th>
+                            <th style="padding: 10px; text-align: right;">Cost</th>
+                        </tr>
+                        <tr style="border-bottom: 1px solid #e2e8f0;">
+                            <td style="padding: 10px;">Concrete</td>
+                            <td style="padding: 10px; text-align: right;" id="costConcreteQty">-</td>
+                            <td style="padding: 10px; text-align: right;" id="costConcreteCost">-</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid #e2e8f0;">
+                            <td style="padding: 10px;">Steel Reinforcement</td>
+                            <td style="padding: 10px; text-align: right;" id="costSteelQty">-</td>
+                            <td style="padding: 10px; text-align: right;" id="costSteelCost">-</td>
+                        </tr>
+                        <tr style="background: #d4f1f4;">
+                            <td style="padding: 10px; font-weight: 700;">TOTAL</td>
+                            <td style="padding: 10px;"></td>
+                            <td style="padding: 10px; text-align: right; font-weight: 700; color: #00C9A7; font-size: 18px;" id="costTotal">-</td>
+                        </tr>
+                    </table>
+                </div>
+                
+                <!-- Buttons -->
+                <div style="margin-top: 30px; display: flex; gap: 10px;">
+                    <button onclick="viewDrawings()" style="flex: 1; padding: 12px; background: #667eea; color: white; border: none; border-radius: 8px; font-weight: 600; cursor: pointer;">
+                        <i class="fas fa-image"></i> View Drawings
+                    </button>
+                    <button onclick="downloadData()" style="flex: 1; padding: 12px; background: #48bb78; color: white; border: none; border-radius: 8px; font-weight: 600; cursor: pointer;">
+                        <i class="fas fa-download"></i> Download JSON
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        var currentData = null;
+
+        function generateDesign() {
+            // Get values
+            var plotLength = parseFloat(document.getElementById('plotLength').value);
+            var plotWidth = parseFloat(document.getElementById('plotWidth').value);
+            var numFloors = parseInt(document.getElementById('numFloors').value);
+            var far = parseFloat(document.getElementById('far').value);
+            var buildingType = document.getElementById('buildingType').value;
+            
+            // Calculate
+            var plotArea = plotLength * plotWidth;
+            var builtArea = plotArea * far;
+            var height = numFloors * 3.5;
+            var concrete = ((builtArea * 0.175 * 1.35) * 1.05).toFixed(2);
+            var steel = ((builtArea * 0.175 * 1.35) * 0.015 * 7850 / 1000).toFixed(2);
+            var concreteCost = (concrete * 175).toFixed(0);
+            var steelCost = (steel * 1350).toFixed(0);
+            var totalCost = (parseFloat(concreteCost) + parseFloat(steelCost)).toFixed(0);
+            var system = numFloors <= 7 ? 'RC Moment Frame' : 'RC Frame with Shear Walls';
+            
+            // Store data
+            currentData = {
+                plot_length: plotLength,
+                plot_width: plotWidth,
+                num_floors: numFloors,
+                far_allowed: far,
+                building_type: buildingType,
+                plot_area: plotArea,
+                built_area: builtArea,
+                concrete: concrete,
+                steel: steel,
+                total_cost: totalCost
+            };
+            
+            // Update display
+            document.getElementById('statArea').textContent = builtArea.toFixed(0);
+            document.getElementById('statFloors').textContent = numFloors;
+            document.getElementById('statConcrete').textContent = concrete;
+            document.getElementById('statCost').textContent = '$' + totalCost.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+            
+            document.getElementById('detailPlot').textContent = plotArea.toFixed(2) + ' m²';
+            document.getElementById('detailBuilt').textContent = builtArea.toFixed(2) + ' m²';
+            document.getElementById('detailHeight').textContent = height.toFixed(1) + ' m';
+            document.getElementById('detailSystem').textContent = system;
+            
+            document.getElementById('costConcreteQty').textContent = concrete + ' m³';
+            document.getElementById('costConcreteCost').textContent = '$' + concreteCost.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+            document.getElementById('costSteelQty').textContent = steel + ' tonnes';
+            document.getElementById('costSteelCost').textContent = '$' + steelCost.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+            document.getElementById('costTotal').textContent = '$' + totalCost.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+            
+            // Show results
+            document.getElementById('results').style.display = 'block';
+        }
+        
+        function viewDrawings() {
+            if (!currentData) {
+                alert('Please generate a design first!');
+                return;
+            }
+            
+            var win = window.open('', 'Drawings', 'width=1400,height=900');
+            win.document.write('<html><head><title>Architectural Drawings</title></head>');
+            win.document.write('<body style="margin:0;padding:20px;background:#f5f5f5;font-family:Arial">');
+            win.document.write('<h1 style="text-align:center;color:#00C9A7">Architectural Drawings</h1>');
+            win.document.write('<div style="display:grid;grid-template-columns:repeat(2,1fr);gap:20px;max-width:1300px;margin:20px auto">');
+            
+            // 6 Canvases
+            var drawings = ['Site Plan', 'Floor Plan', 'Elevation', 'Isometric', 'Structural Grid', 'Perspective'];
+            for (var i = 0; i < 6; i++) {
+                win.document.write('<div style="background:white;padding:20px;border-radius:8px"><h3 style="text-align:center">' + drawings[i] + '</h3><canvas id="canvas' + i + '" width="600" height="400" style="width:100%;border:1px solid #ddd"></canvas></div>');
+            }
+            
+            win.document.write('</div><script>');
+            win.document.write('var data=' + JSON.stringify(currentData) + ';');
+            
+            // Site Plan
+            win.document.write('var ctx=document.getElementById("canvas0").getContext("2d");');
+            win.document.write('ctx.fillStyle="#E8F5E9";ctx.fillRect(0,0,600,400);');
+            win.document.write('ctx.strokeStyle="#000";ctx.lineWidth=3;ctx.strokeRect(80,60,440,280);');
+            win.document.write('ctx.fillStyle="#90CAF9";ctx.fillRect(150,110,300,180);');
+            win.document.write('ctx.strokeStyle="#1976D2";ctx.lineWidth=2;ctx.strokeRect(150,110,300,180);');
+            win.document.write('ctx.fillStyle="#000";ctx.font="bold 18px Arial";ctx.fillText("SITE PLAN",20,30);');
+            win.document.write('ctx.font="14px Arial";ctx.fillText("Plot: "+data.plot_length+"m × "+data.plot_width+"m",20,55);');
+            
+            // Floor Plan
+            win.document.write('ctx=document.getElementById("canvas1").getContext("2d");');
+            win.document.write('ctx.fillStyle="#FFF";ctx.fillRect(0,0,600,400);');
+            win.document.write('ctx.strokeStyle="#000";ctx.lineWidth=4;ctx.strokeRect(100,80,400,240);');
+            win.document.write('for(var i=0;i<5;i++){for(var j=0;j<4;j++){ctx.fillStyle="#000";ctx.fillRect(100+i*100-5,80+j*80-5,10,10);}}');
+            win.document.write('ctx.fillStyle="#000";ctx.font="bold 18px Arial";ctx.fillText("FLOOR PLAN",20,30);');
+            
+            // Elevation
+            win.document.write('ctx=document.getElementById("canvas2").getContext("2d");');
+            win.document.write('ctx.fillStyle="#E3F2FD";ctx.fillRect(0,0,600,400);');
+            win.document.write('ctx.fillStyle="#8D6E63";ctx.fillRect(0,320,600,80);');
+            win.document.write('var floors=data.num_floors;var fh=240/floors;');
+            win.document.write('ctx.fillStyle="#ECEFF1";ctx.fillRect(150,320-floors*fh,300,floors*fh);');
+            win.document.write('for(var i=0;i<=floors;i++){var y=320-i*fh;ctx.strokeStyle="#000";ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(150,y);ctx.lineTo(450,y);ctx.stroke();}');
+            win.document.write('ctx.fillStyle="#000";ctx.font="bold 18px Arial";ctx.fillText("ELEVATION",20,30);');
+            
+            // Isometric
+            win.document.write('ctx=document.getElementById("canvas3").getContext("2d");');
+            win.document.write('ctx.fillStyle="#F5F5F5";ctx.fillRect(0,0,600,400);');
+            win.document.write('var f=Math.min(floors,12);var bx=200;var by=300;var w=200;var d=120;var fh=15;');
+            win.document.write('ctx.fillStyle="#CFD8DC";ctx.beginPath();ctx.moveTo(bx,by);ctx.lineTo(bx+w,by);ctx.lineTo(bx+w,by-f*fh);ctx.lineTo(bx,by-f*fh);ctx.closePath();ctx.fill();');
+            win.document.write('ctx.fillStyle="#000";ctx.font="bold 18px Arial";ctx.fillText("ISOMETRIC",20,30);');
+            
+            // Grid
+            win.document.write('ctx=document.getElementById("canvas4").getContext("2d");');
+            win.document.write('ctx.fillStyle="#FFF";ctx.fillRect(0,0,600,400);');
+            win.document.write('for(var i=0;i<6;i++){for(var j=0;j<5;j++){var x=100+i*80;var y=80+j*70;ctx.fillStyle="#1976D2";ctx.beginPath();ctx.arc(x,y,8,0,Math.PI*2);ctx.fill();}}');
+            win.document.write('ctx.fillStyle="#000";ctx.font="bold 18px Arial";ctx.fillText("STRUCTURAL GRID",20,30);');
+            
+            // Perspective
+            win.document.write('ctx=document.getElementById("canvas5").getContext("2d");');
+            win.document.write('var g=ctx.createLinearGradient(0,0,0,250);g.addColorStop(0,"#87CEEB");g.addColorStop(1,"#E0F6FF");ctx.fillStyle=g;ctx.fillRect(0,0,600,250);');
+            win.document.write('ctx.fillStyle="#A5D6A7";ctx.fillRect(0,250,600,150);');
+            win.document.write('ctx.fillStyle="#CFD8DC";ctx.beginPath();ctx.moveTo(200,270);ctx.lineTo(400,270);ctx.lineTo(420,270-f*10);ctx.lineTo(220,270-f*10);ctx.closePath();ctx.fill();');
+            win.document.write('ctx.fillStyle="#FFD54F";ctx.beginPath();ctx.arc(500,80,40,0,Math.PI*2);ctx.fill();');
+            win.document.write('ctx.fillStyle="#000";ctx.font="bold 18px Arial";ctx.fillText("PERSPECTIVE",20,30);');
+            
+            win.document.write('</script></body></html>');
+            win.document.close();
+        }
+        
+        function downloadData() {
+            if (!currentData) {
+                alert('Please generate a design first!');
+                return;
+            }
+            var str = JSON.stringify(currentData, null, 2);
+            var blob = new Blob([str], {type: 'application/json'});
+            var url = URL.createObjectURL(blob);
+            var a = document.createElement('a');
+            a.href = url;
+            a.download = 'design_' + Date.now() + '.json';
+            a.click();
+        }
+    </script>
+</body>
+</html>

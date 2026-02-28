@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CeraTech Design Suite</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #00C9A7;
+            --secondary-color: #667eea;
+            --text-primary: #2d3748;
+            --text-secondary: #718096;
+            --bg-main: #f7fafc;
+            --bg-card: #ffffff;
+            --border-color: #e2e8f0;
+            --sidebar-width: 240px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-main);
+            color: var(--text-primary);
+        }
+
+        .container {
+            display: grid;
+            grid-template-columns: var(--sidebar-width) 1fr;
+            min-height: 100vh;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            background: linear-gradient(180deg, #1a202c 0%, #2d3748 100%);
+            color: white;
+            padding: 30px 20px;
+            box-shadow: 4px 0 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 40px;
+        }
+
+        .nav-section {
+            margin-bottom: 30px;
+        }
+
+        .nav-title {
+            font-size: 11px;
+            font-weight: 600;
+            color: #a0aec0;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 15px;
+            margin-bottom: 5px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            color: #cbd5e0;
+        }
+
+        .nav-item:hover {
+            background: rgba(0, 201, 167, 0.1);
+            color: var(--primary-color);
+        }
+
+        .nav-item.active {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .nav-item i {
+            margin-right: 12px;
+            width: 20px;
+        }
+
+        /* Main Content */
+        .main-content {
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header */
+        .header {
+            background: white;
+            padding: 20px 40px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-left h1 {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .header-meta {
+            display: flex;
+            gap: 20px;
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--primary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: white;
+        }
+
+        /* Content Area */
+        .content-area {
+            padding: 30px 40px;
+            flex: 1;
+        }
+
+        /* AI Banner */
+        .ai-banner {
+            background: linear-gradient(135deg, #d4f1f4 0%, #a8e6cf 100%);
+            padding: 20px 30px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .ai-banner h3 {
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+
+        .ai-banner p {
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+            font-size: 14px;
+        }
+
+        .btn-primary {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #00b596;
+            transform: translateY(-2px);
+        }
+
+        .btn-full {
+            width: 100%;
+            padding: 15px;
+            font-size: 16px;
+        }
+
+        .btn i {
+            margin-right: 8px;
+        }
+
+        /* Grid Layout */
+        .grid-layout {
+            display: grid;
+            grid-template-columns: 450px 1fr;
+            gap: 30px;
+        }
+
+        /* Card */
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+        }
+
+        .card-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* Form */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        .form-label i {
+            margin-right: 8px;
+            color: var(--primary-color);
+        }
+
+        .form-input,
+        .form-select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+
+        .form-input:focus,
+        .form-select:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        .input-group {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .stat-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.9;
+            margin-bottom: 8px;
+        }
+
+        .stat-value {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .stat-unit {
+            font-size: 12px;
+            opacity: 0.8;
+        }
+
+        /* Results */
+        .results-header {
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        .results-header h2 {
+            font-size: 22px;
+            margin-bottom: 5px;
+        }
+
+        .results-header p {
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+
+        table tr {
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        table td {
+            padding: 12px;
+            font-size: 14px;
+        }
+
+        table td:first-child {
+            font-weight: 600;
+            color: var(--text-secondary);
+        }
+
+        .total-row {
+            background: rgba(0, 201, 167, 0.1);
+            font-weight: 700;
+        }
+
+        .total-row td {
+            padding: 15px 12px;
+            color: var(--primary-color);
+            font-size: 16px;
+        }
+
+        /* Action Buttons */
+        .action-buttons {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-top: 25px;
+        }
+
+        .btn-secondary {
+            background: var(--secondary-color);
+            color: white;
+        }
+
+        .btn-success {
+            background: #48bb78;
+            color: white;
+        }
+
+        /* Loading Overlay */
+        .loading-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 9999;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .loading-overlay.active {
+            display: flex;
+        }
+
+        .spinner {
+            width: 60px;
+            height: 60px;
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-top-color: var(--primary-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .loading-text {
+            color: white;
+            margin-top: 20px;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div>
+            <div class="spinner"></div>
+            <div class="loading-text">Generating Design...</div>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <i class="fas fa-cube"></i> CeraTech
+                <div style="font-size: 11px; color: #718096; margin-top: 5px;">Design Suite v2.0</div>
+            </div>
+            
+            <div class="nav-section">
+                <div class="nav-title">WORKSPACE</div>
+                <div class="nav-item active">
+                    <i class="fas fa-home"></i>
+                    <span>Dashboard</span>
+                </div>
+                <div class="nav-item">
+                    <i class="fas fa-folder"></i>
+                    <span>Projects</span>
+                </div>
+                <div class="nav-item">
+                    <i class="fas fa-calculator"></i>
+                    <span>Calculator</span>
+                </div>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-title">SETTINGS</div>
+                <div class="nav-item">
+                    <i class="fas fa-cog"></i>
+                    <span>Preferences</span>
+                </div>
+                <div class="nav-item">
+                    <i class="fas fa-question-circle"></i>
+                    <span>Help</span>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="header">
+                <div class="header-left">
+                    <h1>Good day, Architect</h1>
+                    <div class="header-meta">
+                        <span><i class="far fa-calendar"></i> <span id="currentDate">Feb 28, 2026</span></span>
+                        <span><i class="far fa-clock"></i> <span id="currentTime">06:25 PM</span></span>
+                    </div>
+                </div>
+                <div class="header-right">
+                    <div class="user-profile">
+                        <div class="user-avatar">LP</div>
+                        <div>
+                            <div style="font-weight: 600;">LP Stephen</div>
+                            <div style="font-size: 12px; color: var(--text-secondary);">Structural Engineer</div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Content Area -->
+            <div class="content-area">
+                <!-- AI Banner -->
+                <div class="ai-banner">
+                    <div>
+                        <h3>✨ AI Design Assistant</h3>
+                        <p>Generate optimized structural designs based on your requirements</p>
+                    </div>
+                    <button class="btn btn-primary">Learn More</button>
+                </div>
+
+                <!-- Main Grid -->
+                <div class="grid-layout">
+                    <!-- Left: Form -->
+                    <div class="card">
+                        <div class="card-title">
+                            <i class="fas fa-sliders-h"></i>
+                            Project Configuration
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label"><i class="fas fa-ruler-combined"></i> Plot Dimensions (meters)</label>
+                            <div class="input-group">
+                                <input type="number" class="form-input" id="plotLength" value="50" placeholder="Length">
+                                <input type="number" class="form-input" id="plotWidth" value="30" placeholder="Width">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label"><i class="fas fa-map-marker-alt"></i> Location</label>
+                            <input type="text" class="form-input" id="location" value="Mumbai" placeholder="City name">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label"><i class="fas fa-sun"></i> Climate Zone</label>
+                            <select class="form-select" id="climate">
+                                <option value="Tropical">Tropical</option>
+                                <option value="Arid">Arid</option>
+                                <option value="Temperate">Temperate</option>
+                                <option value="Cold">Cold</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label"><i class="fas fa-building"></i> Building Type</label>
+                            <select class="form-select" id="buildingType">
+                                <option value="Residential">Residential</option>
+                                <option value="Commercial">Commercial</option>
+                                <option value="Institutional">Institutional</option>
+                                <option value="Industrial">Industrial</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label"><i class="fas fa-layer-group"></i> Number of Floors</label>
+                            <input type="number" class="form-input" id="numFloors" value="10" min="1" max="50">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label"><i class="fas fa-chart-area"></i> FAR (Floor Area Ratio)</label>
+                            <input type="number" class="form-input" id="far" value="2.5" step="0.1" min="0.5" max="10">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label"><i class="fas fa-mountain"></i> Soil Type</label>
+                            <select class="form-select" id="soilType">
+                                <option value="Rock">Rock</option>
+                                <option value="Sand">Sand</option>
+                                <option value="Clay">Clay</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label"><i class="fas fa-exclamation-triangle"></i> Seismic Zone</label>
+                            <select class="form-select" id="seismicZone">
+                                <option value="I">Zone I</option>
+                                <option value="II">Zone II</option>
+                                <option value="III" selected>Zone III</option>
+                                <option value="IV">Zone IV</option>
+                                <option value="V">Zone V</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label"><i class="fas fa-palette"></i> Architectural Style</label>
+                            <select class="form-select" id="archStyle">
+                                <option value="Modern">Modern</option>
+                                <option value="Contemporary">Contemporary</option>
+                                <option value="Brutalist">Brutalist</option>
+                                <option value="Glass">Glass/High-tech</option>
+                            </select>
+                        </div>
+
+                        <button type="button" class="btn btn-primary btn-full" onclick="generateDesign()">
+                            <i class="fas fa-magic"></i>
+                            Generate Design
+                        </button>
+                    </div>
+
+                    <!-- Right: Results -->
+                    <div class="card" id="resultsCard" style="display: none;">
+                        <div class="results-header">
+                            <h2>✅ Structural Design Report</h2>
+                            <p>AI-generated design optimized for your requirements</p>
+                        </div>
+
+                        <!-- Stats Grid -->
+                        <div class="stats-grid">
+                            <div class="stat-card">
+                                <div class="stat-label">BUILT AREA</div>
+                                <div class="stat-value" id="statBuiltArea">0</div>
+                                <div class="stat-unit">m²</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-label">FLOORS</div>
+                                <div class="stat-value" id="statFloors">0</div>
+                                <div class="stat-unit">stories</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-label">CONCRETE</div>
+                                <div class="stat-value" id="statConcrete">0</div>
+                                <div class="stat-unit">m³</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-label">TOTAL COST</div>
+                                <div class="stat-value" id="statCost">$0</div>
+                            </div>
+                        </div>
+
+                        <!-- Project Overview -->
+                        <h3 style="margin-bottom: 15px;">📋 Project Overview</h3>
+                        <table>
+                            <tbody id="projectOverview"></tbody>
+                        </table>
+
+                        <!-- Structural Details -->
+                        <h3 style="margin: 25px 0 15px;">🏗️ Structural System</h3>
+                        <div id="structuralDetails" style="padding: 15px; background: #f7fafc; border-radius: 8px; line-height: 1.8;"></div>
+
+                        <!-- Cost Breakdown -->
+                        <h3 style="margin: 25px 0 15px;">💰 Cost Breakdown</h3>
+                        <table>
+                            <tbody id="costTable"></tbody>
+                        </table>
+
+                        <!-- Action Buttons -->
+                        <div class="action-buttons">
+                            <button class="btn btn-secondary" onclick="viewDrawings()">
+                                <i class="fas fa-image"></i> View Drawings
+                            </button>
+                            <button class="btn btn-success" onclick="downloadData()">
+                                <i class="fas fa-download"></i> Download JSON
+                            </button>
+                            <button class="btn btn-primary" onclick="alert('PDF export coming soon!')">
+                                <i class="fas fa-file-pdf"></i> Export PDF
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        var designData = null;
+
+        // GENERATE DESIGN
+        function generateDesign() {
+            console.log('Button clicked!');
+            
+            // Show loading
+            document.getElementById('loadingOverlay').classList.add('active');
+
+            // Get form values
+            var plotLength = parseFloat(document.getElementById('plotLength').value);
+            var plotWidth = parseFloat(document.getElementById('plotWidth').value);
+            var location = document.getElementById('location').value;
+            var climate = document.getElementById('climate').value;
+            var buildingType = document.getElementById('buildingType').value;
+            var numFloors = parseInt(document.getElementById('numFloors').value);
+            var far = parseFloat(document.getElementById('far').value);
+            var soilType = document.getElementById('soilType').value;
+            var seismicZone = document.getElementById('seismicZone').value;
+            var archStyle = document.getElementById('archStyle').value;
+
+            // Calculate
+            var plotArea = plotLength * plotWidth;
+            var builtArea = plotArea * far;
+            var baySize = buildingType === 'Residential' ? 4.5 : 6.0;
+            var buildingHeight = numFloors * 3.5;
+            var concreteVolume = ((builtArea * 0.175 * 1.35) * 1.05).toFixed(2);
+            var steelWeight = ((builtArea * 0.175 * 1.35) * 0.015 * 7850 / 1000).toFixed(2);
+            var concreteCost = (concreteVolume * 175).toFixed(0);
+            var steelCost = (steelWeight * 1350).toFixed(0);
+            var totalCost = (parseFloat(concreteCost) + parseFloat(steelCost)).toFixed(0);
+
+            // Store data
+            designData = {
+                plot_length: plotLength,
+                plot_width: plotWidth,
+                location: location,
+                climate_zone: climate,
+                building_type: buildingType,
+                num_floors: numFloors,
+                far_allowed: far,
+                soil_type: soilType,
+                seismic_zone: seismicZone,
+                architectural_style: archStyle,
+                plot_area: plotArea,
+                built_area: builtArea,
+                concrete: concreteVolume,
+                steel: steelWeight,
+                total_cost: totalCost
+            };
+
+            console.log('Data:', designData);
+
+            // Update stats
+            document.getElementById('statBuiltArea').textContent = builtArea.toFixed(0);
+            document.getElementById('statFloors').textContent = numFloors;
+            document.getElementById('statConcrete').textContent = concreteVolume;
+            document.getElementById('statCost').textContent = '$' + parseInt(totalCost).toLocaleString();
+
+            // Project Overview
+            var structuralSystem = numFloors <= 7 ? 'RC Moment Resisting Frame' : 'RC Frame with Shear Walls';
+            document.getElementById('projectOverview').innerHTML =
+                '<tr><td>Plot Area</td><td>' + plotArea.toFixed(2) + ' m²</td></tr>' +
+                '<tr><td>Built-up Area</td><td>' + builtArea.toFixed(2) + ' m²</td></tr>' +
+                '<tr><td>Number of Floors</td><td>' + numFloors + '</td></tr>' +
+                '<tr><td>Building Height</td><td>' + buildingHeight.toFixed(1) + ' m</td></tr>' +
+                '<tr><td>FAR Applied</td><td>' + far + '</td></tr>' +
+                '<tr><td>Bay Size</td><td>' + baySize + ' m × ' + baySize + ' m</td></tr>' +
+                '<tr><td>Structural System</td><td>' + structuralSystem + '</td></tr>';
+
+            // Structural Details
+            var foundation = soilType === 'Rock' ? 'Isolated Footings' : soilType === 'Sand' ? 'Combined Footings' : 'Raft Foundation';
+            var colSize = numFloors <= 5 ? '300 × 300 mm' : numFloors <= 10 ? '400 × 400 mm' : '500 × 500 mm';
+            document.getElementById('structuralDetails').innerHTML =
+                '<div><strong>Foundation:</strong> ' + foundation + '</div>' +
+                '<div><strong>Column Size:</strong> ' + colSize + '</div>' +
+                '<div><strong>Beam Size:</strong> 300 × 450 mm</div>' +
+                '<div><strong>Slab Thickness:</strong> 150 mm</div>' +
+                '<div><strong>Concrete Grade:</strong> M30</div>' +
+                '<div><strong>Steel Grade:</strong> Fe 500</div>' +
+                '<div><strong>Seismic Zone:</strong> Zone ' + seismicZone + '</div>';
+
+            // Cost Table
+            document.getElementById('costTable').innerHTML =
+                '<tr><td>Concrete (M30)</td><td>' + concreteVolume + ' m³ @ $175/m³</td><td>$' + parseInt(concreteCost).toLocaleString() + '</td></tr>' +
+                '<tr><td>Steel (Fe 500)</td><td>' + steelWeight + ' tonnes @ $1,350/tonne</td><td>$' + parseInt(steelCost).toLocaleString() + '</td></tr>' +
+                '<tr class="total-row"><td colspan="2">TOTAL STRUCTURAL COST</td><td>$' + parseInt(totalCost).toLocaleString() + '</td></tr>';
+
+            // Show results
+            setTimeout(function() {
+                document.getElementById('loadingOverlay').classList.remove('active');
+                document.getElementById('resultsCard').style.display = 'block';
+                document.getElementById('resultsCard').scrollIntoView({ behavior: 'smooth' });
+            }, 1500);
+        }
+
+        // VIEW DRAWINGS
+        function viewDrawings() {
+            if (!designData) {
+                alert('Please generate a design first!');
+                return;
+            }
+
+            var win = window.open('', 'Drawings', 'width=1400,height=900');
+            win.document.write('<html><head><title>Architectural Drawings</title></head>');
+            win.document.write('<body style="margin:0;padding:20px;background:#f5f5f5;font-family:Arial">');
+            win.document.write('<h1 style="text-align:center;color:#00C9A7">Architectural Drawings</h1>');
+            win.document.write('<div style="display:grid;grid-template-columns:repeat(2,1fr);gap:20px;max-width:1300px;margin:20px auto">');
+
+            var drawings = ['Site Plan', 'Floor Plan', 'Elevation', 'Isometric', 'Structural Grid', 'Perspective'];
+            for (var i = 0; i < 6; i++) {
+                win.document.write('<div style="background:white;padding:20px;border-radius:8px"><h3 style="text-align:center">' + drawings[i] + '</h3><canvas id="canvas' + i + '" width="600" height="400" style="width:100%;border:1px solid #ddd"></canvas></div>');
+            }
+
+            win.document.write('</div><script>');
+            win.document.write('var data=' + JSON.stringify(designData) + ';');
+            win.document.write('var floors=data.num_floors;');
+
+            // Site Plan
+            win.document.write('var ctx=document.getElementById("canvas0").getContext("2d");');
+            win.document.write('ctx.fillStyle="#E8F5E9";ctx.fillRect(0,0,600,400);');
+            win.document.write('ctx.strokeStyle="#000";ctx.lineWidth=3;ctx.strokeRect(80,60,440,280);');
+            win.document.write('ctx.fillStyle="#90CAF9";ctx.fillRect(150,110,300,180);');
+            win.document.write('ctx.strokeStyle="#1976D2";ctx.lineWidth=2;ctx.strokeRect(150,110,300,180);');
+            win.document.write('ctx.fillStyle="#4CAF50";for(var i=0;i<6;i++){var x=100+i*70;var y=i%2===0?90:260;ctx.beginPath();ctx.arc(x,y,15,0,Math.PI*2);ctx.fill();}');
+            win.document.write('ctx.fillStyle="#000";ctx.font="bold 18px Arial";ctx.fillText("SITE PLAN",20,30);');
+            win.document.write('ctx.font="14px Arial";ctx.fillText("Plot: "+data.plot_length+"m × "+data.plot_width+"m",20,55);');
+
+            // Floor Plan
+            win.document.write('ctx=document.getElementById("canvas1").getContext("2d");');
+            win.document.write('ctx.fillStyle="#FFF";ctx.fillRect(0,0,600,400);');
+            win.document.write('ctx.strokeStyle="#000";ctx.lineWidth=4;ctx.strokeRect(100,80,400,240);');
+            win.document.write('for(var i=0;i<=5;i++){for(var j=0;j<=4;j++){ctx.fillStyle="#000";ctx.fillRect(100+i*80-5,80+j*60-5,10,10);}}');
+            win.document.write('ctx.fillStyle="#FDD835";ctx.fillRect(250,150,100,80);');
+            win.document.write('ctx.fillStyle="#000";ctx.font="bold 18px Arial";ctx.fillText("FLOOR PLAN",20,30);');
+            win.document.write('ctx.font="12px Arial";ctx.fillText("Service Core",260,195);');
+
+            // Elevation
+            win.document.write('ctx=document.getElementById("canvas2").getContext("2d");');
+            win.document.write('ctx.fillStyle="#E3F2FD";ctx.fillRect(0,0,600,400);');
+            win.document.write('ctx.fillStyle="#8D6E63";ctx.fillRect(0,320,600,80);');
+            win.document.write('var fh=Math.min(240/floors,25);');
+            win.document.write('ctx.fillStyle="#ECEFF1";ctx.fillRect(150,320-floors*fh,300,floors*fh);');
+            win.document.write('ctx.strokeStyle="#000";ctx.lineWidth=2;');
+            win.document.write('for(var i=0;i<=floors;i++){var y=320-i*fh;ctx.beginPath();ctx.moveTo(150,y);ctx.lineTo(450,y);ctx.stroke();}');
+            win.document.write('for(var i=0;i<floors;i++){for(var j=0;j<5;j++){var y=320-(i+0.5)*fh;var x=170+j*55;ctx.fillStyle="#64B5F6";ctx.fillRect(x,y-8,35,16);}}');
+            win.document.write('ctx.fillStyle="#000";ctx.font="bold 18px Arial";ctx.fillText("ELEVATION",20,30);');
+            win.document.write('ctx.font="14px Arial";ctx.fillText(floors+" Floors",20,55);');
+
+            // Isometric
+            win.document.write('ctx=document.getElementById("canvas3").getContext("2d");');
+            win.document.write('ctx.fillStyle="#F5F5F5";ctx.fillRect(0,0,600,400);');
+            win.document.write('var f=Math.min(floors,15);var h=f*15;');
+            win.document.write('ctx.fillStyle="#CFD8DC";ctx.beginPath();ctx.moveTo(200,300);ctx.lineTo(400,300);ctx.lineTo(400,300-h);ctx.lineTo(200,300-h);ctx.closePath();ctx.fill();');
+            win.document.write('ctx.strokeStyle="#546E7A";ctx.lineWidth=2;ctx.stroke();');
+            win.document.write('ctx.fillStyle="#B0BEC5";ctx.beginPath();ctx.moveTo(400,300);ctx.lineTo(480,260);ctx.lineTo(480,260-h);ctx.lineTo(400,300-h);ctx.closePath();ctx.fill();ctx.stroke();');
+            win.document.write('ctx.fillStyle="#90A4AE";ctx.beginPath();ctx.moveTo(200,300-h);ctx.lineTo(400,300-h);ctx.lineTo(480,260-h);ctx.lineTo(280,260-h);ctx.closePath();ctx.fill();ctx.stroke();');
+            win.document.write('ctx.fillStyle="#000";ctx.font="bold 18px Arial";ctx.fillText("ISOMETRIC VIEW",20,30);');
+
+            // Structural Grid
+            win.document.write('ctx=document.getElementById("canvas4").getContext("2d");');
+            win.document.write('ctx.fillStyle="#FFF";ctx.fillRect(0,0,600,400);');
+            win.document.write('ctx.strokeStyle="#E0E0E0";ctx.lineWidth=1;');
+            win.document.write('for(var i=0;i<6;i++){ctx.beginPath();ctx.moveTo(100+i*80,80);ctx.lineTo(100+i*80,350);ctx.stroke();}');
+            win.document.write('for(var j=0;j<5;j++){ctx.beginPath();ctx.moveTo(100,80+j*67.5);ctx.lineTo(500,80+j*67.5);ctx.stroke();}');
+            win.document.write('ctx.fillStyle="#1976D2";ctx.font="14px Arial";');
+            win.document.write('for(var i=0;i<6;i++){for(var j=0;j<5;j++){var x=100+i*80;var y=80+j*67.5;ctx.beginPath();ctx.arc(x,y,8,0,Math.PI*2);ctx.fill();}}');
+            win.document.write('ctx.fillStyle="#000";ctx.font="bold 18px Arial";ctx.fillText("STRUCTURAL GRID",20,30);');
+            win.document.write('ctx.font="14px Arial";ctx.fillText("Bay: 6.0m × 6.0m",20,55);');
+
+            // Perspective
+            win.document.write('ctx=document.getElementById("canvas5").getContext("2d");');
+            win.document.write('var g=ctx.createLinearGradient(0,0,0,250);g.addColorStop(0,"#87CEEB");g.addColorStop(1,"#E0F6FF");');
+            win.document.write('ctx.fillStyle=g;ctx.fillRect(0,0,600,250);');
+            win.document.write('ctx.fillStyle="#A5D6A7";ctx.fillRect(0,250,600,150);');
+            win.document.write('var h=Math.min(floors*10,150);');
+            win.document.write('ctx.fillStyle="#CFD8DC";ctx.beginPath();ctx.moveTo(200,270);ctx.lineTo(400,270);ctx.lineTo(420,270-h);ctx.lineTo(220,270-h);ctx.closePath();ctx.fill();');
+            win.document.write('ctx.strokeStyle="#546E7A";ctx.lineWidth=2;ctx.stroke();');
+            win.document.write('ctx.fillStyle="#90A4AE";ctx.beginPath();ctx.moveTo(400,270);ctx.lineTo(500,240);ctx.lineTo(520,240-h);ctx.lineTo(420,270-h);ctx.closePath();ctx.fill();ctx.stroke();');
+            win.document.write('for(var i=1;i<floors;i++){var y=270-i*10;for(var j=0;j<8;j++){var x=215+j*25;ctx.fillStyle="#64B5F6";ctx.fillRect(x,y-6,15,8);}}');
+            win.document.write('ctx.fillStyle="#FFD54F";ctx.beginPath();ctx.arc(500,80,40,0,Math.PI*2);ctx.fill();');
+            win.document.write('ctx.fillStyle="#000";ctx.font="bold 18px Arial";ctx.fillText("PERSPECTIVE VIEW",20,30);');
+
+            win.document.write('</script></body></html>');
+            win.document.close();
+        }
+
+        // DOWNLOAD DATA
+        function downloadData() {
+            if (!designData) {
+                alert('Please generate a design first!');
+                return;
+            }
+            var str = JSON.stringify(designData, null, 2);
+            var blob = new Blob([str], {type: 'application/json'});
+            var url = URL.createObjectURL(blob);
+            var a = document.createElement('a');
+            a.href = url;
+            a.download = 'design_' + Date.now() + '.json';
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+
+        // Update time
+        function updateTime() {
+            var now = new Date();
+            var dateStr = now.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+            var timeStr = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
+            document.getElementById('currentDate').textContent = dateStr;
+            document.getElementById('currentTime').textContent = timeStr;
+        }
+        updateTime();
+        setInterval(updateTime, 60000);
+
+        console.log('Page loaded successfully!');
+    </script>
+</body>
+</html>

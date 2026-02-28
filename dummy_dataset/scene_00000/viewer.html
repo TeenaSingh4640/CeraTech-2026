@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Structured3D Visualization Viewer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        header {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .scene-info {
+            background: #3498db;
+            color: white;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+
+        .scene-info div {
+            margin: 5px 15px;
+        }
+
+        .scene-info strong {
+            display: block;
+            font-size: 0.9em;
+            opacity: 0.8;
+        }
+
+        .scene-info span {
+            font-size: 1.3em;
+            font-weight: bold;
+        }
+
+        nav {
+            background: #ecf0f1;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        nav button {
+            background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+        }
+
+        nav button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(52, 152, 219, 0.5);
+        }
+
+        nav button.active {
+            background: linear-gradient(135deg, #27ae60 0%, #229954 100%);
+            box-shadow: 0 4px 15px rgba(39, 174, 96, 0.4);
+        }
+
+        .content {
+            display: flex;
+            min-height: 600px;
+        }
+
+        .main-view {
+            flex: 1;
+            padding: 30px;
+            background: #f8f9fa;
+        }
+
+        .view-title {
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+
+        .image-container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .image-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+        }
+
+        .sidebar {
+            width: 350px;
+            background: #34495e;
+            color: white;
+            padding: 30px;
+            overflow-y: auto;
+        }
+
+        .sidebar h2 {
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+
+        .sidebar section {
+            margin-bottom: 25px;
+        }
+
+        .sidebar h3 {
+            font-size: 1.1em;
+            margin-bottom: 10px;
+            color: #3498db;
+        }
+
+        .sidebar ul {
+            list-style: none;
+            line-height: 1.8;
+        }
+
+        .sidebar li {
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .sidebar li:before {
+            content: "▸";
+            position: absolute;
+            left: 0;
+            color: #3498db;
+        }
+
+        .action-buttons {
+            margin-top: 30px;
+        }
+
+        .action-btn {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 10px;
+            background: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: bold;
+            transition: background 0.3s ease;
+        }
+
+        .action-btn:hover {
+            background: #2980b9;
+        }
+
+        .action-btn.success {
+            background: #27ae60;
+        }
+
+        .action-btn.success:hover {
+            background: #229954;
+        }
+
+        .action-btn.danger {
+            background: #e74c3c;
+        }
+
+        .action-btn.danger:hover {
+            background: #c0392b;
+        }
+
+        footer {
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            font-size: 0.9em;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 50px;
+            color: #7f8c8d;
+        }
+
+        @media (max-width: 1024px) {
+            .content {
+                flex-direction: column;
+            }
+            .sidebar {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🏗️ Structured3D Visualization System</h1>
+            <p>Interactive Building Structure Viewer</p>
+        </header>
+
+        <div class="scene-info">
+            <div>
+                <strong>Scene ID</strong>
+                <span>00000</span>
+            </div>
+            <div>
+                <strong>Room Type</strong>
+                <span>Living Room</span>
+            </div>
+            <div>
+                <strong>Dimensions</strong>
+                <span>5m × 4m × 2.5m</span>
+            </div>
+            <div>
+                <strong>Floor Area</strong>
+                <span>20 m²</span>
+            </div>
+            <div>
+                <strong>Objects</strong>
+                <span>3 items</span>
+            </div>
+        </div>
+
+        <nav id="nav-buttons">
+            <button onclick="showView('paper_style_combined')" class="active">📊 Paper Style</button>
+            <button onclick="showView('semantic_floorplan')">🏠 Semantic Plan</button>
+            <button onclick="showView('graph_representation')">🔷 Graph View</button>
+            <button onclick="showView('combined_views')">📐 Orthographic</button>
+            <button onclick="showView('top_view')">🔝 Top View</button>
+            <button onclick="showView('front_view')">👁️ Front View</button>
+        </nav>
+
+        <div class="content">
+            <div class="main-view">
+                <h2 class="view-title" id="view-title">Research Paper Style - Graph + Floorplan</h2>
+                <div class="image-container" id="image-container">
+                    <img id="main-image" src="paper_style_combined.png" alt="Visualization">
+                </div>
+            </div>
+
+            <aside class="sidebar">
+                <h2>📋 Scene Information</h2>
+                
+                <section>
+                    <h3>🏠 Room Details</h3>
+                    <ul>
+                        <li>Type: Living Room</li>
+                        <li>Width: 5 meters</li>
+                        <li>Depth: 4 meters</li>
+                        <li>Height: 2.5 meters</li>
+                        <li>Volume: 50 m³</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h3>🪑 Furniture Objects</h3>
+                    <ul>
+                        <li>Coffee Table (0.6×0.6m)</li>
+                        <li>Bookshelf (1.0×0.5m)</li>
+                        <li>Chair (0.8×0.8m)</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h3>🎨 Available Views</h3>
+                    <ul>
+                        <li><strong>Paper Style:</strong> Research format</li>
+                        <li><strong>Semantic Plan:</strong> Color-coded</li>
+                        <li><strong>Graph View:</strong> Connectivity</li>
+                        <li><strong>Orthographic:</strong> Multi-angle</li>
+                        <li><strong>Top View:</strong> Bird's eye</li>
+                        <li><strong>Front View:</strong> Elevation</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h3>🎯 Features</h3>
+                    <ul>
+                        <li>3D structure annotations</li>
+                        <li>Semantic room labeling</li>
+                        <li>Furniture bounding boxes</li>
+                        <li>Multiple visualization modes</li>
+                        <li>Professional presentation</li>
+                    </ul>
+                </section>
+
+                <div class="action-buttons">
+                    <button class="action-btn success" onclick="openFolder()">📂 Open Folder</button>
+                    <button class="action-btn" onclick="showInfo()">ℹ️ More Info</button>
+                    <button class="action-btn danger" onclick="launch3D()">🎮 3D Viewer</button>
+                </div>
+            </aside>
+        </div>
+
+        <footer>
+            <p>Structured3D Dataset Visualization Demo | Generated from 3D Annotations</p>
+            <p>© 2026 - Lightweight Dummy Dataset (5MB) for Testing</p>
+        </footer>
+    </div>
+
+    <script>
+        const views = {
+            'paper_style_combined': {
+                title: 'Research Paper Style - Graph + Floorplan',
+                image: 'paper_style_combined.png',
+                description: 'Combined view matching academic paper format'
+            },
+            'semantic_floorplan': {
+                title: 'Semantic Floorplan - Color-Coded Rooms',
+                image: 'semantic_floorplan.png',
+                description: 'Color-coded floor layout with room types'
+            },
+            'graph_representation': {
+                title: 'Graph Representation - Room Connectivity',
+                image: 'graph_representation.png',
+                description: 'Node and edge graph showing spatial relationships'
+            },
+            'combined_views': {
+                title: 'Orthographic Views - Top/Front/Side + 3D',
+                image: 'combined_views.png',
+                description: 'Engineering-style multi-angle projections'
+            },
+            'top_view': {
+                title: 'Top View - Bird\'s Eye Perspective',
+                image: 'top_view.png',
+                description: 'Overhead floor plan view'
+            },
+            'front_view': {
+                title: 'Front View - South Wall Elevation',
+                image: 'front_view.png',
+                description: 'Front elevation showing height dimensions'
+            }
+        };
+
+        function showView(viewId) {
+            const view = views[viewId];
+            if (!view) return;
+
+            // Update active button
+            document.querySelectorAll('nav button').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+
+            // Update title
+            document.getElementById('view-title').textContent = view.title;
+
+            // Update image
+            const img = document.getElementById('main-image');
+            const imagePath = view.image;
+            
+            // Show loading
+            document.getElementById('image-container').innerHTML = '<div class="loading">Loading...</div>';
+            
+            // Load image
+            const newImg = new Image();
+            newImg.onload = function() {
+                document.getElementById('image-container').innerHTML = '';
+                img.src = imagePath;
+                img.alt = view.title;
+                document.getElementById('image-container').appendChild(img);
+            };
+            newImg.onerror = function() {
+                document.getElementById('image-container').innerHTML = 
+                    `<div class="loading">❌ Image not found: ${view.image}<br><br>` +
+                    `Make sure visualization has been generated.</div>`;
+            };
+            newImg.src = imagePath;
+        }
+
+        function openFolder() {
+            alert('📂 Opening folder: dummy_dataset/scene_00000/\n\nAll generated visualizations are saved there!');
+            window.location.href = 'dummy_dataset/scene_00000/';
+        }
+
+        function showInfo() {
+            alert('ℹ️ Structured3D Visualization System\n\n' +
+                  '• Dummy dataset: 5MB (vs 1TB real dataset)\n' +
+                  '• Room: 5m × 4m × 2.5m living room\n' +
+                  '• Features: 3D annotations, semantic labels\n' +
+                  '• Multiple visualization styles\n' +
+                  '• Perfect for testing and learning\n\n' +
+                  'See QUICKSTART.md for more details!');
+        }
+
+        function launch3D() {
+            alert('🎮 To launch interactive 3D viewer:\n\n' +
+                  'Run in terminal:\n' +
+                  'python visualize_3d.py --path dummy_dataset --scene 0 --type wireframe\n\n' +
+                  'Controls:\n' +
+                  '• Left-click + drag = Rotate\n' +
+                  '• Scroll wheel = Zoom\n' +
+                  '• Q = Close window');
+        }
+
+        // Auto-load first view on page load
+        window.onload = function() {
+            console.log('Structured3D Viewer loaded successfully!');
+        };
+    </script>
+</body>
+</html>

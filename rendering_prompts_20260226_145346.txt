@@ -1,0 +1,95 @@
+================================================================================
+ARCHITECTURAL RENDERING PROMPTS
+================================================================================
+
+Building: 10-storey commercial
+Location: Mumbai (tropical coastal)
+Plot Size: 50.0m × 30.0m
+Structural Grid: 7.14m × 7.5m
+Style: contemporary modernist
+
+================================================================================
+POSITIVE PROMPTS
+================================================================================
+
+01_Main_Perspective
+--------------------------------------------------------------------------------
+Ultra realistic architectural rendering of a 10-storey commercial building on a 50.0m × 30.0m site located in tropical coastal Mumbai, designed in contemporary modernist style, reinforced concrete structural frame visible with 7.14m × 7.5m bay spacing, realistic façade articulation with climate-responsive design, window grid aligned with 700mm structural columns at ground floor tapering to 300mm at top, professional architectural visualization from street level perspective, cantilevered balconies, glass curtain wall with aluminum mullions, deep overhangs for sun protection, vertical shading fins, dramatic shadows, professional architectural visualization, high detail, natural daylight, golden hour lighting, photorealistic materials, 4K resolution
+
+MIDJOURNEY FORMAT:
+Ultra realistic architectural rendering of a 10-storey commercial building on a 50.0m × 30.0m site located in tropical coastal Mumbai, designed in contemporary modernist style, reinforced concrete structural frame visible with 7.14m × 7.5m bay spacing, realistic façade articulation with climate-responsive design, window grid aligned with 700mm structural columns at ground floor tapering to 300mm at top, professional architectural visualization from street level perspective, cantilevered balconies, glass curtain wall with aluminum mullions, deep overhangs for sun protection, vertical shading fins, dramatic shadows, professional architectural visualization, high detail, natural daylight, golden hour lighting, photorealistic materials, 4K resolution --ar 16:9 --q 2 --style raw --s 50
+
+================================================================================
+
+02_Street_Entry
+--------------------------------------------------------------------------------
+Ultra realistic architectural rendering of a 10-storey commercial building on a 50.0m × 30.0m site located in tropical coastal Mumbai, designed in contemporary modernist style, reinforced concrete structural frame visible with 7.14m × 7.5m bay spacing, realistic façade articulation with climate-responsive design, window grid aligned with 700mm structural columns at ground floor tapering to 300mm at top, street level view at human eye height 1.6m, pedestrian perspective, double-height ground floor lobby, human scale figures, tropical landscaping with palm trees, shaded entry plaza, professional architectural visualization, high detail, natural daylight, midday lighting, photorealistic materials, 4K resolution
+
+MIDJOURNEY FORMAT:
+Ultra realistic architectural rendering of a 10-storey commercial building on a 50.0m × 30.0m site located in tropical coastal Mumbai, designed in contemporary modernist style, reinforced concrete structural frame visible with 7.14m × 7.5m bay spacing, realistic façade articulation with climate-responsive design, window grid aligned with 700mm structural columns at ground floor tapering to 300mm at top, street level view at human eye height 1.6m, pedestrian perspective, double-height ground floor lobby, human scale figures, tropical landscaping with palm trees, shaded entry plaza, professional architectural visualization, high detail, natural daylight, midday lighting, photorealistic materials, 4K resolution --ar 16:9 --q 2 --style raw --s 50
+
+================================================================================
+
+03_Aerial_Context
+--------------------------------------------------------------------------------
+Ultra realistic architectural rendering of a 10-storey commercial building on a 50.0m × 30.0m site located in tropical coastal Mumbai, designed in contemporary modernist style, reinforced concrete structural frame visible with 7.14m × 7.5m bay spacing, realistic façade articulation with climate-responsive design, window grid aligned with 700mm structural columns at ground floor tapering to 300mm at top, aerial drone view from 100m height showing urban context, 7 × 4 bay structural grid clearly visible, rooftop solar panels, surrounding urban development, professional architectural visualization, high detail, natural daylight, afternoon lighting, photorealistic materials, 4K resolution
+
+MIDJOURNEY FORMAT:
+Ultra realistic architectural rendering of a 10-storey commercial building on a 50.0m × 30.0m site located in tropical coastal Mumbai, designed in contemporary modernist style, reinforced concrete structural frame visible with 7.14m × 7.5m bay spacing, realistic façade articulation with climate-responsive design, window grid aligned with 700mm structural columns at ground floor tapering to 300mm at top, aerial drone view from 100m height showing urban context, 7 × 4 bay structural grid clearly visible, rooftop solar panels, surrounding urban development, professional architectural visualization, high detail, natural daylight, afternoon lighting, photorealistic materials, 4K resolution --ar 16:9 --q 2 --style raw --s 50
+
+================================================================================
+
+04_Night_View
+--------------------------------------------------------------------------------
+Ultra realistic architectural rendering of a 10-storey commercial building on a 50.0m × 30.0m site located in tropical coastal Mumbai, designed in contemporary modernist style, reinforced concrete structural frame visible with 7.14m × 7.5m bay spacing, realistic façade articulation with climate-responsive design, window grid aligned with 700mm structural columns at ground floor tapering to 300mm at top, twilight blue hour view with interior lighting visible, warm interior office lighting visible through glazing, structural grid pattern emphasized by interior lights, dramatic dusk atmosphere, professional architectural visualization, high detail, natural daylight, blue hour lighting, photorealistic materials, 4K resolution
+
+MIDJOURNEY FORMAT:
+Ultra realistic architectural rendering of a 10-storey commercial building on a 50.0m × 30.0m site located in tropical coastal Mumbai, designed in contemporary modernist style, reinforced concrete structural frame visible with 7.14m × 7.5m bay spacing, realistic façade articulation with climate-responsive design, window grid aligned with 700mm structural columns at ground floor tapering to 300mm at top, twilight blue hour view with interior lighting visible, warm interior office lighting visible through glazing, structural grid pattern emphasized by interior lights, dramatic dusk atmosphere, professional architectural visualization, high detail, natural daylight, blue hour lighting, photorealistic materials, 4K resolution --ar 16:9 --q 2 --style raw --s 50
+
+================================================================================
+
+05_Facade_Detail
+--------------------------------------------------------------------------------
+Ultra realistic architectural rendering of a 10-storey commercial building on a 50.0m × 30.0m site located in tropical coastal Mumbai, designed in contemporary modernist style, reinforced concrete structural frame visible with 7.14m × 7.5m bay spacing, realistic façade articulation with climate-responsive design, window grid aligned with 700mm structural columns at ground floor tapering to 300mm at top, close-up architectural detail view showing material textures and junctions, exposed concrete columns and beams, unitized curtain wall system, climate-responsive external louvers, 7.14m bay width clearly visible, high resolution material finishes, professional architectural visualization, high detail, natural daylight, overcast diffuse lighting, photorealistic materials, 4K resolution
+
+MIDJOURNEY FORMAT:
+Ultra realistic architectural rendering of a 10-storey commercial building on a 50.0m × 30.0m site located in tropical coastal Mumbai, designed in contemporary modernist style, reinforced concrete structural frame visible with 7.14m × 7.5m bay spacing, realistic façade articulation with climate-responsive design, window grid aligned with 700mm structural columns at ground floor tapering to 300mm at top, close-up architectural detail view showing material textures and junctions, exposed concrete columns and beams, unitized curtain wall system, climate-responsive external louvers, 7.14m bay width clearly visible, high resolution material finishes, professional architectural visualization, high detail, natural daylight, overcast diffuse lighting, photorealistic materials, 4K resolution --ar 16:9 --q 2 --style raw --s 50
+
+================================================================================
+
+06_Interior_Office
+--------------------------------------------------------------------------------
+Ultra realistic architectural rendering of a 10-storey commercial building on a 50.0m × 30.0m site located in tropical coastal Mumbai, designed in contemporary modernist style, reinforced concrete structural frame visible with 7.14m × 7.5m bay spacing, realistic façade articulation with climate-responsive design, window grid aligned with 700mm structural columns at ground floor tapering to 300mm at top, interior view showing spatial quality and natural daylighting, typical office floor open plan layout, 700mm × 700mm columns integrated into design, floor-to-ceiling glazing, contemporary office furniture, professional architectural visualization, high detail, natural daylight, natural daylight lighting, photorealistic materials, 4K resolution
+
+MIDJOURNEY FORMAT:
+Ultra realistic architectural rendering of a 10-storey commercial building on a 50.0m × 30.0m site located in tropical coastal Mumbai, designed in contemporary modernist style, reinforced concrete structural frame visible with 7.14m × 7.5m bay spacing, realistic façade articulation with climate-responsive design, window grid aligned with 700mm structural columns at ground floor tapering to 300mm at top, interior view showing spatial quality and natural daylighting, typical office floor open plan layout, 700mm × 700mm columns integrated into design, floor-to-ceiling glazing, contemporary office furniture, professional architectural visualization, high detail, natural daylight, natural daylight lighting, photorealistic materials, 4K resolution --ar 16:9 --q 2 --style raw --s 50
+
+================================================================================
+
+07_Structural_Section
+--------------------------------------------------------------------------------
+Ultra realistic architectural rendering of a 10-storey commercial building on a 50.0m × 30.0m site located in tropical coastal Mumbai, designed in contemporary modernist style, reinforced concrete structural frame visible with 7.14m × 7.5m bay spacing, realistic façade articulation with climate-responsive design, window grid aligned with 700mm structural columns at ground floor tapering to 300mm at top, architectural section cutaway showing structural system, complete structural system visible, dual frame and shear wall system, columns stepping from 700mm to 300mm, foundation system shown, technical detail with dimensions, professional architectural visualization, high detail, natural daylight, technical lighting lighting, photorealistic materials, 4K resolution
+
+MIDJOURNEY FORMAT:
+Ultra realistic architectural rendering of a 10-storey commercial building on a 50.0m × 30.0m site located in tropical coastal Mumbai, designed in contemporary modernist style, reinforced concrete structural frame visible with 7.14m × 7.5m bay spacing, realistic façade articulation with climate-responsive design, window grid aligned with 700mm structural columns at ground floor tapering to 300mm at top, architectural section cutaway showing structural system, complete structural system visible, dual frame and shear wall system, columns stepping from 700mm to 300mm, foundation system shown, technical detail with dimensions, professional architectural visualization, high detail, natural daylight, technical lighting lighting, photorealistic materials, 4K resolution --ar 16:9 --q 2 --style raw --s 50
+
+================================================================================
+
+08_Green_Building
+--------------------------------------------------------------------------------
+Ultra realistic architectural rendering of a 10-storey commercial building on a 50.0m × 30.0m site located in tropical coastal Mumbai, designed in contemporary modernist style, reinforced concrete structural frame visible with 7.14m × 7.5m bay spacing, realistic façade articulation with climate-responsive design, window grid aligned with 700mm structural columns at ground floor tapering to 300mm at top, professional architectural visualization from street level perspective, vertical gardens on balconies aligned with 7.14m structural grid, rooftop solar panels, rainwater harvesting features, climate-responsive shading, lush tropical landscaping, sustainable architecture, professional architectural visualization, high detail, natural daylight, bright sunny day lighting, photorealistic materials, 4K resolution
+
+MIDJOURNEY FORMAT:
+Ultra realistic architectural rendering of a 10-storey commercial building on a 50.0m × 30.0m site located in tropical coastal Mumbai, designed in contemporary modernist style, reinforced concrete structural frame visible with 7.14m × 7.5m bay spacing, realistic façade articulation with climate-responsive design, window grid aligned with 700mm structural columns at ground floor tapering to 300mm at top, professional architectural visualization from street level perspective, vertical gardens on balconies aligned with 7.14m structural grid, rooftop solar panels, rainwater harvesting features, climate-responsive shading, lush tropical landscaping, sustainable architecture, professional architectural visualization, high detail, natural daylight, bright sunny day lighting, photorealistic materials, 4K resolution --ar 16:9 --q 2 --style raw --s 50
+
+================================================================================
+
+
+================================================================================
+NEGATIVE PROMPT (use with all)
+================================================================================
+cartoon, anime, sketch, drawing, unrealistic proportions, distorted perspective, oversaturated colors, fantasy architecture, impossible structures, poor quality, blurry, low resolution,text, watermark, signature, out of frame
+
+================================================================================
+Generated: 2026-02-26 14:53:46
+================================================================================

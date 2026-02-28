@@ -1,0 +1,2069 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CeraTech Design Suite - Professional Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #00C9A7;
+            --primary-dark: #00A88C;
+            --secondary-color: #667eea;
+            --danger-color: #FF6B6B;
+            --warning-color: #FFD93D;
+            --success-color: #6BCB77;
+            --text-primary: #2D3748;
+            --text-secondary: #718096;
+            --bg-primary: #F7FAFC;
+            --bg-card: #FFFFFF;
+            --border-color: #E2E8F0;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.05);
+            --shadow-md: 0 4px 6px rgba(0,0,0,0.07);
+            --shadow-lg: 0 10px 15px rgba(0,0,0,0.1);
+            --sidebar-width: 240px;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        /* Sidebar Navigation */
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: var(--sidebar-width);
+            height: 100vh;
+            background: var(--bg-card);
+            border-right: 1px solid var(--border-color);
+            padding: 24px 0;
+            z-index: 1000;
+            overflow-y: auto;
+        }
+
+        .sidebar-logo {
+            padding: 0 24px 24px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .sidebar-logo i {
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 18px;
+        }
+
+        .sidebar-logo span {
+            font-weight: 700;
+            font-size: 18px;
+            color: var(--text-primary);
+        }
+
+        .sidebar-section {
+            padding: 24px 0 12px;
+        }
+
+        .sidebar-section-title {
+            padding: 0 24px;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-secondary);
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .sidebar-nav {
+            list-style: none;
+        }
+
+        .sidebar-nav li {
+            padding: 0 16px;
+            margin-bottom: 4px;
+        }
+
+        .sidebar-nav a {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 12px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.2s;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .sidebar-nav a:hover {
+            background: var(--bg-primary);
+            color: var(--text-primary);
+        }
+
+        .sidebar-nav a.active {
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+            color: white;
+        }
+
+        .sidebar-nav a i {
+            width: 20px;
+            text-align: center;
+            font-size: 16px;
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-left: var(--sidebar-width);
+            min-height: 100vh;
+        }
+
+        /* Top Header */
+        .top-header {
+            background: var(--bg-card);
+            border-bottom: 1px solid var(--border-color);
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-left h1 {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 4px;
+        }
+
+        .header-left p {
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+        }
+
+        .header-stats {
+            display: flex;
+            gap: 24px;
+        }
+
+        .stat-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+        }
+
+        .stat-item i {
+            color: var(--text-secondary);
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+            padding: 8px 16px;
+            border-radius: 10px;
+            transition: background 0.2s;
+        }
+
+        .user-profile:hover {
+            background: var(--bg-primary);
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 16px;
+        }
+
+        /* AI Suggestion Banner */
+        .ai-banner {
+            background: linear-gradient(135deg, #D4F4DD, #BEF0CB);
+            margin: 24px 40px;
+            padding: 20px 24px;
+            border-radius: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 1px solid rgba(0, 201, 167, 0.2);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .ai-banner-content {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .ai-icon {
+            width: 36px;
+            height: 36px;
+            background: var(--success-color);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+
+        .ai-banner p {
+            font-size: 14px;
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+
+        .ai-banner button {
+            background: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 13px;
+            transition: all 0.2s;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .ai-banner button:hover {
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-md);
+        }
+
+        /* Content Area */
+        .content-area {
+            padding: 24px 40px 40px;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: 400px 1fr;
+            gap: 24px;
+        }
+
+        /* Card Styles */
+        .card {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border-color);
+            transition: all 0.3s;
+        }
+
+        .card:hover {
+            box-shadow: var(--shadow-md);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+
+        .card-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .card-subtitle {
+            font-size: 12px;
+            color: var(--text-secondary);
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 16px;
+        }
+
+        /* Form Styles */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1.5px solid var(--border-color);
+            border-radius: 10px;
+            font-size: 14px;
+            font-family: 'Inter', sans-serif;
+            transition: all 0.2s;
+            background: var(--bg-card);
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(0, 201, 167, 0.1);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        select.form-input {
+            cursor: pointer;
+        }
+
+        /* Button Styles */
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            justify-content: center;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+            color: white;
+            box-shadow: 0 4px 12px rgba(0, 201, 167, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(0, 201, 167, 0.4);
+        }
+
+        .btn-secondary {
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            border: 1.5px solid var(--border-color);
+        }
+
+        .btn-secondary:hover {
+            background: white;
+            border-color: var(--primary-color);
+        }
+
+        .btn-full {
+            width: 100%;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 12px;
+            margin-top: 24px;
+        }
+
+        /* Stats Cards */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .stat-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 20px;
+            transition: all 0.2s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .stat-value {
+            font-size: 32px;
+            font-weight: 800;
+            color: var(--text-primary);
+            margin-bottom: 4px;
+        }
+
+        .stat-label {
+            font-size: 13px;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .stat-trend {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 12px;
+            margin-top: 8px;
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-weight: 600;
+        }
+
+        .stat-trend.up {
+            background: rgba(107, 203, 119, 0.15);
+            color: var(--success-color);
+        }
+
+        .stat-trend.down {
+            background: rgba(255, 107, 107, 0.15);
+            color: var(--danger-color);
+        }
+
+        /* Table Styles */
+        .data-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+        }
+
+        .data-table thead tr {
+            background: var(--bg-primary);
+        }
+
+        .data-table th {
+            text-align: left;
+            padding: 12px 16px;
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .data-table th:first-child {
+            border-top-left-radius: 8px;
+        }
+
+        .data-table th:last-child {
+            border-top-right-radius: 8px;
+        }
+
+        .data-table td {
+            padding: 16px;
+            border-bottom: 1px solid var(--border-color);
+            font-size: 14px;
+            color: var(--text-primary);
+        }
+
+        .data-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .data-table tr:hover {
+            background: var(--bg-primary);
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .badge-success {
+            background: rgba(107, 203, 119, 0.15);
+            color: var(--success-color);
+        }
+
+        .badge-warning {
+            background: rgba(255, 217, 61, 0.15);
+            color: #D4A000;
+        }
+
+        .badge-primary {
+            background: rgba(0, 201, 167, 0.15);
+            color: var(--primary-color);
+        }
+
+        /* Progress Bars */
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: var(--bg-primary);
+            border-radius: 10px;
+            overflow: hidden;
+            margin-top: 12px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            border-radius: 10px;
+            transition: width 0.5s ease;
+        }
+
+        /* Results Section */
+        .results-section {
+            display: none;
+        }
+
+        .results-section.active {
+            display: block;
+        }
+
+        .project-summary {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(0, 201, 167, 0.1));
+            border: 1.5px solid var(--primary-color);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 24px;
+        }
+
+        .summary-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .summary-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .project-id {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-secondary);
+            background: white;
+            padding: 6px 12px;
+            border-radius: 8px;
+        }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 80px 40px;
+        }
+
+        .empty-icon {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 24px;
+            background: var(--bg-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            color: var(--text-secondary);
+        }
+
+        .empty-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+        }
+
+        .empty-description {
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* Loading State */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.95);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            display: none;
+        }
+
+        .loading-overlay.active {
+            display: flex;
+        }
+
+        .loading-content {
+            text-align: center;
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid var(--border-color);
+            border-top-color: var(--primary-color);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin: 0 auto 24px;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .loading-text {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .loading-subtext {
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin-top: 8px;
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                transform: translateX(-100%);
+                transition: transform 0.3s;
+            }
+
+            .main-content {
+                margin-left: 0;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-in {
+            animation: fadeInUp 0.5s ease backwards;
+        }
+
+        .animate-in:nth-child(1) { animation-delay: 0.1s; }
+        .animate-in:nth-child(2) { animation-delay: 0.2s; }
+        .animate-in:nth-child(3) { animation-delay: 0.3s; }
+        .animate-in:nth-child(4) { animation-delay: 0.4s; }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-primary);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--border-color);
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--text-secondary);
+        }
+
+        /* Highlight */
+        .highlight {
+            background: linear-gradient(120deg, #FFE66D, #FFD93D);
+            padding: 3px 10px;
+            border-radius: 6px;
+            font-weight: 700;
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-content">
+            <div class="spinner"></div>
+            <div class="loading-text">Generating Design...</div>
+            <div class="loading-subtext">Analyzing parameters and computing optimal solution</div>
+        </div>
+    </div>
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="sidebar-logo">
+            <i class="fas fa-building"></i>
+            <span>CeraTech</span>
+        </div>
+
+        <div class="sidebar-section">
+            <ul class="sidebar-nav">
+                <li><a href="#" class="active"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="#"><i class="fas fa-drafting-compass"></i> Design Tool</a></li>
+                <li><a href="#"><i class="fas fa-chart-line"></i> Analytics</a></li>
+                <li><a href="#"><i class="fas fa-folder-open"></i> Projects</a></li>
+            </ul>
+        </div>
+
+        <div class="sidebar-section">
+            <div class="sidebar-section-title">Workspace</div>
+            <ul class="sidebar-nav">
+                <li><a href="#"><i class="fas fa-cube"></i> 3D Models</a></li>
+                <li><a href="#"><i class="fas fa-file-invoice-dollar"></i> Cost Estimation</a></li>
+                <li><a href="#"><i class="fas fa-users"></i> Team</a></li>
+            </ul>
+        </div>
+
+        <div class="sidebar-section">
+            <div class="sidebar-section-title">Settings</div>
+            <ul class="sidebar-nav">
+                <li><a href="#"><i class="fas fa-cog"></i> Preferences</a></li>
+                <li><a href="#"><i class="fas fa-bell"></i> Notifications</a></li>
+                <li><a href="#"><i class="fas fa-info-circle"></i> Help</a></li>
+            </ul>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Top Header -->
+        <header class="top-header">
+            <div class="header-left">
+                <h1>Welcome, Engineer 👋</h1>
+                <p>Friday, Feb 28, 2026</p>
+            </div>
+            <div class="header-right">
+                <div class="header-stats">
+                    <div class="stat-item">
+                        <i class="far fa-clock"></i>
+                        <span id="currentTime">02:19 PM</span>
+                    </div>
+                </div>
+                <button class="btn btn-secondary" onclick="showProjects()">
+                    <i class="fas fa-folder"></i> My Projects
+                </button>
+                <div class="user-profile">
+                    <div class="user-avatar">CE</div>
+                </div>
+            </div>
+        </header>
+
+        <!-- AI Banner -->
+        <div class="ai-banner">
+            <div class="ai-banner-content">
+                <div class="ai-icon">
+                    <i class="fas fa-robot"></i>
+                </div>
+                <p><strong>AI Assistant:</strong> Ready to help you design optimized structural systems with real-time calculations</p>
+            </div>
+            <button onclick="learnMore()">Learn More</button>
+        </div>
+
+        <!-- Content Area -->
+        <div class="content-area">
+            <div class="content-grid">
+                <!-- Left Column - Input Form -->
+                <div class="card animate-in">
+                    <div class="card-header">
+                        <h2 class="card-title">
+                            <i class="fas fa-sliders-h"></i>
+                            Project Configuration
+                        </h2>
+                    </div>
+
+                    <form id="designForm" onsubmit="return false;">
+                        <div class="form-group">
+                            <label class="form-label">📏 Plot Dimensions (meters)</label>
+                            <div class="form-row">
+                                <input type="number" class="form-input" id="plotLength" value="50" min="10" max="200" placeholder="Length">
+                                <input type="number" class="form-input" id="plotWidth" value="30" min="10" max="200" placeholder="Width">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">📍 Location</label>
+                            <input type="text" class="form-input" id="location" value="Mumbai" placeholder="Enter city">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">🌤️ Climate Zone</label>
+                            <select class="form-input" id="climate">
+                                <option value="Tropical">Tropical</option>
+                                <option value="Arid">Arid (Desert)</option>
+                                <option value="Temperate">Temperate</option>
+                                <option value="Cold">Cold</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">🏢 Building Type</label>
+                            <select class="form-input" id="buildingType">
+                                <option value="Residential">Residential</option>
+                                <option value="Commercial">Commercial</option>
+                                <option value="Institutional">Institutional</option>
+                                <option value="Industrial">Industrial</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">🔢 Number of Floors</label>
+                            <input type="number" class="form-input" id="numFloors" value="10" min="1" max="50">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">📊 FAR (Floor Area Ratio)</label>
+                            <input type="number" class="form-input" id="far" value="2.5" min="0.5" max="10" step="0.1">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">🌍 Soil Type</label>
+                            <select class="form-input" id="soilType">
+                                <option value="Rock">Rock (Hard)</option>
+                                <option value="Sand">Sand (Medium)</option>
+                                <option value="Clay">Clay (Soft)</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">🌋 Seismic Zone</label>
+                            <select class="form-input" id="seismicZone">
+                                <option value="I">Zone I (Lowest)</option>
+                                <option value="II">Zone II (Low)</option>
+                                <option value="III">Zone III (Moderate)</option>
+                                <option value="IV">Zone IV (High)</option>
+                                <option value="V">Zone V (Highest)</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">🎨 Architectural Style</label>
+                            <select class="form-input" id="archStyle">
+                                <option value="Modern">Modern</option>
+                                <option value="Contemporary">Contemporary</option>
+                                <option value="Brutalist">Brutalist</option>
+                                <option value="Glass">Glass/High-tech</option>
+                            </select>
+                        </div>
+
+                        <button type="button" class="btn btn-primary btn-full" onclick="generateDesign()">
+                            <i class="fas fa-magic"></i>
+                            Generate Design
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Right Column - Output -->
+                <div>
+                    <!-- Empty State -->
+                    <div class="card animate-in" id="emptyState">
+                        <div class="empty-state">
+                            <div class="empty-icon">
+                                <i class="fas fa-drafting-compass"></i>
+                            </div>
+                            <h3 class="empty-title">Configure Your Project</h3>
+                            <p class="empty-description">
+                                Fill in the project parameters on the left and click "Generate Design"<br>
+                                to create a comprehensive structural design with cost estimation
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Results Section -->
+                    <div class="results-section" id="resultsSection">
+                        <!-- Summary Card -->
+                        <div class="project-summary animate-in">
+                            <div class="summary-header">
+                                <div>
+                                    <h3 class="summary-title">✅ Design Generated Successfully</h3>
+                                    <p style="color: var(--text-secondary); font-size: 14px; margin-top: 4px;">Your structural design is ready</p>
+                                </div>
+                                <div class="project-id" id="projectId">ID: SD_...</div>
+                            </div>
+                        </div>
+
+                        <!-- Stats Grid -->
+                        <div class="stats-grid animate-in">
+                            <div class="stat-card">
+                                <div class="stat-value" id="statBuiltArea">0</div>
+                                <div class="stat-label">Built Area (m²)</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-value" id="statFloors">0</div>
+                                <div class="stat-label">Floors</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-value" id="statConcrete">0</div>
+                                <div class="stat-label">Concrete (m³)</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-value" id="statCost">$0</div>
+                                <div class="stat-label">Total Cost</div>
+                            </div>
+                        </div>
+
+                        <!-- Details Cards -->
+                        <div class="card animate-in" style="margin-bottom: 24px;">
+                            <h3 class="card-title">📊 Project Overview</h3>
+                            <table class="data-table" style="margin-top: 16px;">
+                                <tbody id="projectOverview"></tbody>
+                            </table>
+                        </div>
+
+                        <div class="card animate-in" style="margin-bottom: 24px;">
+                            <h3 class="card-title">🏗️ Structural System</h3>
+                            <div id="structuralSystem" style="margin-top: 16px;"></div>
+                        </div>
+
+                        <div class="card animate-in" style="margin-bottom: 24px;">
+                            <h3 class="card-title">💰 Cost Breakdown</h3>
+                            <table class="data-table" style="margin-top: 16px;">
+                                <thead>
+                                    <tr>
+                                        <th>Material</th>
+                                        <th>Quantity</th>
+                                        <th>Unit Cost</th>
+                                        <th>Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="costTable"></tbody>
+                            </table>
+                        </div>
+
+                        <div class="card animate-in">
+                            <h3 class="card-title">🌍 Climate & Seismic Design</h3>
+                            <div id="climateSeismic" style="margin-top: 16px;"></div>
+                        </div>
+
+                        <!-- Action Buttons -->
+                        <div class="btn-group">
+                            <button class="btn btn-primary" onclick="downloadJSON()">
+                                <i class="fas fa-download"></i>
+                                Download JSON
+                            </button>
+                            <button class="btn btn-secondary" onclick="exportPDF()">
+                                <i class="fas fa-file-pdf"></i>
+                                Export PDF
+                            </button>
+                            <button class="btn btn-secondary" onclick="viewDrawings()">
+                                <i class="fas fa-image"></i>
+                                View Drawings
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        let designData = null;
+
+        // Update time
+        function updateTime() {
+            const now = new Date();
+            const timeStr = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
+            document.getElementById('currentTime').textContent = timeStr;
+        }
+        updateTime();
+        setInterval(updateTime, 60000);
+
+        function generateDesign() {
+            alert('Button clicked! Check console for details.');
+            try {
+                console.log('Generate Design clicked');
+                
+                // Show loading
+                const loadingOverlay = document.getElementById('loadingOverlay');
+                if (loadingOverlay) {
+                    loadingOverlay.classList.add('active');
+                    console.log('Loading overlay shown');
+                }
+
+                // Collect data
+                const data = {
+                    plot_length: parseFloat(document.getElementById('plotLength').value) || 50,
+                    plot_width: parseFloat(document.getElementById('plotWidth').value) || 30,
+                    location: document.getElementById('location').value || 'Mumbai',
+                    climate_zone: document.getElementById('climate').value || 'Tropical',
+                    building_type: document.getElementById('buildingType').value || 'Residential',
+                    num_floors: parseInt(document.getElementById('numFloors').value) || 10,
+                    far_allowed: parseFloat(document.getElementById('far').value) || 2.5,
+                    soil_type: document.getElementById('soilType').value || 'Rock',
+                    seismic_zone: document.getElementById('seismicZone').value || 'III',
+                    architectural_style: document.getElementById('archStyle').value || 'Modern'
+                };
+
+                console.log('Data collected:', data);
+                designData = data;
+
+                // Simulate processing
+                setTimeout(() => {
+                    try {
+                        console.log('Showing results...');
+                        showResults(data);
+                        if (loadingOverlay) {
+                            loadingOverlay.classList.remove('active');
+                        }
+                        console.log('Results displayed');
+                    } catch (error) {
+                        console.error('Error showing results:', error);
+                        alert('Error generating results: ' + error.message);
+                        if (loadingOverlay) {
+                            loadingOverlay.classList.remove('active');
+                        }
+                    }
+                }, 1500);
+            } catch (error) {
+                console.error('Error in generateDesign:', error);
+                alert('Error generating design: ' + error.message);
+                const loadingOverlay = document.getElementById('loadingOverlay');
+                if (loadingOverlay) {
+                    loadingOverlay.classList.remove('active');
+                }
+            }
+        }
+
+        function showResults(data) {
+            try {
+                console.log('showResults called with:', data);
+                
+                const plotArea = data.plot_length * data.plot_width;
+                const builtArea = plotArea * data.far_allowed;
+                const baySize = data.building_type === 'Residential' ? 4.5 : 6.0;
+                const buildingHeight = data.num_floors * 3.5;
+                const concreteVolume = ((builtArea * 0.175 * 1.35) * 1.05).toFixed(2);
+                const steelWeight = ((builtArea * 0.175 * 1.35) * 0.015 * 7850 / 1000).toFixed(2);
+                const concreteCost = (concreteVolume * 175).toFixed(0);
+                const steelCost = (steelWeight * 1350).toFixed(0);
+                const totalCost = (parseFloat(concreteCost) + parseFloat(steelCost)).toFixed(0);
+
+                console.log('Calculations done');
+
+                // Hide empty state, show results
+                const emptyState = document.getElementById('emptyState');
+                const resultsSection = document.getElementById('resultsSection');
+                
+                if (emptyState) {
+                    emptyState.style.display = 'none';
+                    console.log('Empty state hidden');
+                }
+                
+                if (resultsSection) {
+                    resultsSection.classList.add('active');
+                    console.log('Results section shown');
+                } else {
+                    console.error('Results section not found!');
+                }
+
+                // Update project ID
+                const projectId = \`SD_\${Date.now()}\`;
+                const projectIdElement = document.getElementById('projectId');
+                if (projectIdElement) {
+                    projectIdElement.textContent = \`ID: \${projectId}\`;
+                }
+
+                // Update stats
+                const statBuiltArea = document.getElementById('statBuiltArea');
+                if (statBuiltArea) statBuiltArea.textContent = builtArea.toFixed(0);
+                
+                const statFloors = document.getElementById('statFloors');
+                if (statFloors) statFloors.textContent = data.num_floors;
+                
+                const statConcrete = document.getElementById('statConcrete');
+                if (statConcrete) statConcrete.textContent = concreteVolume;
+                
+                const statCost = document.getElementById('statCost');
+                if (statCost) statCost.textContent = \`$\${totalCost.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}\`;
+
+                console.log('Stats updated');
+
+            // Project Overview Table
+            document.getElementById('projectOverview').innerHTML = `
+                <tr>
+                    <td><strong>Location</strong></td>
+                    <td>${data.location} (${data.climate_zone})</td>
+                </tr>
+                <tr>
+                    <td><strong>Building Type</strong></td>
+                    <td><span class="badge badge-primary">${data.building_type}</span></td>
+                </tr>
+                <tr>
+                    <td><strong>Plot Area</strong></td>
+                    <td><span class="highlight">${plotArea.toFixed(2)} m²</span></td>
+                </tr>
+                <tr>
+                    <td><strong>Total Built Area</strong></td>
+                    <td><span class="highlight">${builtArea.toFixed(2)} m²</span></td>
+                </tr>
+                <tr>
+                    <td><strong>Building Height</strong></td>
+                    <td>${buildingHeight.toFixed(1)} m</td>
+                </tr>
+                <tr>
+                    <td><strong>Structural Bay</strong></td>
+                    <td>${baySize}m × ${baySize}m</td>
+                </tr>
+                <tr>
+                    <td><strong>Architectural Style</strong></td>
+                    <td>${data.architectural_style}</td>
+                </tr>
+            `;
+
+            // Structural System
+            const structuralSystem = data.num_floors <= 7 ? 'RC Moment-Resisting Frame' : 'RC Frame with Shear Walls';
+            const concreteGrade = data.num_floors <= 7 ? 'M25-M30' : 'M30-M40';
+            const steelGrade = data.num_floors <= 7 ? 'Fe 415/500' : 'Fe 500/550';
+            
+            document.getElementById('structuralSystem').innerHTML = `
+                <p style="margin-bottom: 12px;"><strong>Primary System:</strong> ${structuralSystem}</p>
+                <p style="margin-bottom: 12px;"><strong>Concrete Grade:</strong> ${concreteGrade}</p>
+                <p style="margin-bottom: 12px;"><strong>Steel Grade:</strong> ${steelGrade}</p>
+                <p style="margin-bottom: 12px;"><strong>Column Grid:</strong> ${baySize}m × ${baySize}m spacing</p>
+                <p style="margin-bottom: 12px;"><strong>Column Sizes:</strong></p>
+                <ul style="margin-left: 24px; margin-bottom: 12px; color: var(--text-secondary);">
+                    <li>Lower floors: ${data.num_floors <= 7 ? '300×450mm' : '450×600mm'}</li>
+                    <li>Upper floors: ${data.num_floors <= 7 ? '300×300mm' : '300×450mm'}</li>
+                </ul>
+                <p style="margin-bottom: 12px;"><strong>Beam Sizes:</strong> 300×450mm (primary), 230×300mm (secondary)</p>
+                <p><strong>Slab Thickness:</strong> ${data.num_floors <= 7 ? '125mm' : '150mm'}</p>
+            `;
+
+            // Cost Table
+            document.getElementById('costTable').innerHTML = `
+                <tr>
+                    <td><strong>Concrete</strong></td>
+                    <td><span class="badge badge-warning">${concreteVolume} m³</span></td>
+                    <td>$175/m³</td>
+                    <td><strong>$${concreteCost.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</strong></td>
+                </tr>
+                <tr>
+                    <td><strong>Steel Reinforcement</strong></td>
+                    <td><span class="badge badge-warning">${steelWeight} tonnes</span></td>
+                    <td>$1,350/tonne</td>
+                    <td><strong>$${steelCost.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</strong></td>
+                </tr>
+                <tr style="background: rgba(107, 203, 119, 0.1);">
+                    <td colspan="3"><strong>TOTAL STRUCTURAL COST</strong></td>
+                    <td><strong style="color: var(--success-color); font-size: 16px;">$${totalCost.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</strong></td>
+                </tr>
+            `;
+
+            // Climate & Seismic
+            document.getElementById('climateSeismic').innerHTML = `
+                <div style="margin-bottom: 24px;">
+                    <p style="font-weight: 600; margin-bottom: 12px; color: var(--text-primary);">🌤️ Climate Strategy - ${data.climate_zone}</p>
+                    ${getClimateStrategy(data.climate_zone)}
+                </div>
+                <div>
+                    <p style="font-weight: 600; margin-bottom: 12px; color: var(--text-primary);">🛡️ Seismic Design - Zone ${data.seismic_zone}</p>
+                    ${getSeismicStrategy(data.seismic_zone)}
+                </div>
+            `;
+
+            // Scroll to results
+            const resultsSection2 = document.getElementById('resultsSection');
+            if (resultsSection2) {
+                setTimeout(() => {
+                    resultsSection2.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }, 100);
+            }
+            
+            console.log('showResults completed successfully');
+            
+            } catch (error) {
+                console.error('Error in showResults:', error);
+                alert('Error displaying results: ' + error.message + '\n\nCheck browser console for details.');
+            }
+        }
+
+        function getClimateStrategy(zone) {
+            const strategies = {
+                'Tropical': `<ul style="margin-left: 20px; color: var(--text-secondary); line-height: 1.8;">
+                    <li>North-South orientation to minimize sun exposure</li>
+                    <li>Deep overhangs (1.5-2m) and vertical fins</li>
+                    <li>Cross ventilation with operable windows</li>
+                    <li>30-40% WWR with double glazing</li>
+                </ul>`,
+                'Arid': `<ul style="margin-left: 20px; color: var(--text-secondary); line-height: 1.8;">
+                    <li>Compact envelope to minimize surface area</li>
+                    <li>Minimal east-west glazing (20-30% WWR)</li>
+                    <li>R-4.0 walls, R-6.0 roof insulation</li>
+                    <li>Night cooling with thermal mass</li>
+                </ul>`,
+                'Temperate': `<ul style="margin-left: 20px; color: var(--text-secondary); line-height: 1.8;">
+                    <li>South facing for passive solar gain</li>
+                    <li>40-50% WWR with double glazing</li>
+                    <li>Adjustable external shading</li>
+                    <li>Mixed mode ventilation</li>
+                </ul>`,
+                'Cold': `<ul style="margin-left: 20px; color: var(--text-secondary); line-height: 1.8;">
+                    <li>Compact form for heat retention</li>
+                    <li>Triple glazed windows (25-35% WWR)</li>
+                    <li>R-6.0 walls, R-8.0 roof insulation</li>
+                    <li>Heat recovery ventilation required</li>
+                </ul>`
+            };
+            return strategies[zone] || strategies['Temperate'];
+        }
+
+        function getSeismicStrategy(zone) {
+            const strategies = {
+                'I': '<p style="color: var(--text-secondary);">Low risk. Standard ductile detailing as per code.</p>',
+                'II': '<p style="color: var(--text-secondary);">Low risk. Standard ductile detailing with earthquake-resistant design.</p>',
+                'III': '<p style="color: var(--text-secondary);">Moderate risk. Special moment-resisting frames with enhanced ductile detailing required.</p>',
+                'IV': '<p style="color: var(--warning-color); font-weight: 600;">High risk. Dual system (frame + shear walls) recommended. Base isolation for >15 floors.</p>',
+                'V': '<p style="color: var(--danger-color); font-weight: 600;">⚠️ Highest risk. Dual system mandatory. Base isolation strongly recommended for >10 floors.</p>'
+            };
+            return strategies[zone] || strategies['III'];
+        }
+
+        function downloadJSON() {
+            if (!designData) return alert('No design data available!');
+
+            const timestamp = Date.now();
+            const fileName = `structural_design_${timestamp}.json`;
+            
+            const exportData = {
+                ...designData,
+                project_id: `SD_${timestamp}`,
+                generated_date: new Date().toISOString(),
+                plot_area: designData.plot_length * designData.plot_width,
+                built_area: designData.plot_length * designData.plot_width * designData.far_allowed
+            };
+
+            const blob = new Blob([JSON.stringify(exportData, null, 2)], {type: 'application/json'});
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = fileName;
+            a.click();
+            URL.revokeObjectURL(url);
+
+            showNotification('✅ Design data downloaded successfully!');
+        }
+
+        function exportPDF() {
+            showNotification('📄 PDF export feature coming soon!');
+        }
+
+        function viewDrawings() {
+            if (!designData) {
+                alert('⚠️ Please generate a design first!\n\n1. Fill the form\n2. Click "Generate Design"\n3. Wait for results\n4. Then click "View Drawings"');
+                return;
+            }
+
+            // Open new window with architectural views
+            const viewWindow = window.open('', '_blank', 'width=1600,height=1000');
+            
+            // Check if popup was blocked
+            if (!viewWindow || viewWindow.closed || typeof viewWindow.closed == 'undefined') {
+                alert('❌ Popup blocked!\n\nPlease allow popups for this page and try again.');
+                return;
+            }
+            viewWindow.document.write(`
+                <!DOCTYPE html>
+                <html>
+                <head>
+                    <title>Architectural Design Views - CeraTech</title>
+                    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+                    <style>
+                        * {
+                            margin: 0;
+                            padding: 0;
+                            box-sizing: border-box;
+                        }
+                        body {
+                            font-family: 'Inter', sans-serif;
+                            background: #F7FAFC;
+                            padding: 40px;
+                        }
+                        .header {
+                            text-align: center;
+                            margin-bottom: 40px;
+                        }
+                        h1 {
+                            font-size: 2.5rem;
+                            color: #2D3748;
+                            margin-bottom: 12px;
+                            font-weight: 800;
+                        }
+                        .subtitle {
+                            font-size: 1.1rem;
+                            color: #718096;
+                            font-weight: 500;
+                        }
+                        .view-grid {
+                            display: grid;
+                            grid-template-columns: repeat(auto-fit, minmax(700px, 1fr));
+                            gap: 32px;
+                            max-width: 1600px;
+                            margin: 0 auto;
+                        }
+                        .view-card {
+                            background: white;
+                            border-radius: 16px;
+                            padding: 24px;
+                            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+                            border: 1px solid #E2E8F0;
+                        }
+                        .view-card h2 {
+                            color: #2D3748;
+                            margin-bottom: 20px;
+                            font-size: 1.4rem;
+                            font-weight: 700;
+                            display: flex;
+                            align-items: center;
+                            gap: 10px;
+                        }
+                        canvas {
+                            width: 100%;
+                            border-radius: 12px;
+                            background: white;
+                            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+                        }
+                        .btn-group {
+                            text-align: center;
+                            margin: 40px 0;
+                            display: flex;
+                            gap: 16px;
+                            justify-content: center;
+                        }
+                        .btn {
+                            padding: 14px 28px;
+                            border: none;
+                            border-radius: 12px;
+                            font-weight: 600;
+                            font-size: 15px;
+                            cursor: pointer;
+                            font-family: 'Inter', sans-serif;
+                            transition: all 0.2s;
+                        }
+                        .btn-primary {
+                            background: linear-gradient(135deg, #00C9A7, #00A88C);
+                            color: white;
+                            box-shadow: 0 4px 12px rgba(0,201,167,0.3);
+                        }
+                        .btn-primary:hover {
+                            transform: translateY(-2px);
+                            box-shadow: 0 6px 16px rgba(0,201,167,0.4);
+                        }
+                        .btn-secondary {
+                            background: #F7FAFC;
+                            color: #2D3748;
+                            border: 1.5px solid #E2E8F0;
+                        }
+                        .btn-secondary:hover {
+                            background: white;
+                            border-color: #00C9A7;
+                        }
+                    </style>
+                </head>
+                <body>
+                    <div class="header">
+                        <h1>🏗️ Architectural Design Views</h1>
+                        <p class="subtitle">Project: ${designData.building_type} Building in ${designData.location}</p>
+                    </div>
+                    
+                    <div class="btn-group">
+                        <button class="btn btn-primary" onclick="downloadAllImages()">💾 Download All Images</button>
+                        <button class="btn btn-secondary" onclick="window.print()">🖨️ Print Views</button>
+                        <button class="btn btn-secondary" onclick="window.close()">✕ Close</button>
+                    </div>
+
+                    <div class="view-grid">
+                        <div class="view-card">
+                            <h2>📐 Site Plan</h2>
+                            <canvas id="sitePlan" width="800" height="600"></canvas>
+                        </div>
+                        
+                        <div class="view-card">
+                            <h2>🏠 Ground Floor Plan</h2>
+                            <canvas id="floorPlan" width="800" height="600"></canvas>
+                        </div>
+                        
+                        <div class="view-card">
+                            <h2>🏢 Front Elevation</h2>
+                            <canvas id="elevation" width="800" height="600"></canvas>
+                        </div>
+                        
+                        <div class="view-card">
+                            <h2>📦 3D Isometric View</h2>
+                            <canvas id="isometric" width="800" height="600"></canvas>
+                        </div>
+                        
+                        <div class="view-card">
+                            <h2>🏗️ Structural Grid</h2>
+                            <canvas id="structuralGrid" width="800" height="600"></canvas>
+                        </div>
+                        
+                        <div class="view-card">
+                            <h2>🎨 Rendered Perspective</h2>
+                            <canvas id="perspective" width="800" height="600"></canvas>
+                        </div>
+                    </div>
+
+                    <script>
+                        const data = ${JSON.stringify(designData)};
+                        
+                        // Draw Site Plan
+                        function drawSitePlan() {
+                            const canvas = document.getElementById('sitePlan');
+                            const ctx = canvas.getContext('2d');
+                            const w = canvas.width, h = canvas.height;
+                            
+                            ctx.fillStyle = '#e8f5e9';
+                            ctx.fillRect(0, 0, w, h);
+                            
+                            const scale = Math.min(w / (data.plot_length * 1.3), h / (data.plot_width * 1.3));
+                            const offsetX = (w - data.plot_length * scale) / 2;
+                            const offsetY = (h - data.plot_width * scale) / 2;
+                            
+                            // Plot boundary
+                            ctx.strokeStyle = '#e74c3c';
+                            ctx.lineWidth = 3;
+                            ctx.setLineDash([10, 5]);
+                            ctx.strokeRect(offsetX, offsetY, data.plot_length * scale, data.plot_width * scale);
+                            ctx.setLineDash([]);
+                            
+                            // Building footprint (80% of plot)
+                            const buildingL = data.plot_length * 0.8 * scale;
+                            const buildingW = data.plot_width * 0.8 * scale;
+                            const buildingX = offsetX + (data.plot_length * scale - buildingL) / 2;
+                            const buildingY = offsetY + (data.plot_width * scale - buildingW) / 2;
+                            
+                            ctx.fillStyle = '#95a5a6';
+                            ctx.fillRect(buildingX, buildingY, buildingL, buildingW);
+                            ctx.strokeStyle = '#2c3e50';
+                            ctx.lineWidth = 2;
+                            ctx.strokeRect(buildingX, buildingY, buildingL, buildingW);
+                            
+                            // Add trees
+                            ctx.fillStyle = '#27ae60';
+                            for (let i = 0; i < 12; i++) {
+                                const tx = offsetX + Math.random() * data.plot_length * scale;
+                                const ty = offsetY + Math.random() * data.plot_width * scale;
+                                if (tx < buildingX || tx > buildingX + buildingL || ty < buildingY || ty > buildingY + buildingW) {
+                                    ctx.beginPath();
+                                    ctx.arc(tx, ty, 8, 0, Math.PI * 2);
+                                    ctx.fill();
+                                }
+                            }
+                            
+                            // Labels
+                            ctx.fillStyle = '#2c3e50';
+                            ctx.font = 'bold 20px Inter';
+                            ctx.textAlign = 'center';
+                            ctx.fillText('BUILDING', buildingX + buildingL/2, buildingY + buildingW/2);
+                            
+                            ctx.font = '16px Inter';
+                            ctx.fillText(\`\${data.plot_length}m × \${data.plot_width}m\`, w/2, offsetY - 15);
+                            
+                            // North arrow
+                            const arrowX = w - 60, arrowY = 60;
+                            ctx.strokeStyle = '#e74c3c';
+                            ctx.lineWidth = 3;
+                            ctx.beginPath();
+                            ctx.moveTo(arrowX, arrowY + 20);
+                            ctx.lineTo(arrowX, arrowY - 20);
+                            ctx.lineTo(arrowX - 10, arrowY - 10);
+                            ctx.moveTo(arrowX, arrowY - 20);
+                            ctx.lineTo(arrowX + 10, arrowY - 10);
+                            ctx.stroke();
+                            ctx.fillStyle = '#e74c3c';
+                            ctx.font = 'bold 18px Inter';
+                            ctx.fillText('N', arrowX, arrowY - 30);
+                        }
+                        
+                        // Draw Floor Plan
+                        function drawFloorPlan() {
+                            const canvas = document.getElementById('floorPlan');
+                            const ctx = canvas.getContext('2d');
+                            const w = canvas.width, h = canvas.height;
+                            
+                            ctx.fillStyle = 'white';
+                            ctx.fillRect(0, 0, w, h);
+                            
+                            const buildingL = data.plot_length * 0.8;
+                            const buildingW = data.plot_width * 0.8;
+                            const scale = Math.min(w / (buildingL * 1.3), h / (buildingW * 1.3));
+                            const offsetX = (w - buildingL * scale) / 2;
+                            const offsetY = (h - buildingW * scale) / 2;
+                            const baySize = data.building_type === 'Residential' ? 4.5 : 6.0;
+                            
+                            // Building outline
+                            ctx.fillStyle = '#f8f9fa';
+                            ctx.fillRect(offsetX, offsetY, buildingL * scale, buildingW * scale);
+                            ctx.strokeStyle = '#2c3e50';
+                            ctx.lineWidth = 4;
+                            ctx.strokeRect(offsetX, offsetY, buildingL * scale, buildingW * scale);
+                            
+                            // Draw grid lines
+                            ctx.strokeStyle = '#3498db';
+                            ctx.lineWidth = 1;
+                            ctx.setLineDash([5, 5]);
+                            const numBaysX = Math.floor(buildingL / baySize);
+                            const numBaysY = Math.floor(buildingW / baySize);
+                            
+                            for (let i = 0; i <= numBaysX; i++) {
+                                const x = offsetX + (i * baySize * scale);
+                                ctx.beginPath();
+                                ctx.moveTo(x, offsetY);
+                                ctx.lineTo(x, offsetY + buildingW * scale);
+                                ctx.stroke();
+                            }
+                            
+                            for (let i = 0; i <= numBaysY; i++) {
+                                const y = offsetY + (i * baySize * scale);
+                                ctx.beginPath();
+                                ctx.moveTo(offsetX, y);
+                                ctx.lineTo(offsetX + buildingL * scale, y);
+                                ctx.stroke();
+                            }
+                            ctx.setLineDash([]);
+                            
+                            // Draw columns
+                            ctx.fillStyle = '#2c3e50';
+                            for (let i = 0; i <= numBaysX; i++) {
+                                for (let j = 0; j <= numBaysY; j++) {
+                                    const x = offsetX + (i * baySize * scale);
+                                    const y = offsetY + (j * baySize * scale);
+                                    ctx.fillRect(x - 4, y - 4, 8, 8);
+                                }
+                            }
+                            
+                            // Core area (center)
+                            const coreSize = Math.min(buildingL, buildingW) * 0.3 * scale;
+                            const coreX = offsetX + (buildingL * scale - coreSize) / 2;
+                            const coreY = offsetY + (buildingW * scale - coreSize) / 2;
+                            ctx.fillStyle = 'rgba(231, 76, 60, 0.5)';
+                            ctx.fillRect(coreX, coreY, coreSize, coreSize);
+                            ctx.strokeStyle = '#c0392b';
+                            ctx.lineWidth = 2;
+                            ctx.strokeRect(coreX, coreY, coreSize, coreSize);
+                            
+                            ctx.fillStyle = 'white';
+                            ctx.font = 'bold 16px Inter';
+                            ctx.textAlign = 'center';
+                            ctx.fillText('SERVICE', coreX + coreSize/2, coreY + coreSize/2 - 5);
+                            ctx.fillText('CORE', coreX + coreSize/2, coreY + coreSize/2 + 12);
+                            
+                            // Title
+                            ctx.fillStyle = '#2c3e50';
+                            ctx.font = 'bold 18px Inter';
+                            ctx.fillText('GROUND FLOOR PLAN', w/2, 30);
+                            ctx.font = '14px Inter';
+                            ctx.fillText(\`Grid: \${baySize}m × \${baySize}m\`, w/2, 55);
+                        }
+                        
+                        // Draw Elevation
+                        function drawElevation() {
+                            const canvas = document.getElementById('elevation');
+                            const ctx = canvas.getContext('2d');
+                            const w = canvas.width, h = canvas.height;
+                            
+                            ctx.fillStyle = '#87CEEB';
+                            ctx.fillRect(0, 0, w, h);
+                            
+                            const buildingL = data.plot_length * 0.8;
+                            const buildingH = data.num_floors * 3.5;
+                            const scale = Math.min((w * 0.7) / buildingL, (h * 0.6) / buildingH);
+                            const offsetX = (w - buildingL * scale) / 2;
+                            const offsetY = h * 0.7 - buildingH * scale;
+                            
+                            // Ground
+                            ctx.fillStyle = '#8B7355';
+                            ctx.fillRect(0, h * 0.7, w, h * 0.3);
+                            
+                            // Building mass
+                            ctx.fillStyle = '#ecf0f1';
+                            ctx.fillRect(offsetX, offsetY, buildingL * scale, buildingH * scale);
+                            ctx.strokeStyle = '#2c3e50';
+                            ctx.lineWidth = 3;
+                            ctx.strokeRect(offsetX, offsetY, buildingL * scale, buildingH * scale);
+                            
+                            // Floors
+                            const floorHeight = 3.5 * scale;
+                            for (let i = 0; i <= data.num_floors; i++) {
+                                const y = offsetY + (data.num_floors - i) * floorHeight;
+                                ctx.strokeStyle = '#34495e';
+                                ctx.lineWidth = 2;
+                                ctx.beginPath();
+                                ctx.moveTo(offsetX, y);
+                                ctx.lineTo(offsetX + buildingL * scale, y);
+                                ctx.stroke();
+                                
+                                if (i < data.num_floors) {
+                                    ctx.fillStyle = '#2c3e50';
+                                    ctx.font = '12px Inter';
+                                    ctx.textAlign = 'right';
+                                    ctx.fillText(\`FL \${i+1}\`, offsetX - 10, y + floorHeight/2);
+                                }
+                            }
+                            
+                            // Windows
+                            if (data.building_type === 'Residential') {
+                                ctx.fillStyle = 'rgba(52, 152, 219, 0.6)';
+                                for (let floor = 0; floor < data.num_floors; floor++) {
+                                    const y = offsetY + (data.num_floors - floor - 1) * floorHeight + floorHeight * 0.2;
+                                    const windowH = floorHeight * 0.6;
+                                    for (let i = 0; i < 8; i++) {
+                                        const x = offsetX + (i + 0.5) * buildingL * scale / 8;
+                                        ctx.fillRect(x, y, buildingL * scale / 12, windowH);
+                                    }
+                                }
+                            } else {
+                                ctx.fillStyle = 'rgba(92, 173, 226, 0.4)';
+                                for (let floor = 0; floor < data.num_floors; floor++) {
+                                    const y = offsetY + (data.num_floors - floor - 1) * floorHeight + floorHeight * 0.15;
+                                    ctx.fillRect(offsetX + 5, y, buildingL * scale - 10, floorHeight * 0.7);
+                                }
+                            }
+                            
+                            // Title
+                            ctx.fillStyle = '#2c3e50';
+                            ctx.font = 'bold 18px Inter';
+                            ctx.textAlign = 'center';
+                            ctx.fillText('FRONT ELEVATION', w/2, 30);
+                            ctx.font = '14px Inter';
+                            ctx.fillText(\`\${data.num_floors} Floors | Height: \${buildingH.toFixed(1)}m\`, w/2, 55);
+                        }
+                        
+                        // Draw Isometric View
+                        function drawIsometric() {
+                            const canvas = document.getElementById('isometric');
+                            const ctx = canvas.getContext('2d');
+                            const w = canvas.width, h = canvas.height;
+                            
+                            ctx.fillStyle = '#e3f2fd';
+                            ctx.fillRect(0, 0, w, h);
+                            
+                            const buildingL = data.plot_length * 0.8;
+                            const buildingW = data.plot_width * 0.8;
+                            const buildingH = data.num_floors * 3.5;
+                            
+                            const scale = Math.min(w / (buildingL * 2), h / (buildingH * 2));
+                            const centerX = w / 2;
+                            const centerY = h / 2;
+                            
+                            // Isometric projection helper
+                            function iso(x, y, z) {
+                                return {
+                                    x: centerX + (x - y) * Math.cos(Math.PI / 6) * scale,
+                                    y: centerY + (x + y) * Math.sin(Math.PI / 6) * scale - z * scale
+                                };
+                            }
+                            
+                            // Draw base
+                            ctx.fillStyle = '#27ae60';
+                            ctx.globalAlpha = 0.3;
+                            ctx.beginPath();
+                            const base1 = iso(-5, -5, 0);
+                            const base2 = iso(buildingL + 5, -5, 0);
+                            const base3 = iso(buildingL + 5, buildingW + 5, 0);
+                            const base4 = iso(-5, buildingW + 5, 0);
+                            ctx.moveTo(base1.x, base1.y);
+                            ctx.lineTo(base2.x, base2.y);
+                            ctx.lineTo(base3.x, base3.y);
+                            ctx.lineTo(base4.x, base4.y);
+                            ctx.closePath();
+                            ctx.fill();
+                            ctx.globalAlpha = 1;
+                            
+                            // Draw building
+                            // Front face
+                            ctx.fillStyle = '#bdc3c7';
+                            ctx.beginPath();
+                            const f1 = iso(0, 0, 0);
+                            const f2 = iso(buildingL, 0, 0);
+                            const f3 = iso(buildingL, 0, buildingH);
+                            const f4 = iso(0, 0, buildingH);
+                            ctx.moveTo(f1.x, f1.y);
+                            ctx.lineTo(f2.x, f2.y);
+                            ctx.lineTo(f3.x, f3.y);
+                            ctx.lineTo(f4.x, f4.y);
+                            ctx.closePath();
+                            ctx.fill();
+                            ctx.strokeStyle = '#2c3e50';
+                            ctx.lineWidth = 2;
+                            ctx.stroke();
+                            
+                            // Right face
+                            ctx.fillStyle = '#95a5a6';
+                            ctx.beginPath();
+                            const r1 = iso(buildingL, 0, 0);
+                            const r2 = iso(buildingL, buildingW, 0);
+                            const r3 = iso(buildingL, buildingW, buildingH);
+                            const r4 = iso(buildingL, 0, buildingH);
+                            ctx.moveTo(r1.x, r1.y);
+                            ctx.lineTo(r2.x, r2.y);
+                            ctx.lineTo(r3.x, r3.y);
+                            ctx.lineTo(r4.x, r4.y);
+                            ctx.closePath();
+                            ctx.fill();
+                            ctx.stroke();
+                            
+                            // Top face
+                            ctx.fillStyle = '#34495e';
+                            ctx.beginPath();
+                            const t1 = iso(0, 0, buildingH);
+                            const t2 = iso(buildingL, 0, buildingH);
+                            const t3 = iso(buildingL, buildingW, buildingH);
+                            const t4 = iso(0, buildingW, buildingH);
+                            ctx.moveTo(t1.x, t1.y);
+                            ctx.lineTo(t2.x, t2.y);
+                            ctx.lineTo(t3.x, t3.y);
+                            ctx.lineTo(t4.x, t4.y);
+                            ctx.closePath();
+                            ctx.fill();
+                            ctx.stroke();
+                            
+                            // Draw floors
+                            ctx.strokeStyle = '#3498db';
+                            ctx.lineWidth = 1;
+                            for (let i = 1; i < data.num_floors; i++) {
+                                const z = i * 3.5;
+                                ctx.beginPath();
+                                const fl1 = iso(0, 0, z);
+                                const fl2 = iso(buildingL, 0, z);
+                                ctx.moveTo(fl1.x, fl1.y);
+                                ctx.lineTo(fl2.x, fl2.y);
+                                ctx.stroke();
+                                
+                                ctx.beginPath();
+                                const fr1 = iso(buildingL, 0, z);
+                                const fr2 = iso(buildingL, buildingW, z);
+                                ctx.moveTo(fr1.x, fr1.y);
+                                ctx.lineTo(fr2.x, fr2.y);
+                                ctx.stroke();
+                            }
+                            
+                            // Title
+                            ctx.fillStyle = '#2c3e50';
+                            ctx.font = 'bold 18px Inter';
+                            ctx.textAlign = 'center';
+                            ctx.fillText('3D ISOMETRIC VIEW', w/2, 30);
+                        }
+                        
+                        // Draw Structural Grid
+                        function drawStructuralGrid() {
+                            const canvas = document.getElementById('structuralGrid');
+                            const ctx = canvas.getContext('2d');
+                            const w = canvas.width, h = canvas.height;
+                            
+                            ctx.fillStyle = 'white';
+                            ctx.fillRect(0, 0, w, h);
+                            
+                            const buildingL = data.plot_length * 0.8;
+                            const buildingW = data.plot_width * 0.8;
+                            const scale = Math.min(w / (buildingL * 1.3), h / (buildingW * 1.3));
+                            const offsetX = (w - buildingL * scale) / 2;
+                            const offsetY = (h - buildingW * scale) / 2;
+                            const baySize = data.building_type === 'Residential' ? 4.5 : 6.0;
+                            
+                            // Grid lines
+                            ctx.strokeStyle = '#3498db';
+                            ctx.lineWidth = 2;
+                            const numBaysX = Math.ceil(buildingL / baySize) + 1;
+                            const numBaysY = Math.ceil(buildingW / baySize) + 1;
+                            
+                            for (let i = 0; i < numBaysX; i++) {
+                                const x = offsetX + i * baySize * scale;
+                                ctx.beginPath();
+                                ctx.moveTo(x, offsetY);
+                                ctx.lineTo(x, offsetY + (numBaysY - 1) * baySize * scale);
+                                ctx.stroke();
+                                
+                                // Grid labels
+                                ctx.fillStyle = '#3498db';
+                                ctx.font = 'bold 16px Inter';
+                                ctx.textAlign = 'center';
+                                ctx.fillText(i + 1, x, offsetY - 10);
+                            }
+                            
+                            for (let i = 0; i < numBaysY; i++) {
+                                const y = offsetY + i * baySize * scale;
+                                ctx.beginPath();
+                                ctx.moveTo(offsetX, y);
+                                ctx.lineTo(offsetX + (numBaysX - 1) * baySize * scale, y);
+                                ctx.stroke();
+                                
+                                // Grid labels
+                                ctx.fillStyle = '#3498db';
+                                ctx.font = 'bold 16px Inter';
+                                ctx.textAlign = 'right';
+                                ctx.fillText(String.fromCharCode(65 + i), offsetX - 15, y + 5);
+                            }
+                            
+                            // Columns with labels
+                            ctx.fillStyle = '#e74c3c';
+                            ctx.font = '12px Inter';
+                            ctx.textAlign = 'center';
+                            for (let i = 0; i < numBaysX; i++) {
+                                for (let j = 0; j < numBaysY; j++) {
+                                    const x = offsetX + i * baySize * scale;
+                                    const y = offsetY + j * baySize * scale;
+                                    
+                                    // Column
+                                    ctx.fillRect(x - 5, y - 5, 10, 10);
+                                    
+                                    // Label
+                                    ctx.fillStyle = '#2c3e50';
+                                    ctx.fillText(\`C\${i+1}\${String.fromCharCode(65 + j)}\`, x, y + 25);
+                                    ctx.fillStyle = '#e74c3c';
+                                }
+                            }
+                            
+                            // Dimensions
+                            ctx.strokeStyle = '#e67e22';
+                            ctx.fillStyle = '#e67e22';
+                            ctx.lineWidth = 2;
+                            ctx.font = 'bold 14px Inter';
+                            
+                            // Horizontal dimensions
+                            for (let i = 0; i < numBaysX - 1; i++) {
+                                const x1 = offsetX + i * baySize * scale;
+                                const x2 = offsetX + (i + 1) * baySize * scale;
+                                const y = offsetY + (numBaysY - 1) * baySize * scale + 30;
+                                
+                                ctx.beginPath();
+                                ctx.moveTo(x1, y);
+                                ctx.lineTo(x2, y);
+                                ctx.moveTo(x1, y - 5);
+                                ctx.lineTo(x1, y + 5);
+                                ctx.moveTo(x2, y - 5);
+                                ctx.lineTo(x2, y + 5);
+                                ctx.stroke();
+                                
+                                ctx.textAlign = 'center';
+                                ctx.fillText(\`\${baySize}m\`, (x1 + x2) / 2, y + 20);
+                            }
+                            
+                            // Title
+                            ctx.fillStyle = '#2c3e50';
+                            ctx.font = 'bold 18px Inter';
+                            ctx.textAlign = 'center';
+                            ctx.fillText('STRUCTURAL GRID LAYOUT', w/2, 30);
+                            ctx.font = '14px Inter';
+                            ctx.fillText(\`Bay Size: \${baySize}m × \${baySize}m\`, w/2, 55);
+                        }
+                        
+                        // Draw Perspective View
+                        function drawPerspective() {
+                            const canvas = document.getElementById('perspective');
+                            const ctx = canvas.getContext('2d');
+                            const w = canvas.width, h = canvas.height;
+                            
+                            // Sky gradient
+                            const skyGrad = ctx.createLinearGradient(0, 0, 0, h * 0.7);
+                            skyGrad.addColorStop(0, '#87CEEB');
+                            skyGrad.addColorStop(1, '#E0F6FF');
+                            ctx.fillStyle = skyGrad;
+                            ctx.fillRect(0, 0, w, h * 0.7);
+                            
+                            // Ground
+                            ctx.fillStyle = '#90A4AE';
+                            ctx.fillRect(0, h * 0.7, w, h * 0.3);
+                            
+                            // Perspective vanishing point
+                            const vpX = w * 0.5;
+                            const vpY = h * 0.4;
+                            
+                            // Building in perspective
+                            const base = [
+                                {x: w * 0.2, y: h * 0.7},
+                                {x: w * 0.5, y: h * 0.7},
+                                {x: vpX + 150, y: vpY + 100},
+                                {x: vpX - 50, y: vpY + 100}
+                            ];
+                            
+                            const height = h * 0.3 * (data.num_floors / 10);
+                            const top = base.map(p => ({x: p.x, y: p.y - height}));
+                            
+                            // Right face
+                            ctx.fillStyle = '#95a5a6';
+                            ctx.beginPath();
+                            ctx.moveTo(base[1].x, base[1].y);
+                            ctx.lineTo(base[2].x, base[2].y);
+                            ctx.lineTo(top[2].x, top[2].y);
+                            ctx.lineTo(top[1].x, top[1].y);
+                            ctx.closePath();
+                            ctx.fill();
+                            
+                            // Front face with gradient
+                            const faceGrad = ctx.createLinearGradient(base[0].x, 0, base[1].x, 0);
+                            faceGrad.addColorStop(0, '#bdc3c7');
+                            faceGrad.addColorStop(1, '#95a5a6');
+                            ctx.fillStyle = faceGrad;
+                            ctx.beginPath();
+                            ctx.moveTo(base[0].x, base[0].y);
+                            ctx.lineTo(base[1].x, base[1].y);
+                            ctx.lineTo(top[1].x, top[1].y);
+                            ctx.lineTo(top[0].x, top[0].y);
+                            ctx.closePath();
+                            ctx.fill();
+                            
+                            // Windows on front face
+                            ctx.fillStyle = 'rgba(157, 204, 224, 0.7)';
+                            const numFloorsVisible = data.num_floors;
+                            for (let floor = 0; floor < numFloorsVisible; floor++) {
+                                const floorRatio = floor / numFloorsVisible;
+                                const y1 = base[0].y - (floor / numFloorsVisible) * height;
+                                const y2 = y1 - (height / numFloorsVisible) * 0.7;
+                                
+                                for (let col = 0; col < 5; col++) {
+                                    const xRatio = (col + 0.5) / 6;
+                                    const x1 = base[0].x + (base[1].x - base[0].x) * xRatio;
+                                    const windowW = (base[1].x - base[0].x) * 0.12;
+                                    ctx.fillRect(x1 - windowW/2, y2, windowW, (height / numFloorsVisible) * 0.6);
+                                }
+                            }
+                            
+                            // Roof
+                            ctx.fillStyle = '#34495e';
+                            ctx.beginPath();
+                            ctx.moveTo(top[0].x, top[0].y);
+                            ctx.lineTo(top[1].x, top[1].y);
+                            ctx.lineTo(top[2].x, top[2].y);
+                            ctx.lineTo(top[3].x, top[3].y);
+                            ctx.closePath();
+                            ctx.fill();
+                            
+                            // Ground plane grid
+                            ctx.strokeStyle = 'rgba(255, 255, 255, 0.3)';
+                            ctx.lineWidth = 1;
+                            for (let i = 0; i < 10; i++) {
+                                const y = h * 0.7 + i * 20;
+                                ctx.beginPath();
+                                ctx.moveTo(0, y);
+                                ctx.lineTo(w, y);
+                                ctx.stroke();
+                            }
+                            
+                            // Add people for scale
+                            ctx.fillStyle = 'rgba(255, 255, 255, 0.6)';
+                            for (let i = 0; i < 3; i++) {
+                                const px = w * (0.25 + i * 0.15);
+                                ctx.fillRect(px, h * 0.7 - 15, 5, 15);
+                                ctx.beginPath();
+                                ctx.arc(px + 2.5, h * 0.7 - 18, 4, 0, Math.PI * 2);
+                                ctx.fill();
+                            }
+                            
+                            // Title
+                            ctx.fillStyle = 'white';
+                            ctx.font = 'bold 18px Inter';
+                            ctx.textAlign = 'center';
+                            ctx.strokeStyle = '#2c3e50';
+                            ctx.lineWidth = 3;
+                            ctx.strokeText('RENDERED PERSPECTIVE VIEW', w/2, 40);
+                            ctx.fillText('RENDERED PERSPECTIVE VIEW', w/2, 40);
+                        }
+                        
+                        // Download all images
+                        function downloadAllImages() {
+                            const canvases = ['sitePlan', 'floorPlan', 'elevation', 'isometric', 'structuralGrid', 'perspective'];
+                            const names = ['01_Site_Plan', '02_Floor_Plan', '03_Elevation', '04_Isometric', '05_Structural_Grid', '06_Perspective'];
+                            
+                            canvases.forEach((id, index) => {
+                                setTimeout(() => {
+                                    const canvas = document.getElementById(id);
+                                    canvas.toBlob(blob => {
+                                        const url = URL.createObjectURL(blob);
+                                        const a = document.createElement('a');
+                                        a.href = url;
+                                        a.download = \`\${names[index]}_\${data.location}.png\`;
+                                        document.body.appendChild(a);
+                                        a.click();
+                                        document.body.removeChild(a);
+                                        URL.revokeObjectURL(url);
+                                    });
+                                }, index * 300);
+                            });
+                            
+                            alert('✅ All 6 images are being downloaded!');
+                        }
+                        
+                        // Draw all views immediately
+                        drawSitePlan();
+                        drawFloorPlan();
+                        drawElevation();
+                        drawIsometric();
+                        drawStructuralGrid();
+                        drawPerspective();
+                    </script>
+                </body>
+                </html>
+            `);
+            viewWindow.document.close();
+        }
+
+        function showProjects() {
+            showNotification('📁 Projects view coming soon!');
+        }
+
+        function learnMore() {
+            showNotification('💡 AI Assistant documentation loading...');
+        }
+
+        function showNotification(message) {
+            alert(message);
+        }
+    </script>
+</body>
+</html>

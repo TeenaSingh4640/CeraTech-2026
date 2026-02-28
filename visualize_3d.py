@@ -3,7 +3,12 @@ import json
 import argparse
 
 import open3d
-import pymesh
+try:
+    import pymesh
+    PYMESH_AVAILABLE = True
+except ImportError:
+    PYMESH_AVAILABLE = False
+    print("Warning: pymesh not available. Plane visualization with holes may not work.")
 import numpy as np
 import matplotlib.pyplot as plt
 from shapely.geometry import Polygon
@@ -93,7 +98,9 @@ def project_inv(x, meta):
 def triangulate(points):
     """ triangulate the plane for operation and visualization
     """
-
+    if not PYMESH_AVAILABLE:
+        raise ImportError("pymesh is required for plane visualization with holes. Install it or use wireframe mode.")
+    
     num_points = len(points)
     indices = np.arange(num_points, dtype=np.int)
     segments = np.vstack((indices, np.roll(indices, -1))).T

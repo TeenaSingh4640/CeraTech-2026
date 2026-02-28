@@ -1,0 +1,35 @@
+[
+  {
+    "scene_id": "00001",
+    "room_type": "bedroom",
+    "dimensions": [
+      4.0,
+      4.5,
+      2.8
+    ],
+    "objects": 4,
+    "area": 18.0
+  },
+  {
+    "scene_id": "00002",
+    "room_type": "kitchen",
+    "dimensions": [
+      5.0,
+      3.5,
+      2.6
+    ],
+    "objects": 4,
+    "area": 17.5
+  },
+  {
+    "scene_id": "00003",
+    "room_type": "bathroom",
+    "dimensions": [
+      3.0,
+      2.5,
+      2.4
+    ],
+    "objects": 3,
+    "area": 7.5
+  }
+]

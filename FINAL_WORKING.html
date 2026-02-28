@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CeraTech Design Tool - WORKING</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', Arial, sans-serif; background: #f7fafc; }
+        
+        .container { display: grid; grid-template-columns: 240px 1fr; min-height: 100vh; }
+        
+        .sidebar { background: linear-gradient(180deg, #1a202c 0%, #2d3748 100%); color: white; padding: 30px 20px; }
+        .logo { font-size: 24px; font-weight: 700; color: #00C9A7; margin-bottom: 40px; }
+        .nav-item { padding: 12px 15px; margin-bottom: 5px; border-radius: 8px; color: #cbd5e0; cursor: pointer; }
+        .nav-item.active { background: #00C9A7; color: white; }
+        
+        .main { display: flex; flex-direction: column; }
+        .header { background: white; padding: 20px 40px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+        .header h1 { font-size: 24px; margin-bottom: 5px; }
+        
+        .content { padding: 30px 40px; }
+        .banner { background: linear-gradient(135deg, #d4f1f4 0%, #a8e6cf 100%); padding: 20px; border-radius: 12px; margin-bottom: 30px; }
+        
+        .grid { display: grid; grid-template-columns: 450px 1fr; gap: 30px; }
+        .card { background: white; border-radius: 12px; padding: 25px; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
+        
+        .form-group { margin-bottom: 15px; }
+        .form-label { display: block; margin-bottom: 5px; font-weight: 600; font-size: 14px; }
+        input, select { width: 100%; padding: 10px; border: 2px solid #e2e8f0; border-radius: 8px; font-size: 14px; }
+        .input-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        
+        .btn { width: 100%; padding: 15px; background: #00C9A7; color: white; border: none; border-radius: 8px; font-size: 16px; font-weight: 700; cursor: pointer; margin-top: 10px; }
+        .btn:hover { background: #00b596; }
+        
+        .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; margin-bottom: 20px; }
+        .stat { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 20px; border-radius: 12px; text-align: center; }
+        .stat-value { font-size: 28px; font-weight: 700; }
+        .stat-label { font-size: 11px; opacity: 0.9; }
+        
+        table { width: 100%; border-collapse: collapse; margin: 15px 0; }
+        table tr { border-bottom: 1px solid #e2e8f0; }
+        table td { padding: 12px; font-size: 14px; }
+        
+        .action-btns { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 20px; }
+        .btn-secondary { background: #667eea; }
+        .btn-success { background: #48bb78; }
+        
+        .loading { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.7); z-index: 9999; align-items: center; justify-content: center; }
+        .loading.show { display: flex; }
+        .spinner { width: 60px; height: 60px; border: 4px solid rgba(255,255,255,0.3); border-top-color: #00C9A7; border-radius: 50%; animation: spin 1s linear infinite; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .loading-text { color: white; margin-top: 20px; font-size: 18px; }
+        
+        .hide { display: none; }
+        .show { display: block; }
+    </style>
+</head>
+<body>
+    <div class="loading" id="loading">
+        <div>
+            <div class="spinner"></div>
+            <div class="loading-text">Generating Design...</div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="sidebar">
+            <div class="logo"><i class="fas fa-cube"></i> CeraTech</div>
+            <div class="nav-item active"><i class="fas fa-home"></i> Dashboard</div>
+            <div class="nav-item"><i class="fas fa-folder"></i> Projects</div>
+            <div class="nav-item"><i class="fas fa-calculator"></i> Calculator</div>
+        </div>
+
+        <div class="main">
+            <div class="header">
+                <h1>Good day, Architect</h1>
+                <p style="color: #718096; margin-top: 5px;">Feb 28, 2026 | 06:25 PM</p>
+            </div>
+
+            <div class="content">
+                <div class="banner">
+                    <h3>✨ AI Design Assistant</h3>
+                    <p style="color: #718096; margin-top: 5px;">Generate optimized structural designs</p>
+                </div>
+
+                <div class="grid">
+                    <div class="card">
+                        <h2 style="margin-bottom: 20px;">Project Configuration</h2>
+
+                        <div class="form-group">
+                            <label class="form-label">Plot Dimensions (meters)</label>
+                            <div class="input-row">
+                                <input type="number" id="plotLength" value="50">
+                                <input type="number" id="plotWidth" value="30">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Number of Floors</label>
+                            <input type="number" id="numFloors" value="10">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">FAR (Floor Area Ratio)</label>
+                            <input type="number" id="far" value="2.5" step="0.1">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Building Type</label>
+                            <select id="buildingType">
+                                <option>Residential</option>
+                                <option>Commercial</option>
+                                <option>Industrial</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Soil Type</label>
+                            <select id="soilType">
+                                <option>Rock</option>
+                                <option>Sand</option>
+                                <option>Clay</option>
+                            </select>
+                        </div>
+
+                        <button class="btn" id="generateBtn">
+                            <i class="fas fa-magic"></i> GENERATE DESIGN
+                        </button>
+                    </div>
+
+                    <div class="card hide" id="results">
+                        <h2 style="margin-bottom: 20px;">✅ Design Results</h2>
+
+                        <div class="stats">
+                            <div class="stat">
+                                <div class="stat-label">BUILT AREA</div>
+                                <div class="stat-value" id="area">0</div>
+                                <div class="stat-label">m²</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-label">FLOORS</div>
+                                <div class="stat-value" id="floors">0</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-label">CONCRETE</div>
+                                <div class="stat-value" id="concrete">0</div>
+                                <div class="stat-label">m³</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-label">COST</div>
+                                <div class="stat-value" id="cost">$0</div>
+                            </div>
+                        </div>
+
+                        <h3>📋 Project Details</h3>
+                        <table id="detailsTable"></table>
+
+                        <h3 style="margin-top: 20px;">💰 Cost Breakdown</h3>
+                        <table id="costTable"></table>
+
+                        <div class="action-btns">
+                            <button class="btn btn-secondary" id="drawBtn">
+                                <i class="fas fa-image"></i> Drawings
+                            </button>
+                            <button class="btn btn-success" id="jsonBtn">
+                                <i class="fas fa-download"></i> JSON
+                            </button>
+                            <button class="btn" id="pdfBtn">
+                                <i class="fas fa-file-pdf"></i> PDF
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        var data = null;
+
+        document.getElementById('generateBtn').addEventListener('click', function() {
+            console.log('BUTTON CLICKED!');
+            
+            document.getElementById('loading').classList.add('show');
+
+            var plotL = parseFloat(document.getElementById('plotLength').value);
+            var plotW = parseFloat(document.getElementById('plotWidth').value);
+            var floors = parseInt(document.getElementById('numFloors').value);
+            var far = parseFloat(document.getElementById('far').value);
+            
+            var plotArea = plotL * plotW;
+            var builtArea = plotArea * far;
+            var height = floors * 3.5;
+            var conc = ((builtArea * 0.175 * 1.35) * 1.05).toFixed(2);
+            var steel = ((builtArea * 0.175 * 1.35) * 0.015 * 7850 / 1000).toFixed(2);
+            var concCost = (conc * 175).toFixed(0);
+            var steelCost = (steel * 1350).toFixed(0);
+            var total = (parseFloat(concCost) + parseFloat(steelCost)).toFixed(0);
+
+            data = { plot: plotArea, built: builtArea, floors: floors, concrete: conc, steel: steel, cost: total };
+
+            document.getElementById('area').textContent = builtArea.toFixed(0);
+            document.getElementById('floors').textContent = floors;
+            document.getElementById('concrete').textContent = conc;
+            document.getElementById('cost').textContent = '$' + parseInt(total).toLocaleString();
+
+            document.getElementById('detailsTable').innerHTML = 
+                '<tr><td><strong>Plot Area</strong></td><td>' + plotArea.toFixed(2) + ' m²</td></tr>' +
+                '<tr><td><strong>Built Area</strong></td><td>' + builtArea.toFixed(2) + ' m²</td></tr>' +
+                '<tr><td><strong>Floors</strong></td><td>' + floors + '</td></tr>' +
+                '<tr><td><strong>Height</strong></td><td>' + height.toFixed(1) + ' m</td></tr>' +
+                '<tr><td><strong>System</strong></td><td>RC Frame</td></tr>';
+
+            document.getElementById('costTable').innerHTML = 
+                '<tr><td>Concrete</td><td>' + conc + ' m³</td><td>$' + parseInt(concCost).toLocaleString() + '</td></tr>' +
+                '<tr><td>Steel</td><td>' + steel + ' tonnes</td><td>$' + parseInt(steelCost).toLocaleString() + '</td></tr>' +
+                '<tr style="background:#d4f1f4"><td><strong>TOTAL</strong></td><td></td><td><strong>$' + parseInt(total).toLocaleString() + '</strong></td></tr>';
+
+            setTimeout(function() {
+                document.getElementById('loading').classList.remove('show');
+                document.getElementById('results').classList.remove('hide');
+                document.getElementById('results').scrollIntoView({ behavior: 'smooth' });
+            }, 1500);
+        });
+
+        document.getElementById('drawBtn').addEventListener('click', function() {
+            if (!data) { alert('Generate design first!'); return; }
+            var w = window.open('', 'Drawings', 'width=1400,height=900');
+            w.document.write('<html><head><title>Drawings</title></head><body style="padding:20px;background:#f5f5f5"><h1 style="text-align:center;color:#00C9A7">Architectural Drawings</h1><div style="display:grid;grid-template-columns:repeat(2,1fr);gap:20px;max-width:1300px;margin:20px auto">');
+            for (var i = 0; i < 6; i++) {
+                w.document.write('<div style="background:white;padding:20px;border-radius:8px"><h3>Drawing ' + (i+1) + '</h3><canvas id="c' + i + '" width="600" height="400" style="width:100%;border:1px solid #ddd"></canvas></div>');
+            }
+            w.document.write('</div><script>');
+            for (var j = 0; j < 6; j++) {
+                w.document.write('var ctx' + j + '=document.getElementById("c' + j + '").getContext("2d");');
+                w.document.write('ctx' + j + '.fillStyle="#f0f0f0";ctx' + j + '.fillRect(0,0,600,400);');
+                w.document.write('ctx' + j + '.fillStyle="#00C9A7";ctx' + j + '.font="bold 24px Arial";ctx' + j + '.fillText("VIEW ' + (j+1) + '",20,40);');
+                w.document.write('ctx' + j + '.fillStyle="#667eea";ctx' + j + '.fillRect(100,100,400,200);');
+                w.document.write('ctx' + j + '.strokeStyle="#000";ctx' + j + '.lineWidth=2;ctx' + j + '.strokeRect(100,100,400,200);');
+                w.document.write('ctx' + j + '.fillStyle="#fff";ctx' + j + '.font="20px Arial";ctx' + j + '.fillText("' + data.floors + ' FLOORS",250,210);');
+            }
+            w.document.write('</script></body></html>');
+            w.document.close();
+        });
+
+        document.getElementById('jsonBtn').addEventListener('click', function() {
+            if (!data) { alert('Generate design first!'); return; }
+            var str = JSON.stringify(data, null, 2);
+            var blob = new Blob([str], {type: 'application/json'});
+            var url = URL.createObjectURL(blob);
+            var a = document.createElement('a');
+            a.href = url;
+            a.download = 'design.json';
+            a.click();
+        });
+
+        document.getElementById('pdfBtn').addEventListener('click', function() {
+            alert('PDF export coming soon!');
+        });
+
+        console.log('Page loaded successfully!');
+    </script>
+</body>
+</html>

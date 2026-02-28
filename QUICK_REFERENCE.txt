@@ -1,0 +1,111 @@
+╔════════════════════════════════════════════════════════════════════════════╗
+║                    📋 STRUCTURED3D QUICK REFERENCE                         ║
+╚════════════════════════════════════════════════════════════════════════════╝
+
+🌐 LAUNCH ENHANCED VIEWER
+  start enhanced_viewer.html
+
+📊 AVAILABLE SCENES
+  • Scene 00000 - Living Room (5×4×2.5m) - 3 objects
+  • Scene 00001 - Bedroom (4×4.5×2.8m) - 4 objects  
+  • Scene 00002 - Kitchen (5×3.5×2.6m) - 4 objects
+  • Scene 00003 - Bathroom (3×2.5×2.4m) - 3 objects
+
+⌨️ KEYBOARD SHORTCUTS (in viewer)
+  F - Fullscreen
+  Z - Zoom
+  C - Comparison mode
+  T - Toggle dark/light theme
+  Escape - Close fullscreen
+
+🎨 VISUALIZATION TYPES
+  1. Semantic Floorplan - Color-coded layout
+  2. Top View - Bird's eye perspective
+  3. Graph Representation - Connectivity
+  4. Multi-View Orthographic - Multiple angles
+  5. Paper Style - Research format
+  6. Measurement Overlay - With dimensions
+
+📥 EXPORT 3D MODELS
+  python export_3d_models.py --scene 0 --format all
+  python export_3d_models.py --scene 1 --format obj
+  python export_3d_models.py --scene 2 --format stl
+  python export_3d_models.py --scene 3 --format gltf
+
+  Formats: OBJ (Blender), STL (3D print), glTF (web/games)
+
+🚀 INTERACTIVE 3D VIEWER
+  python visualize_3d.py --path dummy_dataset --scene 0 --type wireframe
+  python visualize_3d.py --path dummy_dataset --scene 1 --type wireframe
+  
+  Controls:
+    • Left-click + drag = Rotate
+    • Scroll wheel = Zoom
+    • Right-click + drag = Pan
+    • Q = Close
+
+📏 GENERATE MEASUREMENTS
+  python add_measurement_overlays.py
+  
+  Creates: floorplan_measurements.png in each scene folder
+
+🏠 GENERATE NEW SCENES
+  python generate_multiple_scenes.py
+  
+  Creates: bedroom, kitchen, bathroom with furniture
+
+📂 FILE LOCATIONS
+  Enhanced Viewer: enhanced_viewer.html
+  Scene Data: dummy_dataset/scene_XXXXX/
+  3D Exports: exports/scene_XXXXX/
+  Documentation: ENHANCEMENTS.md, QUICKSTART.md, HOW_IT_WORKS.md
+
+🎯 FEATURES
+  ✅ Dark mode toggle
+  ✅ Image zoom & fullscreen
+  ✅ Side-by-side comparison
+  ✅ Real-time statistics
+  ✅ Cost estimation
+  ✅ Measurement overlays
+  ✅ 3D model export (OBJ/STL/glTF)
+  ✅ Mobile responsive
+  ✅ Download/export tools
+  ✅ Multiple room types
+
+💰 COST BREAKDOWN (Per Scene)
+  Flooring: $20/m²
+  Paint: $5/m² (wall area)
+  Furniture: $600/item
+  
+  Living Room: $2,350  |  Kitchen: $2,925
+  Bedroom: $2,949      |  Bathroom: $2,049
+
+🔧 TROUBLESHOOTING
+  If images don't load:
+    1. Refresh browser (F5 or Ctrl+R)
+    2. Check file paths are correct
+    3. Ensure you're in Structured3D/ directory
+  
+  If 3D viewer doesn't work:
+    1. Check open3d installed: pip list | findstr open3d
+    2. Run from correct directory
+    3. Verify scene folder exists
+
+📱 MOBILE ACCESS
+  Enhanced viewer is mobile-optimized!
+  Simply open enhanced_viewer.html on your phone/tablet
+
+🌐 BROWSER SUPPORT
+  ✅ Chrome/Edge (Recommended)
+  ✅ Firefox
+  ✅ Safari
+  ✅ Mobile browsers
+
+═══════════════════════════════════════════════════════════════════════════
+
+For detailed documentation, see:
+  • ENHANCEMENTS.md - Complete feature guide
+  • QUICKSTART.md - Getting started
+  • HOW_IT_WORKS.md - Technical details
+  
+═══════════════════════════════════════════════════════════════════════════

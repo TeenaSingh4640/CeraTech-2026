@@ -1,0 +1,1371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Structural Design Tool</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        header {
+            background: #2c3e50;
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2rem;
+            margin-bottom: 5px;
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: 400px 1fr;
+            min-height: 700px;
+        }
+
+        .sidebar {
+            background: #f8f9fa;
+            padding: 25px;
+            border-right: 2px solid #ddd;
+            overflow-y: auto;
+            max-height: 800px;
+        }
+
+        .output {
+            padding: 30px;
+            overflow-y: auto;
+            max-height: 800px;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #2c3e50;
+            font-size: 0.9rem;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .btn {
+            width: 100%;
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 5px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: background 0.3s;
+        }
+
+        .btn:hover {
+            background: #5568d3;
+        }
+
+        .btn:active {
+            transform: scale(0.98);
+        }
+
+        .btn-secondary {
+            background: #27ae60;
+        }
+
+        .btn-secondary:hover {
+            background: #229954;
+        }
+
+        .btn-tertiary {
+            background: #e67e22;
+        }
+
+        .btn-tertiary:hover {
+            background: #d35400;
+        }
+
+        .section {
+            background: #f8f9fa;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+
+        .section h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+
+        table th, table td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        table th {
+            background: #2c3e50;
+            color: white;
+        }
+
+        .highlight {
+            background: #fff3cd;
+            padding: 3px 8px;
+            border-radius: 3px;
+            font-weight: bold;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 50px;
+            color: #7f8c8d;
+        }
+
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .success-box {
+            background: #d4edda;
+            border-left: 4px solid #28a745;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+
+        @media (max-width: 1024px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🏗️ AI Structural Design Tool</h1>
+            <p>Professional Building Design in Seconds</p>
+        </header>
+
+        <div class="main-content">
+            <div class="sidebar">
+                <h2 style="margin-bottom: 20px; color: #2c3e50;">Project Details</h2>
+                
+                <div class="form-group">
+                    <label>📏 Plot Dimensions (meters)</label>
+                    <div class="form-row">
+                        <input type="number" id="plotLength" value="50" min="10" max="200">
+                        <input type="number" id="plotWidth" value="30" min="10" max="200">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>📍 Location</label>
+                    <input type="text" id="location" value="Mumbai">
+                </div>
+
+                <div class="form-group">
+                    <label>🌤️ Climate Zone</label>
+                    <select id="climate">
+                        <option value="Tropical">Tropical</option>
+                        <option value="Arid">Arid (Desert)</option>
+                        <option value="Temperate">Temperate</option>
+                        <option value="Cold">Cold</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>🏢 Building Type</label>
+                    <select id="buildingType">
+                        <option value="Residential">Residential</option>
+                        <option value="Commercial">Commercial</option>
+                        <option value="Institutional">Institutional</option>
+                        <option value="Industrial">Industrial</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>🔢 Number of Floors</label>
+                    <input type="number" id="numFloors" value="10" min="1" max="50">
+                </div>
+
+                <div class="form-group">
+                    <label>📊 FAR (Floor Area Ratio)</label>
+                    <input type="number" id="far" value="2.5" min="0.5" max="10" step="0.1">
+                </div>
+
+                <div class="form-group">
+                    <label>🌍 Soil Type</label>
+                    <select id="soilType">
+                        <option value="Rock">Rock (Hard)</option>
+                        <option value="Sand">Sand (Medium)</option>
+                        <option value="Clay">Clay (Soft)</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>🌋 Seismic Zone</label>
+                    <select id="seismicZone">
+                        <option value="I">Zone I (Lowest)</option>
+                        <option value="II">Zone II (Low)</option>
+                        <option value="III">Zone III (Moderate)</option>
+                        <option value="IV">Zone IV (High)</option>
+                        <option value="V">Zone V (Highest)</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>🎨 Architectural Style</label>
+                    <select id="archStyle">
+                        <option value="Modern">Modern</option>
+                        <option value="Contemporary">Contemporary</option>
+                        <option value="Brutalist">Brutalist</option>
+                        <option value="Glass">Glass/High-tech</option>
+                    </select>
+                </div>
+
+                <button class="btn" onclick="generateDesign()">🚀 Generate Design</button>
+            </div>
+
+            <div class="output" id="output">
+                <div class="loading">
+                    <h2>👈 Fill the form and click Generate Design</h2>
+                    <p style="margin-top: 10px;">Complete structural design will be generated instantly</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let designData = null;
+
+        function generateDesign() {
+            const outputDiv = document.getElementById('output');
+            
+            // Show loading
+            outputDiv.innerHTML = `
+                <div class="loading">
+                    <div class="spinner"></div>
+                    <h2>Generating comprehensive structural design...</h2>
+                </div>
+            `;
+
+            // Collect form data
+            const data = {
+                plot_length: parseFloat(document.getElementById('plotLength').value),
+                plot_width: parseFloat(document.getElementById('plotWidth').value),
+                location: document.getElementById('location').value,
+                climate_zone: document.getElementById('climate').value,
+                building_type: document.getElementById('buildingType').value,
+                num_floors: parseInt(document.getElementById('numFloors').value),
+                far_allowed: parseFloat(document.getElementById('far').value),
+                soil_type: document.getElementById('soilType').value,
+                seismic_zone: document.getElementById('seismicZone').value,
+                architectural_style: document.getElementById('archStyle').value
+            };
+
+            designData = data;
+
+            // Generate after short delay
+            setTimeout(() => {
+                showResults(data);
+            }, 1000);
+        }
+
+        function showResults(data) {
+            const plotArea = data.plot_length * data.plot_width;
+            const builtArea = plotArea * data.far_allowed;
+            const baySize = data.building_type === 'Residential' ? 4.5 : 6.0;
+            const buildingHeight = data.num_floors * 3.5;
+            const concreteVolume = ((builtArea * 0.175 * 1.35) * 1.05).toFixed(2);
+            const steelWeight = ((builtArea * 0.175 * 1.35) * 0.015 * 7850 / 1000).toFixed(2);
+            const structuralCost = ((((builtArea * 0.175 * 1.35) * 1.05) * 175) + (((builtArea * 0.175 * 1.35) * 0.015 * 7850) * 1.35)).toFixed(0);
+
+            const outputDiv = document.getElementById('output');
+            outputDiv.innerHTML = `
+                <h2 style="color: #28a745; margin-bottom: 25px;">✅ Design Generated Successfully</h2>
+
+                <div class="section">
+                    <h3>📊 Project Overview</h3>
+                    <table>
+                        <tr><th>Parameter</th><th>Value</th></tr>
+                        <tr><td>Project ID</td><td>SD_${Date.now()}</td></tr>
+                        <tr><td>Location</td><td>${data.location} (${data.climate_zone})</td></tr>
+                        <tr><td>Building Type</td><td>${data.building_type}</td></tr>
+                        <tr><td>Plot Area</td><td><span class="highlight">${plotArea.toFixed(2)} m²</span></td></tr>
+                        <tr><td>Total Built Area</td><td><span class="highlight">${builtArea.toFixed(2)} m²</span></td></tr>
+                        <tr><td>Number of Floors</td><td>${data.num_floors} floors (≈${buildingHeight.toFixed(1)}m)</td></tr>
+                        <tr><td>Structural Bay</td><td>${baySize}m × ${baySize}m</td></tr>
+                        <tr><td>Style</td><td>${data.architectural_style}</td></tr>
+                    </table>
+                </div>
+
+                <div class="section">
+                    <h3>🏗️ Structural System</h3>
+                    <p><strong>Primary System:</strong> ${data.num_floors <= 7 ? 'RC Moment-Resisting Frame' : 'RC Frame with Shear Walls'}</p>
+                    <p><strong>Concrete Grade:</strong> M${data.num_floors <= 7 ? '25-M30' : '30-M40'}</p>
+                    <p><strong>Steel Grade:</strong> Fe ${data.num_floors <= 7 ? '415/500' : '500/550'}</p>
+                    <p><strong>Column Grid:</strong> ${baySize}m × ${baySize}m spacing</p>
+                    <p><strong>Column Sizes:</strong></p>
+                    <ul style="margin-left: 20px; margin-top: 8px;">
+                        <li>Lower floors: ${data.num_floors <= 7 ? '300×450mm' : '450×600mm'}</li>
+                        <li>Upper floors: ${data.num_floors <= 7 ? '300×300mm' : '300×450mm'}</li>
+                    </ul>
+                    <p style="margin-top: 10px;"><strong>Beam Sizes:</strong> 300×450mm (primary), 230×300mm (secondary)</p>
+                    <p><strong>Slab Thickness:</strong> ${data.num_floors <= 7 ? '125mm' : '150mm'}</p>
+                </div>
+
+                <div class="section">
+                    <h3>🏛️ Foundation Design</h3>
+                    <p><strong>Foundation Type:</strong> ${data.soil_type === 'Rock' || (data.num_floors <= 7 && data.soil_type === 'Sand') ? 'Isolated Footings with Tie Beams' : 'Raft Foundation (Mat)'}</p>
+                    <p><strong>Soil Type:</strong> ${data.soil_type}</p>
+                    <p><strong>Bearing Capacity:</strong> ${data.soil_type === 'Rock' ? '500' : data.soil_type === 'Sand' ? '200' : '100'} kN/m²</p>
+                    <p><strong>Foundation Depth:</strong> ${data.num_floors <= 7 ? '2.5-3.5m' : '4.0-6.0m'} below ground level</p>
+                    ${data.soil_type === 'Clay' ? '<p style="color: #e67e22; margin-top: 8px;"><strong>⚠️ Note:</strong> Soil improvement may be required for soft clay</p>' : ''}
+                </div>
+
+                <div class="section">
+                    <h3>📏 Material Quantities</h3>
+                    <table>
+                        <tr><th>Material</th><th>Quantity</th><th>Unit Cost</th><th>Total Cost</th></tr>
+                        <tr>
+                            <td>Concrete</td>
+                            <td><span class="highlight">${concreteVolume} m³</span></td>
+                            <td>$175/m³</td>
+                            <td>$${(concreteVolume * 175).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
+                        </tr>
+                        <tr>
+                            <td>Steel Reinforcement</td>
+                            <td><span class="highlight">${steelWeight} tonnes</span></td>
+                            <td>$1,350/tonne</td>
+                            <td>$${(steelWeight * 1350).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
+                        </tr>
+                        <tr style="background: #d4edda; font-weight: bold;">
+                            <td colspan="3">TOTAL STRUCTURAL COST</td>
+                            <td>$${structuralCost.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
+                        </tr>
+                    </table>
+                    <p style="margin-top: 10px; font-size: 0.9rem; color: #7f8c8d;"><em>Note: Prices are indicative. Includes 5% wastage for concrete.</em></p>
+                </div>
+
+                <div class="section">
+                    <h3>🌍 Climate Design Strategy - ${data.climate_zone}</h3>
+                    ${getClimateStrategy(data.climate_zone)}
+                </div>
+
+                <div class="section">
+                    <h3>🛡️ Seismic Design - Zone ${data.seismic_zone}</h3>
+                    ${getSeismicStrategy(data.seismic_zone, data.num_floors)}
+                </div>
+
+                <div class="success-box">
+                    <h3 style="color: #155724;">✅ Design Complete</h3>
+                    <p style="margin-top: 8px;"><strong>Estimated Construction Time:</strong> ${Math.ceil(data.num_floors * 0.8 + 6)} months</p>
+                    <p style="margin-top: 8px; font-size: 0.9rem; color: #856404;"><em>⚠️ This is a conceptual design. Detailed structural engineering and local authority approval required before construction.</em></p>
+                </div>
+
+                <button class="btn btn-secondary" onclick="downloadJSON()">💾 Download JSON</button>
+                <button class="btn btn-tertiary" onclick="showAllDesignViews()">🎨 Show All Design Views</button>
+                <button class="btn btn-tertiary" onclick="generateImages()">💾 Download Images as Files</button>
+            `;
+        }
+
+        function getClimateStrategy(zone) {
+            const strategies = {
+                'Tropical': `
+                    <ul style="margin-left: 20px; line-height: 1.8;">
+                        <li><strong>Orientation:</strong> North-South axis to minimize east-west sun exposure</li>
+                        <li><strong>Shading:</strong> Deep overhangs (1.5-2m), vertical fins on east/west</li>
+                        <li><strong>Ventilation:</strong> Cross ventilation with operable windows, stack effect</li>
+                        <li><strong>Glazing:</strong> 30-40% WWR, double glazed with low-E coating</li>
+                        <li><strong>Roof:</strong> Light colored with reflective coating, high thermal mass</li>
+                    </ul>`,
+                'Arid': `
+                    <ul style="margin-left: 20px; line-height: 1.8;">
+                        <li><strong>Form:</strong> Compact building envelope to minimize surface area</li>
+                        <li><strong>Orientation:</strong> Minimal east-west glazing</li>
+                        <li><strong>Shading:</strong> Deep recessed windows, minimal glazing (20-30% WWR)</li>
+                        <li><strong>Insulation:</strong> R-4.0 walls, R-6.0 roof for thermal resistance</li>
+                        <li><strong>Ventilation:</strong> Night cooling with thermal mass storage</li>
+                    </ul>`,
+                'Temperate': `
+                    <ul style="margin-left: 20px; line-height: 1.8;">
+                        <li><strong>Orientation:</strong> South facing for passive solar gain</li>
+                        <li><strong>Glazing:</strong> 40-50% WWR with double glazing</li>
+                        <li><strong>Shading:</strong> Adjustable external shading for seasonal control</li>
+                        <li><strong>Insulation:</strong> R-3.0 walls, R-5.0 roof</li>
+                        <li><strong>Ventilation:</strong> Mixed mode - mechanical + natural</li>
+                    </ul>`,
+                'Cold': `
+                    <ul style="margin-left: 20px; line-height: 1.8;">
+                        <li><strong>Form:</strong> Compact envelope for maximum heat retention</li>
+                        <li><strong>Glazing:</strong> Triple glazed, argon filled, 25-35% WWR</li>
+                        <li><strong>Insulation:</strong> R-6.0 walls, R-8.0 roof, continuous insulation</li>
+                        <li><strong>Entrance:</strong> Vestibules at all entries to prevent heat loss</li>
+                        <li><strong>HVAC:</strong> Heat recovery ventilation system required</li>
+                    </ul>`
+            };
+            return strategies[zone] || strategies['Temperate'];
+        }
+
+        function getSeismicStrategy(zone, floors) {
+            const strategies = {
+                'I': '<p>Low seismic risk. Standard ductile detailing as per code.</p>',
+                'II': '<p>Low seismic risk. Standard ductile detailing with earthquake-resistant design.</p>',
+                'III': '<p>Moderate seismic risk. Special moment-resisting frames with ductile detailing. Soft story checks required.</p>',
+                'IV': '<p>High seismic risk. Special moment-resisting frames or dual system (frame + shear walls). Enhanced ductile detailing. Base isolation recommended for >15 floors.</p>',
+                'V': '<p><strong style="color: #dc3545;">Highest seismic risk.</strong> Dual system mandatory (frame + shear walls). Special ductile detailing. Base isolation strongly recommended for >10 floors. Seismic joints required.</p>'
+            };
+            return strategies[zone] || strategies['III'];
+        }
+
+        function downloadJSON() {
+            if (!designData) {
+                alert('No design data available!');
+                return;
+            }
+
+            const timestamp = Date.now();
+            const fileName = `design_data_${timestamp}.json`;
+            
+            const exportData = {
+                ...designData,
+                project_id: `SD_${timestamp}`,
+                generated_date: new Date().toISOString(),
+                plot_area: designData.plot_length * designData.plot_width,
+                built_area: designData.plot_length * designData.plot_width * designData.far_allowed
+            };
+
+            const dataStr = JSON.stringify(exportData, null, 2);
+            const blob = new Blob([dataStr], {type: 'application/json'});
+            const url = URL.createObjectURL(blob);
+            
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = fileName;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+
+            alert('✅ JSON file downloaded: ' + fileName);
+        }
+
+        function generateImages() {
+            if (!designData) {
+                alert('Please generate a design first!');
+                return;
+            }
+
+            // Save JSON first
+            const timestamp = Date.now();
+            const fileName = `design_data_${timestamp}.json`;
+            
+            const exportData = {
+                ...designData,
+                project_id: `SD_${timestamp}`,
+                generated_date: new Date().toISOString(),
+                plot_area: designData.plot_length * designData.plot_width,
+                built_area: designData.plot_length * designData.plot_width * designData.far_allowed
+            };
+
+            const dataStr = JSON.stringify(exportData, null, 2);
+            const blob = new Blob([dataStr], {type: 'application/json'});
+            const url = URL.createObjectURL(blob);
+            
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = fileName;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+
+            // Show instructions
+            const win = window.open('', '_blank', 'width=900,height=700');
+            win.document.write(`
+                <!DOCTYPE html>
+                <html>
+                <head>
+                    <title>Generate Images</title>
+                    <style>
+                        body {
+                            font-family: Arial, sans-serif;
+                            padding: 40px;
+                            max-width: 800px;
+                            margin: 0 auto;
+                            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                            color: white;
+                        }
+                        .box {
+                            background: white;
+                            color: #2c3e50;
+                            padding: 30px;
+                            border-radius: 10px;
+                            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+                        }
+                        h1 { color: #e67e22; }
+                        .command {
+                            background: #2c3e50;
+                            color: #2ecc71;
+                            padding: 15px;
+                            border-radius: 5px;
+                            font-family: 'Courier New', monospace;
+                            margin: 15px 0;
+                            overflow-x: auto;
+                            font-size: 0.95rem;
+                        }
+                        .step {
+                            background: #ecf0f1;
+                            padding: 15px;
+                            margin: 15px 0;
+                            border-radius: 5px;
+                            border-left: 4px solid #3498db;
+                        }
+                        .btn {
+                            background: #e67e22;
+                            color: white;
+                            border: none;
+                            padding: 12px 24px;
+                            border-radius: 5px;
+                            cursor: pointer;
+                            font-size: 1rem;
+                            margin: 10px 5px;
+                            font-weight: bold;
+                        }
+                        .btn:hover { background: #d35400; }
+                        ul { margin: 10px 0 10px 25px; }
+                        li { margin: 8px 0; }
+                        .note {
+                            background: #fff3cd;
+                            color: #856404;
+                            padding: 15px;
+                            border-radius: 5px;
+                            border-left: 4px solid #ffc107;
+                            margin: 15px 0;
+                        }
+                    </style>
+                </head>
+                <body>
+                    <div class="box">
+                        <h1>🏗️ Generate Architectural Images</h1>
+                        <p style="font-size: 1.1rem; margin: 10px 0;"><strong>JSON saved:</strong> ${fileName}</p>
+                        
+                        <div class="note">
+                            <strong>✅ Step 1 Complete:</strong> Design data has been downloaded!
+                        </div>
+
+                        <h2 style="color: #2c3e50; margin-top: 25px;">📋 Next Steps:</h2>
+                        
+                        <div class="step">
+                            <strong>Step 2:</strong> Open PowerShell (or use VS Code terminal)
+                        </div>
+                        
+                        <div class="step">
+                            <strong>Step 3:</strong> Navigate to the project folder
+                            <div class="command">cd C:\\Users\\lpste\\Desktop\\ceratech\\Structured3D</div>
+                        </div>
+                        
+                        <div class="step">
+                            <strong>Step 4:</strong> Run the image generator
+                            <div class="command">python generate_architectural_images.py "${fileName}"</div>
+                        </div>
+                        
+                        <div class="note" style="background: #d4edda; color: #155724; border-left-color: #28a745;">
+                            <strong>⚡ Quick Option - Copy this single command:</strong>
+                            <div class="command">cd C:\\Users\\lpste\\Desktop\\ceratech\\Structured3D; & ../.venv/Scripts/Activate.ps1; python generate_architectural_images.py "${fileName}"</div>
+                            <button class="btn" onclick="navigator.clipboard.writeText('cd C:\\\\Users\\\\lpste\\\\Desktop\\\\ceratech\\\\Structured3D; & ../.venv/Scripts/Activate.ps1; python generate_architectural_images.py \\'${fileName}\\'').then(() => alert('✅ Copied to clipboard!'))">
+                                📋 Copy Command
+                            </button>
+                        </div>
+
+                        <h2 style="color: #2c3e50; margin-top: 25px;">🎨 What You'll Get:</h2>
+                        <ul>
+                            <li>📐 <strong>Site Plan</strong> - Plot layout with building footprint</li>
+                            <li>🏠 <strong>Floor Plans</strong> - Ground and typical floor layouts</li>
+                            <li>🏢 <strong>Elevation View</strong> - Front facade with dimensions</li>
+                            <li>📦 <strong>3D Isometric</strong> - Three-dimensional view</li>
+                        </ul>
+
+                        <p style="margin-top: 20px; font-size: 1.1rem;"><strong>📁 Output:</strong> All images saved in <code style="background: #ecf0f1; padding: 3px 8px; border-radius: 3px; color: #2c3e50;">exports/design_*</code> folder (300 DPI)</p>
+                        
+                        <button class="btn" onclick="window.close()" style="background: #95a5a6; margin-top: 20px;">Close</button>
+                    </div>
+                </body>
+                </html>
+            `);
+            win.document.close();
+        }
+
+        function showAllDesignViews() {
+            if (!designData) {
+                alert('Please generate a design first!');
+                return;
+            }
+
+            // Open new window with all views
+            const viewWindow = window.open('', '_blank', 'width=1400,height=900');
+            viewWindow.document.write(`
+                <!DOCTYPE html>
+                <html>
+                <head>
+                    <title>Architectural Design Views</title>
+                    <style>
+                        body {
+                            font-family: Arial, sans-serif;
+                            margin: 0;
+                            padding: 20px;
+                            background: #f5f5f5;
+                        }
+                        h1 {
+                            text-align: center;
+                            color: #2c3e50;
+                            margin-bottom: 10px;
+                        }
+                        .subtitle {
+                            text-align: center;
+                            color: #7f8c8d;
+                            margin-bottom: 30px;
+                        }
+                        .view-grid {
+                            display: grid;
+                            grid-template-columns: repeat(auto-fit, minmax(600px, 1fr));
+                            gap: 25px;
+                            max-width: 1400px;
+                            margin: 0 auto;
+                        }
+                        .view-card {
+                            background: white;
+                            border-radius: 10px;
+                            padding: 20px;
+                            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+                        }
+                        .view-card h2 {
+                            color: #667eea;
+                            margin-bottom: 15px;
+                            font-size: 1.3rem;
+                        }
+                        canvas {
+                            width: 100%;
+                            border: 1px solid #ddd;
+                            border-radius: 5px;
+                            background: white;
+                        }
+                        .btn-group {
+                            text-align: center;
+                            margin: 30px 0;
+                        }
+                        .btn {
+                            background: #667eea;
+                            color: white;
+                            border: none;
+                            padding: 12px 24px;
+                            border-radius: 5px;
+                            cursor: pointer;
+                            font-size: 1rem;
+                            margin: 5px;
+                            font-weight: bold;
+                        }
+                        .btn:hover { background: #5568d3; }
+                        .download-btn { background: #27ae60; }
+                        .download-btn:hover { background: #229954; }
+                    </style>
+                </head>
+                <body>
+                    <h1>🏗️ Architectural Design Views</h1>
+                    <p class="subtitle">Project: ${designData.building_type} Building in ${designData.location}</p>
+                    
+                    <div class="btn-group">
+                        <button class="btn download-btn" onclick="downloadAllImages()">💾 Download All Images</button>
+                        <button class="btn" onclick="window.print()">🖨️ Print All Views</button>
+                        <button class="btn" onclick="window.close()" style="background: #95a5a6;">✕ Close</button>
+                    </div>
+
+                    <div class="view-grid">
+                        <div class="view-card">
+                            <h2>📐 Site Plan</h2>
+                            <canvas id="sitePlan" width="800" height="600"></canvas>
+                        </div>
+                        
+                        <div class="view-card">
+                            <h2>🏠 Ground Floor Plan</h2>
+                            <canvas id="floorPlan" width="800" height="600"></canvas>
+                        </div>
+                        
+                        <div class="view-card">
+                            <h2>🏢 Front Elevation</h2>
+                            <canvas id="elevation" width="800" height="600"></canvas>
+                        </div>
+                        
+                        <div class="view-card">
+                            <h2>📦 3D Isometric View</h2>
+                            <canvas id="isometric" width="800" height="600"></canvas>
+                        </div>
+                        
+                        <div class="view-card">
+                            <h2>🏗️ Structural Grid</h2>
+                            <canvas id="structuralGrid" width="800" height="600"></canvas>
+                        </div>
+                        
+                        <div class="view-card">
+                            <h2>🎨 Rendered Perspective</h2>
+                            <canvas id="perspective" width="800" height="600"></canvas>
+                        </div>
+                    </div>
+
+                    <script>
+                        const data = ${JSON.stringify(designData)};
+                        
+                        // Draw Site Plan
+                        function drawSitePlan() {
+                            const canvas = document.getElementById('sitePlan');
+                            const ctx = canvas.getContext('2d');
+                            const w = canvas.width, h = canvas.height;
+                            
+                            ctx.fillStyle = '#e8f5e9';
+                            ctx.fillRect(0, 0, w, h);
+                            
+                            const scale = Math.min(w / (data.plot_length * 1.3), h / (data.plot_width * 1.3));
+                            const offsetX = (w - data.plot_length * scale) / 2;
+                            const offsetY = (h - data.plot_width * scale) / 2;
+                            
+                            // Plot boundary
+                            ctx.strokeStyle = '#e74c3c';
+                            ctx.lineWidth = 3;
+                            ctx.setLineDash([10, 5]);
+                            ctx.strokeRect(offsetX, offsetY, data.plot_length * scale, data.plot_width * scale);
+                            ctx.setLineDash([]);
+                            
+                            // Building footprint (80% of plot)
+                            const buildingL = data.plot_length * 0.8 * scale;
+                            const buildingW = data.plot_width * 0.8 * scale;
+                            const buildingX = offsetX + (data.plot_length * scale - buildingL) / 2;
+                            const buildingY = offsetY + (data.plot_width * scale - buildingW) / 2;
+                            
+                            ctx.fillStyle = '#95a5a6';
+                            ctx.fillRect(buildingX, buildingY, buildingL, buildingW);
+                            ctx.strokeStyle = '#2c3e50';
+                            ctx.lineWidth = 2;
+                            ctx.strokeRect(buildingX, buildingY, buildingL, buildingW);
+                            
+                            // Add trees
+                            ctx.fillStyle = '#27ae60';
+                            for (let i = 0; i < 12; i++) {
+                                const tx = offsetX + Math.random() * data.plot_length * scale;
+                                const ty = offsetY + Math.random() * data.plot_width * scale;
+                                if (tx < buildingX || tx > buildingX + buildingL || ty < buildingY || ty > buildingY + buildingW) {
+                                    ctx.beginPath();
+                                    ctx.arc(tx, ty, 8, 0, Math.PI * 2);
+                                    ctx.fill();
+                                }
+                            }
+                            
+                            // Labels
+                            ctx.fillStyle = '#2c3e50';
+                            ctx.font = 'bold 20px Arial';
+                            ctx.textAlign = 'center';
+                            ctx.fillText('BUILDING', buildingX + buildingL/2, buildingY + buildingW/2);
+                            
+                            ctx.font = '16px Arial';
+                            ctx.fillText(\`\${data.plot_length}m × \${data.plot_width}m\`, w/2, offsetY - 15);
+                            
+                            // North arrow
+                            const arrowX = w - 60, arrowY = 60;
+                            ctx.strokeStyle = '#e74c3c';
+                            ctx.lineWidth = 3;
+                            ctx.beginPath();
+                            ctx.moveTo(arrowX, arrowY + 20);
+                            ctx.lineTo(arrowX, arrowY - 20);
+                            ctx.lineTo(arrowX - 10, arrowY - 10);
+                            ctx.moveTo(arrowX, arrowY - 20);
+                            ctx.lineTo(arrowX + 10, arrowY - 10);
+                            ctx.stroke();
+                            ctx.fillStyle = '#e74c3c';
+                            ctx.font = 'bold 18px Arial';
+                            ctx.fillText('N', arrowX, arrowY - 30);
+                        }
+                        
+                        // Draw Floor Plan
+                        function drawFloorPlan() {
+                            const canvas = document.getElementById('floorPlan');
+                            const ctx = canvas.getContext('2d');
+                            const w = canvas.width, h = canvas.height;
+                            
+                            ctx.fillStyle = 'white';
+                            ctx.fillRect(0, 0, w, h);
+                            
+                            const buildingL = data.plot_length * 0.8;
+                            const buildingW = data.plot_width * 0.8;
+                            const scale = Math.min(w / (buildingL * 1.3), h / (buildingW * 1.3));
+                            const offsetX = (w - buildingL * scale) / 2;
+                            const offsetY = (h - buildingW * scale) / 2;
+                            const baySize = data.building_type === 'Residential' ? 4.5 : 6.0;
+                            
+                            // Building outline
+                            ctx.fillStyle = '#f8f9fa';
+                            ctx.fillRect(offsetX, offsetY, buildingL * scale, buildingW * scale);
+                            ctx.strokeStyle = '#2c3e50';
+                            ctx.lineWidth = 4;
+                            ctx.strokeRect(offsetX, offsetY, buildingL * scale, buildingW * scale);
+                            
+                            // Draw grid lines
+                            ctx.strokeStyle = '#3498db';
+                            ctx.lineWidth = 1;
+                            ctx.setLineDash([5, 5]);
+                            const numBaysX = Math.floor(buildingL / baySize);
+                            const numBaysY = Math.floor(buildingW / baySize);
+                            
+                            for (let i = 0; i <= numBaysX; i++) {
+                                const x = offsetX + (i * baySize * scale);
+                                ctx.beginPath();
+                                ctx.moveTo(x, offsetY);
+                                ctx.lineTo(x, offsetY + buildingW * scale);
+                                ctx.stroke();
+                            }
+                            
+                            for (let i = 0; i <= numBaysY; i++) {
+                                const y = offsetY + (i * baySize * scale);
+                                ctx.beginPath();
+                                ctx.moveTo(offsetX, y);
+                                ctx.lineTo(offsetX + buildingL * scale, y);
+                                ctx.stroke();
+                            }
+                            ctx.setLineDash([]);
+                            
+                            // Draw columns
+                            ctx.fillStyle = '#2c3e50';
+                            for (let i = 0; i <= numBaysX; i++) {
+                                for (let j = 0; j <= numBaysY; j++) {
+                                    const x = offsetX + (i * baySize * scale);
+                                    const y = offsetY + (j * baySize * scale);
+                                    ctx.fillRect(x - 4, y - 4, 8, 8);
+                                }
+                            }
+                            
+                            // Core area (center)
+                            const coreSize = Math.min(buildingL, buildingW) * 0.3 * scale;
+                            const coreX = offsetX + (buildingL * scale - coreSize) / 2;
+                            const coreY = offsetY + (buildingW * scale - coreSize) / 2;
+                            ctx.fillStyle = 'rgba(231, 76, 60, 0.5)';
+                            ctx.fillRect(coreX, coreY, coreSize, coreSize);
+                            ctx.strokeStyle = '#c0392b';
+                            ctx.lineWidth = 2;
+                            ctx.strokeRect(coreX, coreY, coreSize, coreSize);
+                            
+                            ctx.fillStyle = 'white';
+                            ctx.font = 'bold 16px Arial';
+                            ctx.textAlign = 'center';
+                            ctx.fillText('SERVICE', coreX + coreSize/2, coreY + coreSize/2 - 5);
+                            ctx.fillText('CORE', coreX + coreSize/2, coreY + coreSize/2 + 12);
+                            
+                            // Title
+                            ctx.fillStyle = '#2c3e50';
+                            ctx.font = 'bold 18px Arial';
+                            ctx.fillText('GROUND FLOOR PLAN', w/2, 30);
+                            ctx.font = '14px Arial';
+                            ctx.fillText(\`Grid: \${baySize}m × \${baySize}m\`, w/2, 55);
+                        }
+                        
+                        // Draw Elevation
+                        function drawElevation() {
+                            const canvas = document.getElementById('elevation');
+                            const ctx = canvas.getContext('2d');
+                            const w = canvas.width, h = canvas.height;
+                            
+                            ctx.fillStyle = '#87CEEB';
+                            ctx.fillRect(0, 0, w, h);
+                            
+                            const buildingL = data.plot_length * 0.8;
+                            const buildingH = data.num_floors * 3.5;
+                            const scale = Math.min((w * 0.7) / buildingL, (h * 0.6) / buildingH);
+                            const offsetX = (w - buildingL * scale) / 2;
+                            const offsetY = h * 0.7 - buildingH * scale;
+                            
+                            // Ground
+                            ctx.fillStyle = '#8B7355';
+                            ctx.fillRect(0, h * 0.7, w, h * 0.3);
+                            
+                            // Building mass
+                            ctx.fillStyle = '#ecf0f1';
+                            ctx.fillRect(offsetX, offsetY, buildingL * scale, buildingH * scale);
+                            ctx.strokeStyle = '#2c3e50';
+                            ctx.lineWidth = 3;
+                            ctx.strokeRect(offsetX, offsetY, buildingL * scale, buildingH * scale);
+                            
+                            // Floors
+                            const floorHeight = 3.5 * scale;
+                            for (let i = 0; i <= data.num_floors; i++) {
+                                const y = offsetY + (data.num_floors - i) * floorHeight;
+                                ctx.strokeStyle = '#34495e';
+                                ctx.lineWidth = 2;
+                                ctx.beginPath();
+                                ctx.moveTo(offsetX, y);
+                                ctx.lineTo(offsetX + buildingL * scale, y);
+                                ctx.stroke();
+                                
+                                if (i < data.num_floors) {
+                                    ctx.fillStyle = '#2c3e50';
+                                    ctx.font = '12px Arial';
+                                    ctx.textAlign = 'right';
+                                    ctx.fillText(\`FL \${i+1}\`, offsetX - 10, y + floorHeight/2);
+                                }
+                            }
+                            
+                            // Windows
+                            if (data.building_type === 'Residential') {
+                                ctx.fillStyle = 'rgba(52, 152, 219, 0.6)';
+                                for (let floor = 0; floor < data.num_floors; floor++) {
+                                    const y = offsetY + (data.num_floors - floor - 1) * floorHeight + floorHeight * 0.2;
+                                    const windowH = floorHeight * 0.6;
+                                    for (let i = 0; i < 8; i++) {
+                                        const x = offsetX + (i + 0.5) * buildingL * scale / 8;
+                                        ctx.fillRect(x, y, buildingL * scale / 12, windowH);
+                                    }
+                                }
+                            } else {
+                                ctx.fillStyle = 'rgba(92, 173, 226, 0.4)';
+                                for (let floor = 0; floor < data.num_floors; floor++) {
+                                    const y = offsetY + (data.num_floors - floor - 1) * floorHeight + floorHeight * 0.15;
+                                    ctx.fillRect(offsetX + 5, y, buildingL * scale - 10, floorHeight * 0.7);
+                                }
+                            }
+                            
+                            // Title
+                            ctx.fillStyle = '#2c3e50';
+                            ctx.font = 'bold 18px Arial';
+                            ctx.textAlign = 'center';
+                            ctx.fillText('FRONT ELEVATION', w/2, 30);
+                            ctx.font = '14px Arial';
+                            ctx.fillText(\`\${data.num_floors} Floors | Height: \${buildingH.toFixed(1)}m\`, w/2, 55);
+                        }
+                        
+                        // Draw Isometric View
+                        function drawIsometric() {
+                            const canvas = document.getElementById('isometric');
+                            const ctx = canvas.getContext('2d');
+                            const w = canvas.width, h = canvas.height;
+                            
+                            ctx.fillStyle = '#e3f2fd';
+                            ctx.fillRect(0, 0, w, h);
+                            
+                            const buildingL = data.plot_length * 0.8;
+                            const buildingW = data.plot_width * 0.8;
+                            const buildingH = data.num_floors * 3.5;
+                            
+                            const scale = Math.min(w / (buildingL * 2), h / (buildingH * 2));
+                            const centerX = w / 2;
+                            const centerY = h / 2;
+                            
+                            // Isometric projection helper
+                            function iso(x, y, z) {
+                                return {
+                                    x: centerX + (x - y) * Math.cos(Math.PI / 6) * scale,
+                                    y: centerY + (x + y) * Math.sin(Math.PI / 6) * scale - z * scale
+                                };
+                            }
+                            
+                            // Draw base
+                            ctx.fillStyle = '#27ae60';
+                            ctx.globalAlpha = 0.3;
+                            ctx.beginPath();
+                            const base1 = iso(-5, -5, 0);
+                            const base2 = iso(buildingL + 5, -5, 0);
+                            const base3 = iso(buildingL + 5, buildingW + 5, 0);
+                            const base4 = iso(-5, buildingW + 5, 0);
+                            ctx.moveTo(base1.x, base1.y);
+                            ctx.lineTo(base2.x, base2.y);
+                            ctx.lineTo(base3.x, base3.y);
+                            ctx.lineTo(base4.x, base4.y);
+                            ctx.closePath();
+                            ctx.fill();
+                            ctx.globalAlpha = 1;
+                            
+                            // Draw building
+                            // Front face
+                            ctx.fillStyle = '#bdc3c7';
+                            ctx.beginPath();
+                            const f1 = iso(0, 0, 0);
+                            const f2 = iso(buildingL, 0, 0);
+                            const f3 = iso(buildingL, 0, buildingH);
+                            const f4 = iso(0, 0, buildingH);
+                            ctx.moveTo(f1.x, f1.y);
+                            ctx.lineTo(f2.x, f2.y);
+                            ctx.lineTo(f3.x, f3.y);
+                            ctx.lineTo(f4.x, f4.y);
+                            ctx.closePath();
+                            ctx.fill();
+                            ctx.strokeStyle = '#2c3e50';
+                            ctx.lineWidth = 2;
+                            ctx.stroke();
+                            
+                            // Right face
+                            ctx.fillStyle = '#95a5a6';
+                            ctx.beginPath();
+                            const r1 = iso(buildingL, 0, 0);
+                            const r2 = iso(buildingL, buildingW, 0);
+                            const r3 = iso(buildingL, buildingW, buildingH);
+                            const r4 = iso(buildingL, 0, buildingH);
+                            ctx.moveTo(r1.x, r1.y);
+                            ctx.lineTo(r2.x, r2.y);
+                            ctx.lineTo(r3.x, r3.y);
+                            ctx.lineTo(r4.x, r4.y);
+                            ctx.closePath();
+                            ctx.fill();
+                            ctx.stroke();
+                            
+                            // Top face
+                            ctx.fillStyle = '#34495e';
+                            ctx.beginPath();
+                            const t1 = iso(0, 0, buildingH);
+                            const t2 = iso(buildingL, 0, buildingH);
+                            const t3 = iso(buildingL, buildingW, buildingH);
+                            const t4 = iso(0, buildingW, buildingH);
+                            ctx.moveTo(t1.x, t1.y);
+                            ctx.lineTo(t2.x, t2.y);
+                            ctx.lineTo(t3.x, t3.y);
+                            ctx.lineTo(t4.x, t4.y);
+                            ctx.closePath();
+                            ctx.fill();
+                            ctx.stroke();
+                            
+                            // Draw floors
+                            ctx.strokeStyle = '#3498db';
+                            ctx.lineWidth = 1;
+                            for (let i = 1; i < data.num_floors; i++) {
+                                const z = i * 3.5;
+                                ctx.beginPath();
+                                const fl1 = iso(0, 0, z);
+                                const fl2 = iso(buildingL, 0, z);
+                                ctx.moveTo(fl1.x, fl1.y);
+                                ctx.lineTo(fl2.x, fl2.y);
+                                ctx.stroke();
+                                
+                                ctx.beginPath();
+                                const fr1 = iso(buildingL, 0, z);
+                                const fr2 = iso(buildingL, buildingW, z);
+                                ctx.moveTo(fr1.x, fr1.y);
+                                ctx.lineTo(fr2.x, fr2.y);
+                                ctx.stroke();
+                            }
+                            
+                            // Title
+                            ctx.fillStyle = '#2c3e50';
+                            ctx.font = 'bold 18px Arial';
+                            ctx.textAlign = 'center';
+                            ctx.fillText('3D ISOMETRIC VIEW', w/2, 30);
+                        }
+                        
+                        // Draw Structural Grid
+                        function drawStructuralGrid() {
+                            const canvas = document.getElementById('structuralGrid');
+                            const ctx = canvas.getContext('2d');
+                            const w = canvas.width, h = canvas.height;
+                            
+                            ctx.fillStyle = 'white';
+                            ctx.fillRect(0, 0, w, h);
+                            
+                            const buildingL = data.plot_length * 0.8;
+                            const buildingW = data.plot_width * 0.8;
+                            const scale = Math.min(w / (buildingL * 1.3), h / (buildingW * 1.3));
+                            const offsetX = (w - buildingL * scale) / 2;
+                            const offsetY = (h - buildingW * scale) / 2;
+                            const baySize = data.building_type === 'Residential' ? 4.5 : 6.0;
+                            
+                            // Grid lines
+                            ctx.strokeStyle = '#3498db';
+                            ctx.lineWidth = 2;
+                            const numBaysX = Math.ceil(buildingL / baySize) + 1;
+                            const numBaysY = Math.ceil(buildingW / baySize) + 1;
+                            
+                            for (let i = 0; i < numBaysX; i++) {
+                                const x = offsetX + i * baySize * scale;
+                                ctx.beginPath();
+                                ctx.moveTo(x, offsetY);
+                                ctx.lineTo(x, offsetY + (numBaysY - 1) * baySize * scale);
+                                ctx.stroke();
+                                
+                                // Grid labels
+                                ctx.fillStyle = '#3498db';
+                                ctx.font = 'bold 16px Arial';
+                                ctx.textAlign = 'center';
+                                ctx.fillText(i + 1, x, offsetY - 10);
+                            }
+                            
+                            for (let i = 0; i < numBaysY; i++) {
+                                const y = offsetY + i * baySize * scale;
+                                ctx.beginPath();
+                                ctx.moveTo(offsetX, y);
+                                ctx.lineTo(offsetX + (numBaysX - 1) * baySize * scale, y);
+                                ctx.stroke();
+                                
+                                // Grid labels
+                                ctx.fillStyle = '#3498db';
+                                ctx.font = 'bold 16px Arial';
+                                ctx.textAlign = 'right';
+                                ctx.fillText(String.fromCharCode(65 + i), offsetX - 15, y + 5);
+                            }
+                            
+                            // Columns with labels
+                            ctx.fillStyle = '#e74c3c';
+                            ctx.font = '12px Arial';
+                            ctx.textAlign = 'center';
+                            for (let i = 0; i < numBaysX; i++) {
+                                for (let j = 0; j < numBaysY; j++) {
+                                    const x = offsetX + i * baySize * scale;
+                                    const y = offsetY + j * baySize * scale;
+                                    
+                                    // Column
+                                    ctx.fillRect(x - 5, y - 5, 10, 10);
+                                    
+                                    // Label
+                                    ctx.fillStyle = '#2c3e50';
+                                    ctx.fillText(\`C\${i+1}\${String.fromCharCode(65 + j)}\`, x, y + 25);
+                                    ctx.fillStyle = '#e74c3c';
+                                }
+                            }
+                            
+                            // Dimensions
+                            ctx.strokeStyle = '#e67e22';
+                            ctx.fillStyle = '#e67e22';
+                            ctx.lineWidth = 2;
+                            ctx.font = 'bold 14px Arial';
+                            
+                            // Horizontal dimensions
+                            for (let i = 0; i < numBaysX - 1; i++) {
+                                const x1 = offsetX + i * baySize * scale;
+                                const x2 = offsetX + (i + 1) * baySize * scale;
+                                const y = offsetY + (numBaysY - 1) * baySize * scale + 30;
+                                
+                                ctx.beginPath();
+                                ctx.moveTo(x1, y);
+                                ctx.lineTo(x2, y);
+                                ctx.moveTo(x1, y - 5);
+                                ctx.lineTo(x1, y + 5);
+                                ctx.moveTo(x2, y - 5);
+                                ctx.lineTo(x2, y + 5);
+                                ctx.stroke();
+                                
+                                ctx.textAlign = 'center';
+                                ctx.fillText(\`\${baySize}m\`, (x1 + x2) / 2, y + 20);
+                            }
+                            
+                            // Title
+                            ctx.fillStyle = '#2c3e50';
+                            ctx.font = 'bold 18px Arial';
+                            ctx.textAlign = 'center';
+                            ctx.fillText('STRUCTURAL GRID LAYOUT', w/2, 30);
+                            ctx.font = '14px Arial';
+                            ctx.fillText(\`Bay Size: \${baySize}m × \${baySize}m\`, w/2, 55);
+                        }
+                        
+ // Draw Perspective View
+                        function drawPerspective() {
+                            const canvas = document.getElementById('perspective');
+                            const ctx = canvas.getContext('2d');
+                            const w = canvas.width, h = canvas.height;
+                            
+                            // Sky gradient
+                            const skyGrad = ctx.createLinearGradient(0, 0, 0, h * 0.7);
+                            skyGrad.addColorStop(0, '#87CEEB');
+                            skyGrad.addColorStop(1, '#E0F6FF');
+                            ctx.fillStyle = skyGrad;
+                            ctx.fillRect(0, 0, w, h * 0.7);
+                            
+                            // Ground
+                            ctx.fillStyle = '#90A4AE';
+                            ctx.fillRect(0, h * 0.7, w, h * 0.3);
+                            
+                            // Perspective vanishing point
+                            const vpX = w * 0.5;
+                            const vpY = h * 0.4;
+                            
+                            // Building in perspective
+                            const base = [
+                                {x: w * 0.2, y: h * 0.7},
+                                {x: w * 0.5, y: h * 0.7},
+                                {x: vpX + 150, y: vpY + 100},
+                                {x: vpX - 50, y: vpY + 100}
+                            ];
+                            
+                            const height = h * 0.3 * (data.num_floors / 10);
+                            const top = base.map(p => ({x: p.x, y: p.y - height}));
+                            
+                            // Right face
+                            ctx.fillStyle = '#95a5a6';
+                            ctx.beginPath();
+                            ctx.moveTo(base[1].x, base[1].y);
+                            ctx.lineTo(base[2].x, base[2].y);
+                            ctx.lineTo(top[2].x, top[2].y);
+                            ctx.lineTo(top[1].x, top[1].y);
+                            ctx.closePath();
+                            ctx.fill();
+                            
+                            // Front face with gradient
+                            const faceGrad = ctx.createLinearGradient(base[0].x, 0, base[1].x, 0);
+                            faceGrad.addColorStop(0, '#bdc3c7');
+                            faceGrad.addColorStop(1, '#95a5a6');
+                            ctx.fillStyle = faceGrad;
+                            ctx.beginPath();
+                            ctx.moveTo(base[0].x, base[0].y);
+                            ctx.lineTo(base[1].x, base[1].y);
+                            ctx.lineTo(top[1].x, top[1].y);
+                            ctx.lineTo(top[0].x, top[0].y);
+                            ctx.closePath();
+                            ctx.fill();
+                            
+                            // Windows on front face
+                            ctx.fillStyle = 'rgba(157, 204, 224, 0.7)';
+                            const numFloorsVisible = data.num_floors;
+                            for (let floor = 0; floor < numFloorsVisible; floor++) {
+                                const floorRatio = floor / numFloorsVisible;
+                                const y1 = base[0].y - (floor / numFloorsVisible) * height;
+                                const y2 = y1 - (height / numFloorsVisible) * 0.7;
+                                
+                                for (let col = 0; col < 5; col++) {
+                                    const xRatio = (col + 0.5) / 6;
+                                    const x1 = base[0].x + (base[1].x - base[0].x) * xRatio;
+                                    const windowW = (base[1].x - base[0].x) * 0.12;
+                                    ctx.fillRect(x1 - windowW/2, y2, windowW, (height / numFloorsVisible) * 0.6);
+                                }
+                            }
+                            
+                            // Roof
+                            ctx.fillStyle = '#34495e';
+                            ctx.beginPath();
+                            ctx.moveTo(top[0].x, top[0].y);
+                            ctx.lineTo(top[1].x, top[1].y);
+                            ctx.lineTo(top[2].x, top[2].y);
+                            ctx.lineTo(top[3].x, top[3].y);
+                            ctx.closePath();
+                            ctx.fill();
+                            
+                            // Ground plane grid
+                            ctx.strokeStyle = 'rgba(255, 255, 255, 0.3)';
+                            ctx.lineWidth = 1;
+                            for (let i = 0; i < 10; i++) {
+                                const y = h * 0.7 + i * 20;
+                                ctx.beginPath();
+                                ctx.moveTo(0, y);
+                                ctx.lineTo(w, y);
+                                ctx.stroke();
+                            }
+                            
+                            // Add people for scale
+                            ctx.fillStyle = 'rgba(255, 255, 255, 0.6)';
+                            for (let i = 0; i < 3; i++) {
+                                const px = w * (0.25 + i * 0.15);
+                                ctx.fillRect(px, h * 0.7 - 15, 5, 15);
+                                ctx.beginPath();
+                                ctx.arc(px + 2.5, h * 0.7 - 18, 4, 0, Math.PI * 2);
+                                ctx.fill();
+                            }
+                            
+                            // Title
+                            ctx.fillStyle = 'white';
+                            ctx.font = 'bold 18px Arial';
+                            ctx.textAlign = 'center';
+                            ctx.strokeStyle = '#2c3e50';
+                            ctx.lineWidth = 3;
+                            ctx.strokeText('RENDERED PERSPECTIVE VIEW', w/2, 40);
+                            ctx.fillText('RENDERED PERSPECTIVE VIEW', w/2, 40);
+                        }
+                        
+                        // Download all images
+                        function downloadAllImages() {
+                            const canvases = ['sitePlan', 'floorPlan', 'elevation', 'isometric', 'structuralGrid', 'perspective'];
+                            const names = ['01_Site_Plan', '02_Floor_Plan', '03_Elevation', '04_Isometric', '05_Structural_Grid', '06_Perspective'];
+                            
+                            canvases.forEach((id, index) => {
+                                const canvas = document.getElementById(id);
+                                canvas.toBlob(blob => {
+                                    const url = URL.createObjectURL(blob);
+                                    const a = document.createElement('a');
+                                    a.href = url;
+                                    a.download = \`\${names[index]}_\${data.location}.png\`;
+                                    document.body.appendChild(a);
+                                    a.click();
+                                    document.body.removeChild(a);
+                                    URL.revokeObjectURL(url);
+                                });
+                            });
+                            
+                            alert('✅ All 6 images are being downloaded!');
+                        }
+                        
+                        // Draw all views immediately
+                        drawSitePlan();
+                        drawFloorPlan();
+                        drawElevation();
+                        drawIsometric();
+                        drawStructuralGrid();
+                        drawPerspective();
+                    </script>
+                </body>
+                </html>
+            `);
+            viewWindow.document.close();
+        }
+    </script>
+</body>
+</html>

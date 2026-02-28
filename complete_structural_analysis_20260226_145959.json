@@ -1,0 +1,1664 @@
+{
+  "project_info": {
+    "timestamp": "2026-02-26T14:59:59.236469",
+    "building_type": "Commercial",
+    "plot_dimensions": "50.0m × 30.0m",
+    "num_floors": 10,
+    "total_height": 35.0,
+    "location": "Mumbai",
+    "seismic_zone": "III"
+  },
+  "1_structural_grid": {
+    "grid_geometry": {
+      "bays_in_length": 7,
+      "bays_in_width": 4,
+      "span_length_direction": "7.14 m",
+      "span_width_direction": "7.50 m",
+      "average_span": "7.32 m",
+      "total_columns_per_floor": 40,
+      "column_density": "0.0267 columns/m²"
+    },
+    "engineering_justification": {
+      "optimal_span_range": "6.0-9.0 m",
+      "selected_span": "7.5 m (optimal for Commercial)",
+      "reasoning": "Open floor plans require longer spans for flexibility",
+      "slab_behavior": "Two-way slab action (efficient load distribution)",
+      "aspect_ratio": "1.05",
+      "span_depth_ratio": {
+        "actual": "35.7",
+        "limit": "26",
+        "status": "✗ Requires deeper slab or PT"
+      }
+    },
+    "seismic_considerations": {
+      "grid_regularity": "REGULAR",
+      "seismic_zone": "III",
+      "impact": "✓ Regular grid reduces torsional effects under seismic loads",
+      "torsion_control": "Regular grid minimizes torsional irregularity"
+    },
+    "construction_efficiency": {
+      "formwork_reuse": "EXCELLENT (>80% reuse over multiple floors)",
+      "modular_coordination": "⚠ Consider adjusting to 300mm increments for precast/masonry coordination",
+      "floor_to_floor_height": "4.20 m (includes structure + MEP)",
+      "construction_cycle": "7-10 days per floor (typical casting cycle)",
+      "remarks": "Regular grid accelerates construction due to repetitive formwork"
+    },
+    "cost_impact": {
+      "formwork_cost_estimate": "$495,000",
+      "cost_efficiency_factor": "1.10",
+      "savings_vs_irregular": "10% potential savings",
+      "recommendation": "Regular grid recommended for cost optimization"
+    },
+    "design_recommendations": [
+      "Adopt 7 × 4 grid configuration",
+      "Maintain span dimensions: 7.14m × 7.50m",
+      "Use type-form or aluminum formwork for repetitive floors",
+      "Coordinate grid with parking module (2.4-2.5m stall width)",
+      "Align columns with architectural mullions where possible",
+      "Provide expansion joints if grid extends beyond 40m in any direction"
+    ]
+  },
+  "2_column_sizing": {
+    "load_calculation_basis": {
+      "dead_load_intensity": "8.00 kN/m²",
+      "live_load_intensity": "4.00 kN/m²",
+      "tributary_area": "37.50 m²",
+      "live_load_reduction": "Applied per IS 875 Part 2, Cl 3.2"
+    },
+    "floor_wise_columns": {
+      "Floor_10": {
+        "floor_number": 10,
+        "floors_above": 1,
+        "live_load_reduction": "10%",
+        "load_per_floor": "435.0 kN",
+        "cumulative_load_unfactored": "526.9 kN",
+        "factored_load": "790.3 kN",
+        "concrete_grade": "M30",
+        "column_size": "300 × 300 mm",
+        "gross_area": "0.090 m²",
+        "reinforcement": {
+          "steel_percentage": "2.0%",
+          "area_required": "18.0 cm²",
+          "bars": "8 nos. of 20mm φ (min)",
+          "ties": "8mm φ @ 150mm c/c (min)"
+        },
+        "slenderness": {
+          "ratio": "6.5",
+          "classification": "Short column (< 12)"
+        }
+      },
+      "Floor_9": {
+        "floor_number": 9,
+        "floors_above": 2,
+        "live_load_reduction": "20%",
+        "load_per_floor": "420.0 kN",
+        "cumulative_load_unfactored": "922.7 kN",
+        "factored_load": "1384.0 kN",
+        "concrete_grade": "M30",
+        "column_size": "350 × 350 mm",
+        "gross_area": "0.122 m²",
+        "reinforcement": {
+          "steel_percentage": "2.0%",
+          "area_required": "24.5 cm²",
+          "bars": "8 nos. of 20mm φ (min)",
+          "ties": "8mm φ @ 150mm c/c (min)"
+        },
+        "slenderness": {
+          "ratio": "5.6",
+          "classification": "Short column (< 12)"
+        }
+      },
+      "Floor_8": {
+        "floor_number": 8,
+        "floors_above": 3,
+        "live_load_reduction": "30%",
+        "load_per_floor": "405.0 kN",
+        "cumulative_load_unfactored": "1288.5 kN",
+        "factored_load": "1932.8 kN",
+        "concrete_grade": "M30",
+        "column_size": "450 × 450 mm",
+        "gross_area": "0.203 m²",
+        "reinforcement": {
+          "steel_percentage": "2.0%",
+          "area_required": "40.5 cm²",
+          "bars": "13 nos. of 20mm φ (min)",
+          "ties": "8mm φ @ 150mm c/c (min)"
+        },
+        "slenderness": {
+          "ratio": "4.3",
+          "classification": "Short column (< 12)"
+        }
+      },
+      "Floor_7": {
+        "floor_number": 7,
+        "floors_above": 4,
+        "live_load_reduction": "40%",
+        "load_per_floor": "390.0 kN",
+        "cumulative_load_unfactored": "1624.3 kN",
+        "factored_load": "2436.5 kN",
+        "concrete_grade": "M30",
+        "column_size": "500 × 500 mm",
+        "gross_area": "0.250 m²",
+        "reinforcement": {
+          "steel_percentage": "2.0%",
+          "area_required": "50.0 cm²",
+          "bars": "16 nos. of 20mm φ (min)",
+          "ties": "8mm φ @ 150mm c/c (min)"
+        },
+        "slenderness": {
+          "ratio": "3.9",
+          "classification": "Short column (< 12)"
+        }
+      },
+      "Floor_6": {
+        "floor_number": 6,
+        "floors_above": 5,
+        "live_load_reduction": "50%",
+        "load_per_floor": "375.0 kN",
+        "cumulative_load_unfactored": "1930.1 kN",
+        "factored_load": "2895.2 kN",
+        "concrete_grade": "M30",
+        "column_size": "500 × 500 mm",
+        "gross_area": "0.250 m²",
+        "reinforcement": {
+          "steel_percentage": "2.0%",
+          "area_required": "50.0 cm²",
+          "bars": "16 nos. of 20mm φ (min)",
+          "ties": "8mm φ @ 150mm c/c (min)"
+        },
+        "slenderness": {
+          "ratio": "3.9",
+          "classification": "Short column (< 12)"
+        }
+      },
+      "Floor_5": {
+        "floor_number": 5,
+        "floors_above": 6,
+        "live_load_reduction": "50%",
+        "load_per_floor": "375.0 kN",
+        "cumulative_load_unfactored": "2295.9 kN",
+        "factored_load": "3443.9 kN",
+        "concrete_grade": "M30",
+        "column_size": "550 × 550 mm",
+        "gross_area": "0.303 m²",
+        "reinforcement": {
+          "steel_percentage": "2.0%",
+          "area_required": "60.5 cm²",
+          "bars": "20 nos. of 20mm φ (min)",
+          "ties": "8mm φ @ 150mm c/c (min)"
+        },
+        "slenderness": {
+          "ratio": "3.5",
+          "classification": "Short column (< 12)"
+        }
+      },
+      "Floor_4": {
+        "floor_number": 4,
+        "floors_above": 7,
+        "live_load_reduction": "50%",
+        "load_per_floor": "375.0 kN",
+        "cumulative_load_unfactored": "2661.8 kN",
+        "factored_load": "3992.6 kN",
+        "concrete_grade": "M30",
+        "column_size": "600 × 600 mm",
+        "gross_area": "0.360 m²",
+        "reinforcement": {
+          "steel_percentage": "2.0%",
+          "area_required": "72.0 cm²",
+          "bars": "23 nos. of 20mm φ (min)",
+          "ties": "8mm φ @ 150mm c/c (min)"
+        },
+        "slenderness": {
+          "ratio": "3.3",
+          "classification": "Short column (< 12)"
+        }
+      },
+      "Floor_3": {
+        "floor_number": 3,
+        "floors_above": 8,
+        "live_load_reduction": "50%",
+        "load_per_floor": "375.0 kN",
+        "cumulative_load_unfactored": "3027.6 kN",
+        "factored_load": "4541.3 kN",
+        "concrete_grade": "M30",
+        "column_size": "650 × 650 mm",
+        "gross_area": "0.423 m²",
+        "reinforcement": {
+          "steel_percentage": "2.0%",
+          "area_required": "84.5 cm²",
+          "bars": "27 nos. of 20mm φ (min)",
+          "ties": "8mm φ @ 150mm c/c (min)"
+        },
+        "slenderness": {
+          "ratio": "3.0",
+          "classification": "Short column (< 12)"
+        }
+      },
+      "Floor_2": {
+        "floor_number": 2,
+        "floors_above": 9,
+        "live_load_reduction": "50%",
+        "load_per_floor": "375.0 kN",
+        "cumulative_load_unfactored": "3393.4 kN",
+        "factored_load": "5090.1 kN",
+        "concrete_grade": "M30",
+        "column_size": "700 × 700 mm",
+        "gross_area": "0.490 m²",
+        "reinforcement": {
+          "steel_percentage": "2.0%",
+          "area_required": "98.0 cm²",
+          "bars": "32 nos. of 20mm φ (min)",
+          "ties": "8mm φ @ 150mm c/c (min)"
+        },
+        "slenderness": {
+          "ratio": "2.8",
+          "classification": "Short column (< 12)"
+        }
+      },
+      "Floor_1": {
+        "floor_number": 1,
+        "floors_above": 10,
+        "live_load_reduction": "50%",
+        "load_per_floor": "375.0 kN",
+        "cumulative_load_unfactored": "3759.2 kN",
+        "factored_load": "5638.8 kN",
+        "concrete_grade": "M30",
+        "column_size": "700 × 700 mm",
+        "gross_area": "0.490 m²",
+        "reinforcement": {
+          "steel_percentage": "2.0%",
+          "area_required": "98.0 cm²",
+          "bars": "32 nos. of 20mm φ (min)",
+          "ties": "8mm φ @ 150mm c/c (min)"
+        },
+        "slenderness": {
+          "ratio": "2.8",
+          "classification": "Short column (< 12)"
+        }
+      }
+    },
+    "special_columns": {
+      "corner_columns": {
+        "size": "800 × 800 mm",
+        "multiplier": "1.25x",
+        "reasoning": "Biaxial bending from beams in both directions + torsion"
+      },
+      "edge_columns": {
+        "size": "800 × 800 mm",
+        "multiplier": "1.15x",
+        "reasoning": "Uniaxial bending + tie beam effects"
+      },
+      "interior_columns": {
+        "size": "700 × 700 mm",
+        "reasoning": "Primarily axial load with minimal moments"
+      }
+    },
+    "design_notes": [
+      "Sizes are for preliminary design - detailed analysis required",
+      "Biaxial bending effects considered for corner/edge columns",
+      "Live load reduction applied for multi-story buildings",
+      "Slenderness effects to be checked in detailed design",
+      "Minimum 40mm cover for M25-M30, 45mm for M40-M50",
+      "Column size changes at every 3-4 floors for economy"
+    ]
+  },
+  "3_beam_sizing": {
+    "design_philosophy": {
+      "method": "Span-depth ratio approach per IS 456:2000 Cl 23.2.1",
+      "beam_type": "Continuous beams (typical)",
+      "span_depth_ratio_allowable": "31.2",
+      "modification_factor": "1.20"
+    },
+    "primary_beams": {
+      "description": "Spanning 7.14m (longer direction)",
+      "dimensions": {
+        "width": "250 mm",
+        "overall_depth": "300 mm",
+        "effective_depth": "228 mm",
+        "designation": "250×300 mm"
+      },
+      "loading": {
+        "udl_unfactored": "46.88 kN/m",
+        "udl_factored": "70.31 kN/m",
+        "tributary_width": "3.75 m"
+      },
+      "internal_forces": {
+        "maximum_moment": "358.45 kNm (at support)",
+        "maximum_shear": "301.22 kN"
+      },
+      "reinforcement": {
+        "tension_steel_required": "4820 mm² (8.43%)",
+        "bars_required": "16 nos. of 20mm φ (typical)",
+        "stirrups": "Required - 8mm φ 2-legged @ 150mm c/c",
+        "concrete_grade": "M25 minimum",
+        "steel_grade": "Fe 415"
+      },
+      "checks": {
+        "span_depth_ratio": "23.8 (< 31.2) ✓",
+        "shear_stress": "5.26 N/mm² (τc = 0.48 N/mm²)",
+        "deflection": "Deflection limited to span/250 = 28.6mm per IS 456"
+      }
+    },
+    "secondary_beams": {
+      "description": "Spanning 7.50m (shorter direction)",
+      "dimensions": {
+        "width": "250 mm",
+        "overall_depth": "300 mm",
+        "effective_depth": "240 mm",
+        "designation": "250×300 mm"
+      },
+      "loading": {
+        "udl_unfactored": "44.71 kN/m",
+        "udl_factored": "67.07 kN/m",
+        "tributary_width": "3.57 m"
+      },
+      "internal_forces": {
+        "maximum_moment": "377.28 kNm",
+        "maximum_shear": "301.83 kN"
+      },
+      "reinforcement": {
+        "tension_steel_required": "4830 mm²",
+        "bars_required": "16 nos. of 20mm φ",
+        "stirrups": "Required - 8mm φ 2-legged @ 150mm c/c"
+      }
+    },
+    "special_beams": {
+      "edge_beams": {
+        "size": "300×300 mm",
+        "reasoning": "Wider to accommodate torsion from slab edge loads"
+      },
+      "transfer_beams": {
+        "size": "Varies - typically 1.5-2.0 times regular beam depth",
+        "reasoning": "Required where column grid changes between floors",
+        "design_note": "Requires special detailing and analysis"
+      },
+      "cantilever_beams": {
+        "span_depth_ratio": "≈ 7 (more restrictive)",
+        "typical_depth": "1020 mm for 7.1m cantilever"
+      }
+    },
+    "construction_notes": [
+      "Beam depth should fit within floor-to-floor height constraints",
+      "Allow 600mm minimum for MEP services below beam soffit",
+      "Use drop beams in residential for concealed construction",
+      "Consider hidden beams (same depth as slab) for exposed ceiling aesthetics",
+      "Ensure adequate lap length (41× bar diameter for Fe 415 in M25)",
+      "Provide hanger bars in T-beams for shear reinforcement anchorage"
+    ]
+  },
+  "4_slab_thickness": {
+    "slab_classification": {
+      "type": "Two-way slab",
+      "aspect_ratio": "0.95",
+      "support_conditions": "continuous",
+      "effective_span": "7.14 m"
+    },
+    "thickness_calculation_methods": {
+      "method_1_span_depth_ratio": {
+        "basic_ratio": "26",
+        "modification_factor": "1.00",
+        "allowable_ratio": "26.0",
+        "required_thickness": "300 mm",
+        "calculation": "D = (Span × 1000) / 26.0"
+      },
+      "method_2_moment_capacity": {
+        "factored_load": "14.81 kN/m²",
+        "moment": "24.16 kNm/m",
+        "required_thickness": "150 mm",
+        "calculation": "d = √(Mu / 0.138×fck×b)"
+      },
+      "method_3_deflection": {
+        "permissible_deflection": "28.6 mm",
+        "control": "Controlled by span/250 = 28.6 mm limit",
+        "status": "✓ Controlled by span-depth ratio"
+      }
+    },
+    "code_requirements": {
+      "minimum_thickness": "150 mm (structural)",
+      "fire_resistance": "125 mm (for 1.5 hrs)",
+      "sound_insulation": "175 mm (acoustic comfort)",
+      "vibration_control": "225 mm"
+    },
+    "recommended_thickness": {
+      "final_thickness": "300 mm",
+      "effective_depth": "275 mm",
+      "clear_cover": "20 mm",
+      "governing_criterion": "Greater of all methods + code minima",
+      "standard_thickness": "Yes - selected from standard increments"
+    },
+    "reinforcement_design": {
+      "main_steel": {
+        "area_required": "360.0 mm²/m",
+        "minimum_steel": "360.0 mm²/m (0.12%)",
+        "provided": "10mm φ @ 225mm c/c",
+        "steel_grade": "Fe 415"
+      },
+      "distribution_steel": {
+        "percentage": "0.12% of cross-section",
+        "provided": "8mm φ @ 300mm c/c",
+        "direction": "Both directions"
+      },
+      "concrete_grade": "M25 minimum (M30 for better durability)"
+    },
+    "thickness_for_different_systems": {
+      "conventional_slab": "300 mm",
+      "ribbed_slab": "350 mm (rib + topping)",
+      "waffle_slab": "400 mm (deeper for 2-way ribs)",
+      "post_tensioned_slab": "275 mm (thinner due to prestress)",
+      "flat_slab": "350 mm (increased for punching shear)"
+    },
+    "construction_guidelines": [
+      "Maintain 20mm clear cover (mild exposure)",
+      "Use 25mm cover for moderate/severe exposure",
+      "Maximum bar spacing: Lesser of 3D (900mm) or 300mm",
+      "Provide edge strip reinforcement in two-way slabs",
+      "Ensure proper curing for 14 days minimum",
+      "Check punching shear around columns for flat slabs",
+      "Provide additional steel at re-entrant corners (45° bars)"
+    ],
+    "cost_impact": {
+      "concrete_volume_per_sqm": "0.300 m³/m²",
+      "weight_per_sqm": "7.50 kN/m²",
+      "relative_cost": "2.00× baseline (150mm slab)",
+      "economy_note": "±25mm thickness change affects cost by ~15%"
+    }
+  },
+  "5_lateral_load_system": {
+    "selected_system": {
+      "primary": "Dual System (Frame + Shear Walls)",
+      "description": "Frame resists 25%, shear walls resist 75% of lateral loads",
+      "applicable_code": "Dual system per IS 1893 Cl 7.2",
+      "building_height": "35.0 m (10 floors)"
+    },
+    "seismic_parameters": {
+      "zone": "III",
+      "zone_factor_Z": 0.24,
+      "importance_factor_I": 1.0,
+      "response_reduction_factor_R": 4.0,
+      "ductility_class": "Intermediate (DCM - Medium Ductility)"
+    },
+    "moment_frame_design": {
+      "system_type": "Moment-Resisting Frame",
+      "ductility_class": "Intermediate (DCM - Medium Ductility)",
+      "response_reduction_factor_R": 4.0,
+      "connection_type": "Ductile detailing with confined joints",
+      "beam_detailing": {
+        "top_steel": "Continuous over supports",
+        "bottom_steel": "At least 50% of top steel throughout",
+        "stirrups_spacing": "d/4 spacing in 2d length from face of support",
+        "confinement": "Closely spaced hoops in joint region",
+        "lap_splicing": "Avoid laps in potential plastic hinge zones"
+      },
+      "column_detailing": {
+        "longitudinal_steel": "Min 0.8%, max 6% of gross area",
+        "ties_spacing": "≤ least of (0.25×column_size, 8×dia_main_bar, 300mm)",
+        "confinement_length": "Greater of (D, L/6, 450mm) from joint face",
+        "splice_location": "Only in middle third of column height",
+        "special_detailing": "135° hooks for ties in SMRF"
+      },
+      "design_philosophy": "ΣMc ≥ 1.2 × ΣMb (cl 7.4.2 of IS 1893)",
+      "drift_limit": "0.004 × storey height (per IS 1893 Cl 7.11.1)"
+    },
+    "shear_wall_design": {
+      "wall_thickness": "150 mm",
+      "required_wall_length": "22.5 - 37.5 m total",
+      "locations": [
+        "Core walls around staircases and elevators",
+        "Walls at building periphery for torsion resistance",
+        "L-shaped or C-shaped walls at corners for biaxial resistance",
+        "Coupled walls with connecting beams for energy dissipation"
+      ],
+      "reinforcement": {
+        "vertical_steel": "0.25% minimum (both faces)",
+        "horizontal_steel": "0.25% minimum (both faces)",
+        "bar_spacing": "≤ lesser of (300mm, 3×wall_thickness)",
+        "boundary_elements": "Required when edge compression > 0.2fck",
+        "boundary_confinement": "Same as special confinement for columns",
+        "coupling_beams": "Diagonal reinforcement for high shear demand"
+      },
+      "wall_behavior": "Squat wall - shear dominant",
+      "aspect_ratio": "0.2",
+      "design_code": "IS 13920:2016 for ductile detailing",
+      "coupling": "Couple shear walls with deep beams for redundancy",
+      "force_distribution": "75% of lateral loads resisted by walls in dual system"
+    },
+    "bracing_system": {
+      "note": "Bracing not typical for RC buildings of this configuration"
+    },
+    "diaphragm_design": {
+      "floor_slab_role": "Acts as horizontal diaphragm to transfer lateral loads",
+      "requirements": [
+        "Slab acts as deep beam spanning between shear walls/frames",
+        "In-plane rigidity >> out-of-plane stiffness of vertical elements",
+        "Chord reinforcement at edges parallel to lateral force",
+        "Collector/drag beams to transfer forces to vertical elements",
+        "Continuous load path from roof to foundation"
+      ],
+      "design_check": "In-plane shear stress v = V / (A_gross) < τc",
+      "detailing": "Provide edge zone reinforcement as chord steel"
+    },
+    "torsion_considerations": {
+      "code_provision": "IS 1893:2016 Cl 7.9 - Design for torsion",
+      "dynamic_eccentricity": "±1.50 m (5% of plan dimension)",
+      "torsion_irregularity": "Check if max drift > 1.2 × avg drift",
+      "mitigation": [
+        "Place shear walls/columns at building periphery",
+        "Symmetric arrangement of lateral load resisting elements",
+        "Avoid re-entrant corners or provide separation joints",
+        "Use high torsional rigidity elements (closed core walls)"
+      ]
+    },
+    "drift_control": {
+      "code_limit": "14.0 mm (0.4% of storey height)",
+      "design_drift": "≈ 0.002-0.003 × storey height (typical)",
+      "control_measures": [
+        "Increase shear wall length/thickness",
+        "Increase column sizes",
+        "Reduce storey height",
+        "Use stiffer lateral systems (core-outrigger)",
+        "Consider viscous dampers or base isolation for extreme cases"
+      ],
+      "p_delta_effect": "Check if storey drift ratio × axial load ratio > 0.1"
+    },
+    "foundation_connection": {
+      "base_fixity": "Fixed for frames, moment connection to foundation",
+      "shear_wall_foundation": "Mat foundation or piled raft for shear walls",
+      "overturning": "Check net tension at foundation level (T ≤ φ × Pullout_capacity)",
+      "soil_bearing": "Increase foundation size if overturning induces tension",
+      "anchorage": "Dowels from shear walls into foundation with development length"
+    },
+    "system_comparison": {
+      "moment_frame": {
+        "efficiency": "Good for low-rise (≤12m)",
+        "cost": "Moderate",
+        "architectural_impact": "Maximum flexibility - no walls",
+        "best_for": "Low seismic zones, architectural freedom needed"
+      },
+      "shear_wall": {
+        "efficiency": "Excellent for mid-rise (12-40m)",
+        "cost": "Higher initial, lower drift",
+        "architectural_impact": "Core walls don't impact much",
+        "best_for": "Moderate to high seismic zones"
+      },
+      "dual_system": {
+        "efficiency": "Excellent for mid to high-rise",
+        "cost": "Optimized (walls take most lateral, frames for gravity)",
+        "architectural_impact": "Balanced - some walls needed",
+        "best_for": "High seismic zones, tall buildings"
+      },
+      "core_outrigger": {
+        "efficiency": "Excellent for super-tall (>50m)",
+        "cost": "High but necessary",
+        "architectural_impact": "Outrigger levels are utility floors",
+        "best_for": "Super-tall buildings in high seismic/wind zones"
+      }
+    },
+    "design_process": [
+      "1. Determine seismic base shear (V = Z×I×Sa/g / R×W)",
+      "2. Distribute base shear vertically (Wi×hi method)",
+      "3. Analyze 3D model for member forces",
+      "4. Design members for combined gravity + lateral loads",
+      "5. Detail connections per IS 13920:2016",
+      "6. Check drift limits and P-Δ effects",
+      "7. Verify torsional irregularities"
+    ]
+  },
+  "6_seismic_design": {
+    "seismic_zone_data": {
+      "zone": "III",
+      "zone_factor_Z": 0.24,
+      "peak_ground_acceleration": "0.12g",
+      "seismic_intensity": "High"
+    },
+    "site_characteristics": {
+      "soil_type": "Sand",
+      "soil_classification": {
+        "type": "Type II - Medium Soil",
+        "description": "SPT N = 10-30"
+      },
+      "site_amplification": "Considered in spectral acceleration curve"
+    },
+    "structural_response": {
+      "fundamental_period_Ta": "0.535 seconds",
+      "spectral_acceleration_Sa/g": "1.87",
+      "response_reduction_R": 4.0,
+      "damping": "5% (standard for concrete structures)"
+    },
+    "base_shear_calculation": {
+      "design_coefficient_Ah": "0.0561",
+      "base_shear_Vb": "10089.7 kN",
+      "percentage_of_weight": "5.61%",
+      "formula": "Vb = Ah × W, where Ah = (Z/2)×(Sa/g)×(I/R)"
+    },
+    "vertical_distribution": {
+      "method": "Wi × hi² method (IS 1893 Cl 7.7.1)",
+      "floor_forces": [
+        {
+          "floor": 1,
+          "height_from_base": "3.5 m",
+          "floor_weight": "18000.0 kN",
+          "lateral_force": "26.2 kN",
+          "force_percentage": "0.3%"
+        },
+        {
+          "floor": 2,
+          "height_from_base": "7.0 m",
+          "floor_weight": "18000.0 kN",
+          "lateral_force": "104.8 kN",
+          "force_percentage": "1.0%"
+        },
+        {
+          "floor": 3,
+          "height_from_base": "10.5 m",
+          "floor_weight": "18000.0 kN",
+          "lateral_force": "235.9 kN",
+          "force_percentage": "2.3%"
+        },
+        {
+          "floor": 4,
+          "height_from_base": "14.0 m",
+          "floor_weight": "18000.0 kN",
+          "lateral_force": "419.3 kN",
+          "force_percentage": "4.2%"
+        },
+        {
+          "floor": 5,
+          "height_from_base": "17.5 m",
+          "floor_weight": "18000.0 kN",
+          "lateral_force": "655.2 kN",
+          "force_percentage": "6.5%"
+        },
+        "...",
+        {
+          "floor": 9,
+          "height_from_base": "31.5 m",
+          "floor_weight": "18000.0 kN",
+          "lateral_force": "2122.8 kN",
+          "force_percentage": "21.0%"
+        },
+        {
+          "floor": 10,
+          "height_from_base": "35.0 m",
+          "floor_weight": "18000.0 kN",
+          "lateral_force": "2620.7 kN",
+          "force_percentage": "26.0%"
+        }
+      ],
+      "note": "Higher floors receive greater lateral forces"
+    },
+    "modal_analysis": {
+      "method": "Response Spectrum Method (RSM)",
+      "modes_required": "4 modes minimum",
+      "mass_participation": "≥90% in each principal direction",
+      "modal_combination": "SRSS (Square Root of Sum of Squares) or CQC (Complete Quadratic Combination)",
+      "directional_combination": "100% X + 30% Y + 30% Z (and permutations)"
+    },
+    "irregularities_check": {
+      "plan_irregularities": [
+        {
+          "type": "Torsional irregularity",
+          "check": "Max drift > 1.2 × Avg drift at any level",
+          "consequence": "Increase design forces by 1.5× if irregular"
+        },
+        {
+          "type": "Re-entrant corners",
+          "check": "Projection > 15% of plan dimension",
+          "consequence": "Provide separation joint or design for stress concentration"
+        },
+        {
+          "type": "Diaphragm discontinuity",
+          "check": "Openings > 50% of diaphragm area",
+          "consequence": "Special analysis required"
+        }
+      ],
+      "vertical_irregularities": [
+        {
+          "type": "Stiffness irregularity (soft storey)",
+          "check": "Storey stiffness < 70% of storey above",
+          "consequence": "Multiply storey shears by 2.5"
+        },
+        {
+          "type": "Mass irregularity",
+          "check": "Storey mass > 200% of adjacent storey",
+          "consequence": "Dynamic analysis mandatory"
+        },
+        {
+          "type": "Vertical geometric irregularity",
+          "check": "Horizontal dimension > 150% of adjacent storey",
+          "consequence": "Special detailing at transition"
+        }
+      ]
+    },
+    "ductile_detailing": {
+      "beams": {
+        "flexural_reinforcement": [
+          "Top bars continuous over supports",
+          "Bottom bars ≥ 50% of top bars throughout span",
+          "Positive moment capacity ≥ 50% of negative moment capacity",
+          "Bar splices only in central 1/2 of span"
+        ],
+        "shear_reinforcement": [
+          "First stirrup at 50mm from face of support",
+          "Spacing ≤ d/4 in 2d length from support face",
+          "Spacing ≤ d/2 in remaining length",
+          "135° hooks for stirrups"
+        ]
+      },
+      "columns": {
+        "longitudinal_steel": [
+          "Min 0.8% of gross area (0.01 for rectangular, 0.008 for circular)",
+          "Max 6% (to ensure proper compaction)",
+          "Min 4 bars in rectangular, 6 bars in circular",
+          "Lap splices only in middle 1/2 of column height"
+        ],
+        "transverse_reinforcement": [
+          "Special confining steel in h_0 length from joint face",
+          "h_0 = max(D, L/6, 450mm)",
+          "Pitch ≤ min(0.25D, 8φ, 300mm) in confined length",
+          "Pitch ≤ min(0.5D, 16φ, 300mm) in unconfined length",
+          "135° hooks for ties/hoops"
+        ]
+      },
+      "beam_column_joints": {
+        "joint_reinforcement": [
+          "Hoops in joint region continuous with column ties",
+          "Spacing ≤ 150mm in joint",
+          "Special confining steel required",
+          "No bar cut-off in joint region"
+        ],
+        "joint_shear_check": [
+          "τv = V / (b × h) ≤ 1.25√fck for concrete",
+          "Provide additional stirrups if τv exceeds limit"
+        ]
+      }
+    },
+    "p_delta_effects": {
+      "stability_coefficient_theta": "0.054",
+      "check_result": "θ = 0.05 < 0.10 ⇒ P-Δ effects negligible",
+      "mitigation": "Increase lateral stiffness (shear walls) if θ > 0.10"
+    },
+    "foundation_design": {
+      "overturning_moment": "176569.9 kNm (approximate)",
+      "design_requirements": [
+        "Check against overturning: Factor of safety ≥ 1.5",
+        "Design for uplift tension in piles/footings",
+        "Provide tie beams in both directions at plinth level",
+        "Tie beam minimum size: 200×200 mm with 4 bars",
+        "Anchorage dowels from walls/columns with full development"
+      ],
+      "soil_bearing_upgrade": "Increase allowable bearing by 25% for seismic load combinations"
+    },
+    "design_checks": [
+      "✓ Calculate base shear using seismic coefficient method",
+      "✓ Distribute forces vertically using Wi×hi² method",
+      "✓ Analyze 3D model with seismic loads in both directions",
+      "✓ Check drift limits (0.4% of storey height)",
+      "✓ Verify torsional irregularities",
+      "✓ Check P-Δ effects if θ > 0.10",
+      "✓ Design members for combined gravity + seismic loads",
+      "✓ Detail per IS 13920:2016 for ductility",
+      "✓ Check foundation for overturning and uplift"
+    ]
+  },
+  "7_wind_load": {
+    "basic_parameters": {
+      "location": "Mumbai",
+      "basic_wind_speed_Vb": "44 m/s",
+      "terrain_category": "Category 3 - Suburban",
+      "building_class": "Buildings with 50-year design life",
+      "building_dimensions": "50.0 × 30.0 × 35.0 m"
+    },
+    "modification_factors": {
+      "risk_coefficient_k1": 1.0,
+      "terrain_height_factor_k2": "1.112",
+      "topography_factor_k3": 1.0,
+      "importance_factor_k4": 1.0
+    },
+    "wind_speeds_pressures": {
+      "design_wind_speed_Vz": "48.93 m/s",
+      "design_wind_pressure_pz": "1436.3 N/m² (1.44 kN/m²)",
+      "formula": "pz = 0.6 × Vz²"
+    },
+    "pressure_coefficients": {
+      "external_pressures": {
+        "windward_face": {
+          "Cpe": 0.7,
+          "pressure": "1.01 kN/m²",
+          "note": "Positive pressure (pushing inward)"
+        },
+        "leeward_face": {
+          "Cpe": -0.4,
+          "pressure": "-0.57 kN/m²",
+          "note": "Suction (pulling outward)"
+        },
+        "side_faces": {
+          "Cpe": -0.65,
+          "pressure": "-0.93 kN/m²",
+          "note": "Suction on both sides"
+        },
+        "roof": {
+          "Cpe": -0.7,
+          "pressure": "-1.01 kN/m²",
+          "note": "Uplift suction"
+        }
+      },
+      "internal_pressure": {
+        "Cpi_range": "±0.2 (normal permeability)",
+        "pressure_positive": "0.29 kN/m²",
+        "pressure_negative": "-0.29 kN/m²",
+        "note": "Consider both cases for maximum wind effect"
+      },
+      "net_pressures": {
+        "windward_face_critical": "1.29 kN/m² (with internal suction)",
+        "leeward_face_critical": "-0.86 kN/m² (with internal pressure)",
+        "side_faces_critical": "-1.22 kN/m²",
+        "roof_uplift_critical": "-1.29 kN/m² (upward suction)"
+      }
+    },
+    "along_wind_loads": {
+      "wind_on_long_face": {
+        "frontal_area": "1050.0 m²",
+        "force_coefficient_Cf": "1.10",
+        "total_force": "1658.9 kN",
+        "base_moment": "29030.9 kNm"
+      },
+      "wind_on_short_face": {
+        "frontal_area": "1750.0 m²",
+        "force_coefficient_Cf": "1.10",
+        "total_force": "2764.9 kN",
+        "base_moment": "48384.9 kNm"
+      },
+      "governing_case": "Short face"
+    },
+    "across_wind_loads": {
+      "applicability": "Negligible (h/b < 4)",
+      "h_b_ratio": "1.17",
+      "note": "Along-wind loads govern"
+    },
+    "dynamic_effects": {
+      "natural_frequency_estimate": "1.31 Hz",
+      "dynamic_sensitivity": "LOW - Static analysis adequate",
+      "gust_response": "Gust response factor ≈ 1.5-2.0 (typical)",
+      "recommendations": [
+        "Perform dynamic analysis if f₀ < 1 Hz",
+        "Consider occupant comfort (acceleration limits)",
+        "Check for vortex-induced vibrations",
+        "Evaluate fatigue on cladding connections"
+      ]
+    },
+    "load_combinations": [
+      "1.5 DL ± 1.5 WL (Wind as primary load)",
+      "0.9 DL ± 1.5 WL (Check uplift and overturning)",
+      "1.2 DL + 1.2 LL ± 1.2 WL (Combined with live load)",
+      "Critical combination for drift: 1.0 DL + 0.5 LL + 1.0 WL"
+    ],
+    "design_checks_required": [
+      {
+        "check": "Strength Check",
+        "criterion": "Ultimate limit state - member forces",
+        "action": "Design beams, columns, shear walls for wind moments and shears"
+      },
+      {
+        "check": "Drift Check",
+        "criterion": "H/500 for total drift, h/250 for inter-storey drift",
+        "action": "Limit drift to 70.0mm total"
+      },
+      {
+        "check": "Overturning Check",
+        "criterion": "Resisting moment ≥ 1.5 × Overturning moment",
+        "action": "Check foundation stability against wind overturning"
+      },
+      {
+        "check": "Cladding Pressure",
+        "criterion": "Local pressures on facade elements",
+        "action": "Design curtain wall, windows for peak local pressures"
+      },
+      {
+        "check": "Comfort Check (tall buildings)",
+        "criterion": "Peak acceleration < 20 milli-g (residential), < 50 milli-g (commercial)",
+        "action": "May require mass dampers for very tall/slender buildings"
+      }
+    ],
+    "special_considerations": [
+      "Wind directionality: Consider wind from all 4 cardinal directions",
+      "Corner effects: Increased local pressures at building corners",
+      "Channeling: Wind speed increases between closely spaced tall buildings",
+      "Shielding: Upwind buildings may reduce wind loads (conservative to ignore)",
+      "Fatigue: Repeated wind cycles can cause fatigue in steel connections",
+      "Cladding design: Use local pressure coefficients from IS 875 Part 3"
+    ]
+  },
+  "8_detailed_loads": {
+    "dead_load_calculation": {
+      "slab_self_weight": "7.50 kN/m²",
+      "floor_finishes": {
+        "screed_50mm": "1.02 kN/m²",
+        "tiles_15mm": "0.34 kN/m²",
+        "adhesive_10mm": "0.20 kN/m²",
+        "subtotal": "1.57 kN/m²"
+      },
+      "ceiling_plaster": {
+        "soffit_plaster": "0.24 kN/m²",
+        "false_ceiling": "0.15 kN/m²",
+        "subtotal": "0.39 kN/m²"
+      },
+      "partitions_amortized": "1.50 kN/m²",
+      "mep_services": {
+        "electrical": "0.10 kN/m²",
+        "plumbing": "0.15 kN/m²",
+        "hvac": "0.20 kN/m²",
+        "fire_protection": "0.10 kN/m²",
+        "subtotal": "0.55 kN/m²"
+      },
+      "total_floor_dead_load": "11.51 kN/m²",
+      "beam_self_weight": "1.88 kN/m (typical 250×300mm)",
+      "column_self_weight": "12.25 kN/m (typical 700×700mm)"
+    },
+    "live_load_calculation": {
+      "building_type": "Commercial",
+      "occupancy_loads": {
+        "offices": 4.0,
+        "retail": 4.0,
+        "corridors": 4.0,
+        "parking": 2.5,
+        "typical": 4.0
+      },
+      "typical_live_load": "4.00 kN/m²",
+      "live_load_reduction": {
+        "floor_1_and_above": {
+          "reduction": "10%",
+          "reduced_load": "3.60 kN/m²"
+        },
+        "floor_2_and_above": {
+          "reduction": "20%",
+          "reduced_load": "3.20 kN/m²"
+        },
+        "floor_3_and_above": {
+          "reduction": "30%",
+          "reduced_load": "2.80 kN/m²"
+        },
+        "floor_4_and_above": {
+          "reduction": "40%",
+          "reduced_load": "2.40 kN/m²"
+        },
+        "floor_5_and_above": {
+          "reduction": "50%",
+          "reduced_load": "2.00 kN/m²"
+        }
+      },
+      "roof_live_load": "1.5 kN/m² (accessible) or 0.75 kN/m² (inaccessible)",
+      "special_loads": {
+        "concentrated_wheel_load": "Considered as per IS 875 Part 2 Cl 3.3",
+        "impact_factor": "Not applicable for static loads"
+      }
+    },
+    "load_combinations": {
+      "DL + LL": {
+        "unfactored": "15.51 kN/m²",
+        "factored": "23.27 kN/m² (1.5 DL + 1.5 LL)",
+        "use": "Normal design condition"
+      },
+      "DL only": {
+        "unfactored": "11.51 kN/m²",
+        "factored": "17.27 kN/m² (1.5 DL)",
+        "use": "When LL favorable (e.g., uplift check)"
+      },
+      "DL + LL + EQ": {
+        "factored": "18.62 kN/m² + 1.2 EQ (1.2 DL + 1.2 LL ± 1.2 EQ)",
+        "use": "Seismic load combination"
+      },
+      "DL + LL + WL": {
+        "factored": "18.62 kN/m² + 1.2 WL (1.2 DL + 1.2 LL ± 1.2 WL)",
+        "use": "Wind load combination"
+      },
+      "minimum_DL + WL": {
+        "factored": "10.36 kN/m² + 1.5 WL (0.9 DL ± 1.5 WL)",
+        "use": "Uplift/overturning check with wind"
+      }
+    },
+    "special_loads": {
+      "terrace_waterproofing": {
+        "load": "2.0-3.0 kN/m²",
+        "components": "Waterproofing membrane + protection layer + mud phuska"
+      },
+      "external_wall_cladding": {
+        "load": "1.0-2.5 kN/m²",
+        "components": "Depends on facade system (glass curtain wall vs stone cladding)"
+      },
+      "snow_load": {
+        "applicability": "If altitude > 1000m above MSL",
+        "reference": "IS 875 Part 4",
+        "typical": "Not applicable for most Indian cities"
+      },
+      "seismic_load": {
+        "nature": "Inertial force = mass × acceleration",
+        "calculation": "As per IS 1893:2016",
+        "direction": "Horizontal in any direction"
+      },
+      "wind_load": {
+        "nature": "Pressure/suction on surfaces",
+        "calculation": "As per IS 875 Part 3:2015",
+        "direction": "Perpendicular to surface"
+      }
+    },
+    "load_summary": {
+      "per_floor": {
+        "dead_load": "11.51 kN/m²",
+        "live_load": "4.00 kN/m²",
+        "total_service": "15.51 kN/m²",
+        "total_factored": "23.27 kN/m²"
+      },
+      "entire_building": {
+        "total_floor_load": "232707.0 kN",
+        "structural_elements": "46541.4 kN (estimate)",
+        "total_building_weight": "279248.4 kN",
+        "note": "Used for seismic base shear calculation"
+      }
+    },
+    "design_notes": [
+      "All loads calculated per IS 875 Parts 1, 2, and 3",
+      "Dead load includes all permanent fixtures and finishes",
+      "Live load reduction applied for multi-story members",
+      "Partition load amortized over floor area (conservative)",
+      "MEP services load is approximate - coordinate with MEP consultants",
+      "Facade load not included in floor load - applied to perimeter beams",
+      "Seismic weight = DL + 25% of LL (as per IS 1893)",
+      "Load factors per IS 456:2000 for limit state design",
+      "Consider special loads (swimming pool, heavy equipment) separately"
+    ]
+  },
+  "9_material_selection": {
+    "concrete_selection": {
+      "selection_criteria": {
+        "height_based": {
+          "grade": "M30-M40",
+          "reasoning": "High-rise building with high column loads"
+        },
+        "exposure_based": {
+          "min_grade": "M30",
+          "min_cement": "320 kg/m³",
+          "max_w_c_ratio": 0.45,
+          "min_cover": "45 mm",
+          "reasoning": "Exposed to rain, coastal (non-saline), industrial"
+        },
+        "load_based": {
+          "grade": "M50 or higher",
+          "required_fck": "141.0 N/mm²"
+        },
+        "seismic_based": {
+          "min_grade": "M25",
+          "reasoning": "Moderate seismicity - ductile detailing required"
+        },
+        "durability_based": {
+          "grade": "M25-M30",
+          "life": "50 years",
+          "reasoning": "Normal structures"
+        }
+      },
+      "recommended_grade": "M50",
+      "grade_by_element": {
+        "foundation": {
+          "grade": "M25-M30",
+          "reasoning": "Foundation requires good durability + higher cover, M25 minimum per IS 456"
+        },
+        "columns_lower_floors": {
+          "grade": "M50",
+          "reasoning": "High axial loads require higher strength, typically M30-M50"
+        },
+        "columns_upper_floors": {
+          "grade": "M40",
+          "reasoning": "Reduced loads allow lower grade, typically M25-M40"
+        },
+        "beams": {
+          "grade": "M50",
+          "reasoning": "Flexural members, grade matches column grade for monolithic construction"
+        },
+        "slabs": {
+          "grade": "M50",
+          "reasoning": "Same grade as beams for construction convenience"
+        },
+        "shear_walls": {
+          "grade": "M50",
+          "reasoning": "Critical for lateral stability, M30 minimum recommended"
+        }
+      },
+      "properties_comparison": {
+        "M20": {
+          "fck": 20,
+          "fck_cube": 20,
+          "Ec": 22360,
+          "density": 25,
+          "cost_relative": 1.0
+        },
+        "M25": {
+          "fck": 25,
+          "fck_cube": 25,
+          "Ec": 25000,
+          "density": 25,
+          "cost_relative": 1.08
+        },
+        "M30": {
+          "fck": 30,
+          "fck_cube": 30,
+          "Ec": 27386,
+          "density": 25,
+          "cost_relative": 1.15
+        },
+        "M40": {
+          "fck": 40,
+          "fck_cube": 40,
+          "Ec": 31622,
+          "density": 25,
+          "cost_relative": 1.3
+        },
+        "M50": {
+          "fck": 50,
+          "fck_cube": 50,
+          "Ec": 35355,
+          "density": 25,
+          "cost_relative": 1.5
+        }
+      },
+      "mix_design_requirements": {
+        "characteristic_strength": "50 N/mm² at 28 days",
+        "target_strength": "58.2 N/mm² (fck + 1.65σ)",
+        "cement_type": "OPC 43 or 53 grade",
+        "aggregates": "20mm and 10mm down graded aggregates",
+        "admixtures": "Superplasticizer for M40+, retarder in hot weather",
+        "curing": "Water curing for 14 days minimum (21 days for M40+)"
+      },
+      "special_concretes": {
+        "high_performance_concrete": {
+          "grade": "M60-M80",
+          "use": "Columns in super-tall buildings",
+          "advantages": "Reduced column sizes, higher stiffness",
+          "cost_premium": "50-80% more than M30"
+        },
+        "self_compacting_concrete": {
+          "use": "Densely reinforced sections, complex geometries",
+          "advantages": "No vibration needed, better finish",
+          "cost_premium": "20-30% more than conventional"
+        },
+        "lightweight_concrete": {
+          "grade": "M20-M40 with expanded clay/shale",
+          "use": "Reduce dead load in long spans",
+          "advantages": "20-30% weight reduction",
+          "limitations": "Lower modulus of elasticity"
+        }
+      }
+    },
+    "steel_selection": {
+      "available_grades": {
+        "Fe 415": {
+          "fy": 415,
+          "fu": 485,
+          "elongation": "14.5% minimum",
+          "use": "General construction, low to mid-rise",
+          "availability": "Widely available",
+          "cost_relative": 1.0
+        },
+        "Fe 500": {
+          "fy": 500,
+          "fu": 545,
+          "elongation": "12% minimum",
+          "use": "High-rise buildings, where steel savings needed",
+          "availability": "Commonly available",
+          "cost_relative": 1.05
+        },
+        "Fe 550": {
+          "fy": 550,
+          "fu": 585,
+          "elongation": "10% minimum",
+          "use": "Heavy industrial, very high-rise",
+          "availability": "Available in major cities",
+          "cost_relative": 1.1
+        },
+        "Fe 600": {
+          "fy": 600,
+          "fu": 660,
+          "elongation": "10% minimum",
+          "use": "Specialized applications, precast",
+          "availability": "Limited availability",
+          "cost_relative": 1.15
+        }
+      },
+      "seismic_requirements": {
+        "recommended": "Fe 415/Fe 500 both acceptable",
+        "ductility_note": "Moderate ductility detailing required",
+        "code_reference": "IS 13920:2016 Cl 5.2"
+      },
+      "economic_considerations": {
+        "recommended": "Fe 500",
+        "reasoning": "15-20% steel savings compared to Fe 415, justifies cost premium",
+        "steel_savings_Fe500_vs_Fe415": "15-20% (due to higher fy)"
+      },
+      "by_structural_element": {
+        "columns_main_bars": {
+          "recommended": "Fe 500",
+          "reasoning": "High axial loads benefit from higher strength",
+          "typical_bars": "16mm, 20mm, 25mm, 32mm diameter"
+        },
+        "columns_ties": {
+          "recommended": "Fe 415",
+          "reasoning": "Confinement steel - ductility more important than strength",
+          "typical_bars": "8mm, 10mm diameter"
+        },
+        "beams_main_bars": {
+          "recommended": "Fe 500",
+          "reasoning": "Steel savings in flexural reinforcement",
+          "typical_bars": "12mm, 16mm, 20mm, 25mm diameter"
+        },
+        "beams_stirrups": {
+          "recommended": "Fe 415",
+          "reasoning": "Better ductility for shear reinforcement",
+          "typical_bars": "8mm, 10mm diameter"
+        },
+        "slabs": {
+          "recommended": "Fe 500",
+          "reasoning": "Reduce bar sizes or increase spacing",
+          "typical_bars": "8mm, 10mm, 12mm diameter"
+        },
+        "shear_walls": {
+          "recommended": "Fe 500",
+          "reasoning": "Both flexural and shear reinforcement",
+          "typical_bars": "12mm, 16mm, 20mm (vertical), 10mm, 12mm (horizontal)"
+        }
+      },
+      "recommended_grade": "Fe 415/Fe 500 (both suitable)",
+      "corrosion_protection_options": {
+        "standard_bars": {
+          "type": "Black TMT bars (Thermo-Mechanically Treated)",
+          "protection": "Concrete cover + alkaline environment",
+          "suitable_for": "Mild to moderate exposure"
+        },
+        "epoxy_coated": {
+          "type": "Fusion-bonded epoxy coated rebars",
+          "protection": "Epoxy coating 175-300 microns",
+          "suitable_for": "Severe to very severe exposure (coastal)",
+          "cost_premium": "40-60% more than black bars"
+        },
+        "galvanized": {
+          "type": "Hot-dip galvanized rebars",
+          "protection": "Zinc coating 600-1000 microns",
+          "suitable_for": "Very severe to extreme exposure",
+          "cost_premium": "80-100% more than black bars"
+        },
+        "stainless_steel": {
+          "type": "Austenitic stainless steel (Grade 304/316)",
+          "protection": "Inherent corrosion resistance",
+          "suitable_for": "Extreme exposure, critical structures",
+          "cost_premium": "400-600% more than black bars"
+        }
+      },
+      "special_steels": {
+        "prestressing_steel": {
+          "type": "High-tensile steel wire/strand",
+          "strength": "1500-1860 N/mm²",
+          "use": "Post-tensioned slabs, prestressed beams",
+          "standard": "IS 6006"
+        },
+        "structural_steel": {
+          "type": "Mild steel plates/sections",
+          "grade": "IS 2062 Grade A/B/C",
+          "use": "Steel beams, columns, connections",
+          "typical_fy": "250 N/mm² (Grade A), 350 N/mm² (Grade C)"
+        }
+      },
+      "quality_control": {
+        "testing": "Tensile test every 25 tonnes or per IS 1786",
+        "certification": "Test certificates from manufacturer mandatory",
+        "storage": "Protect from rust - store above ground, cover in rain",
+        "bending": "Cold bending - no heat bending allowed",
+        "splicing": "Lap splices or mechanical couplers per IS 13920"
+      }
+    },
+    "cost_comparison": {
+      "concrete": {
+        "M20": "₹5,000-5,500/m³",
+        "M25": "₹5,400-6,000/m³",
+        "M30": "₹5,800-6,500/m³",
+        "M40": "₹6,500-7,500/m³",
+        "M50": "₹7,500-8,500/m³"
+      },
+      "steel": {
+        "Fe 415": "₹55,000-60,000/tonne",
+        "Fe 500": "₹58,000-63,000/tonne",
+        "Fe 550": "₹60,000-65,000/tonne"
+      },
+      "note": "Costs are approximate and vary with time, location, and market conditions"
+    },
+    "summary_recommendations": {
+      "primary_concrete_grade": "M50",
+      "column_concrete_lower_floors": "M50",
+      "beam_slab_concrete": "M50",
+      "foundation_concrete": "M25-M30",
+      "primary_steel_grade": "Fe 415/Fe 500 (both suitable)",
+      "main_reinforcement": "Fe 500",
+      "ties_stirrups": "Fe 415"
+    },
+    "value_engineering_tips": [
+      "Use higher strength concrete in lower columns only (tapered strength)",
+      "Use Fe 500 for main bars (15-20% steel savings)",
+      "Use Fe 415 for ties/stirrups (better ductility, lower cost)",
+      "Consider fly ash concrete (30-40% cement replacement)",
+      "Use ready-mix concrete for quality and speed",
+      "Optimize bar curtailment in beams (avoid full-length bars)",
+      "Use mechanical couplers instead of laps in congested areas",
+      "Standardize bar diameters (reduce cutting waste)"
+    ],
+    "sustainability_considerations": [
+      "Fly ash 30-40% reduces carbon footprint by 25-30%",
+      "GGBS (Ground Granulated Blast Furnace Slag) up to 50%",
+      "Recycled aggregates for non-structural concrete",
+      "Use regional materials to reduce transportation emissions",
+      "Consider life-cycle cost, not just initial cost",
+      "High-strength concrete reduces material volume"
+    ]
+  },
+  "10_optimization": {
+    "design_optimizations": {
+      "1_grid_rationalization": {
+        "strategy": "Regularize column grid, eliminate grid offsets",
+        "impact": "Formwork reuse, construction speed",
+        "potential_savings": "8-12% on formwork costs",
+        "implementation": [
+          "Use consistent bay sizes throughout building",
+          "Minimize column size variations (3-4 sizes max)",
+          "Avoid column offsets between floors",
+          "Align grid with architectural module (300mm)"
+        ],
+        "quantified_saving": "$200000 (4% of project cost)"
+      },
+      "2_beam_depth_optimization": {
+        "strategy": "Optimize beam depth to minimum required",
+        "impact": "Reduced concrete volume, lower building height",
+        "potential_savings": "5-8% on concrete volume",
+        "implementation": [
+          "Use span-depth ratio limits (L/12 to L/15)",
+          "Consider two-way slabs to reduce beam sizes",
+          "Use drop beams instead of wide shallow beams",
+          "Coordinate with MEP for depth constraints"
+        ],
+        "quantified_saving": "$125000 (2.5% average)"
+      },
+      "3_column_size_optimization": {
+        "strategy": "Use high-strength concrete to reduce column sizes",
+        "impact": "Smaller columns, more usable area",
+        "potential_savings": "10-15% reduction in column size",
+        "implementation": [
+          "Use M40-M50 in lower floors instead of M30",
+          "Reduce column size by ~20% with higher grade",
+          "Gain 0.5-1% more carpet area",
+          "Pay ~20% premium on concrete, save on col size"
+        ],
+        "quantified_saving": "$75000 (1.5% net benefit)",
+        "additional_benefit": "Gain 3.0 m² carpet area"
+      },
+      "4_slab_system_optimization": {
+        "strategy": "Use efficient slab systems for longer spans",
+        "impact": "Reduced slab thickness, fewer beams",
+        "potential_savings": "10-20% on floor structure",
+        "options": {
+          "conventional_slab": "baseline",
+          "flat_slab": "10-15% savings on formwork, faster construction",
+          "post_tensioned_slab": "15-20% thinner slab, longer spans",
+          "hollow_core_slab": "30% lighter, faster erection"
+        },
+        "quantified_saving": "$300000 (6% with PT slab)"
+      },
+      "5_foundation_optimization": {
+        "strategy": "Optimize foundation type based on soil",
+        "impact": "Right foundation for soil conditions",
+        "potential_savings": "15-25% on foundation cost",
+        "decision_matrix": {
+          "good_soil": "Isolated footings (least cost)",
+          "moderate_soil": "Combined footings or strip footings",
+          "poor_soil": "Raft foundation (economical for many columns)",
+          "very_poor": "Piled foundation (necessary but expensive)"
+        },
+        "quantified_saving": "$150000 (3% of project)"
+      }
+    },
+    "material_optimizations": {
+      "1_cement_replacement": {
+        "strategy": "Replace cement with fly ash/GGBS",
+        "impact": "Lower cost, lower carbon footprint",
+        "potential_savings": "15-20% on cement cost",
+        "implementation": [
+          "Use 30-40% fly ash in M25-M40 concrete",
+          "Use up to 50% GGBS in coastal areas (better durability)",
+          "Adjust mix design for workability",
+          "Extend curing period by 3-5 days"
+        ],
+        "quantified_saving": "$100000 (2% of project cost)",
+        "co2_reduction": "25-30% reduction in embodied carbon"
+      },
+      "2_steel_grade_upgrade": {
+        "strategy": "Use Fe 500 instead of Fe 415 for main bars",
+        "impact": "15-20% reduction in steel tonnage",
+        "potential_savings": "10-12% on steel cost (net)",
+        "calculation": [
+          "Fe 500 costs 5% more per tonne",
+          "But 18% less tonnage needed",
+          "Net savings: 18% - 5% = 13%"
+        ],
+        "quantified_saving": "$125000 (2.5% of project)",
+        "note": "Applicable to main bars, not ties/stirrups"
+      },
+      "3_recycled_aggregates": {
+        "strategy": "Use recycled aggregates for non-structural elements",
+        "impact": "Lower aggregate cost, sustainability",
+        "potential_savings": "8-10% on aggregate cost",
+        "implementation": [
+          "Use in plinth beams, boundary walls",
+          "Use in pavements, non-structural masonry",
+          "Not recommended for structural concrete",
+          "Ensure proper crushing and grading"
+        ],
+        "quantified_saving": "$50000 (1% of project)"
+      },
+      "4_admixture_optimization": {
+        "strategy": "Use admixtures for performance enhancement",
+        "impact": "Better workability, strength, durability",
+        "types": {
+          "superplasticizer": "10-15% cement reduction for same strength",
+          "retarder": "Avoids cold joints, better in hot weather",
+          "accelerator": "Early strength gain, faster construction",
+          "waterproofing": "Integral waterproofing for basements"
+        },
+        "quantified_saving": "$75000 (1.5% net benefit)"
+      }
+    },
+    "construction_optimizations": {
+      "1_formwork_system": {
+        "strategy": "Use modern formwork systems for repetitive floors",
+        "impact": "Faster construction, better quality, fewer workers",
+        "potential_savings": "20-25% on formwork cost",
+        "options": {
+          "conventional_timber": "baseline (100%)",
+          "steel_props_plywood": "10% faster, 5% cost savings",
+          "table_forms": "20-25% cost savings, 30% faster",
+          "aluminum_formwork": "35-40% cost savings, 50% faster (for >50 reuses)"
+        },
+        "quantified_saving": "$250000 (5% with table forms)",
+        "note": "Aluminum formwork needs 50+ reuses to justify"
+      },
+      "2_precast_elements": {
+        "strategy": "Use precast for stairs, façade, bathroom pods",
+        "impact": "Faster construction, better quality control",
+        "potential_savings": "15-20% on construction time",
+        "elements": {
+          "precast_stairs": "40% faster than cast-in-place",
+          "precast_facade_panels": "30% faster installation",
+          "bathroom_pods": "50% faster, better waterproofing",
+          "precast_beams": "Suitable for industrial buildings"
+        },
+        "quantified_saving": "$150000 (3% + time savings)"
+      },
+      "3_construction_sequencing": {
+        "strategy": "Optimize construction sequence and logistics",
+        "impact": "Reduced idle time, better resource utilization",
+        "potential_savings": "10-15% on project duration",
+        "implementation": [
+          "Parallel work on multiple floors",
+          "Just-in-time material delivery",
+          "Overlap structural and MEP works",
+          "Use critical path method (CPM) scheduling"
+        ],
+        "quantified_saving": "$200000 (4% from time savings)"
+      },
+      "4_quality_control": {
+        "strategy": "Robust QC to avoid rework and repairs",
+        "impact": "Fewer defects, lower lifecycle costs",
+        "potential_savings": "5-8% (avoiding rework)",
+        "implementation": [
+          "Cube testing every pour (1 sample per 100 m³)",
+          "Bar bending schedule adherence",
+          "Cover block placement (maintain cover)",
+          "Joint waterstops in basements",
+          "Third-party inspection for critical elements"
+        ],
+        "quantified_saving": "$100000 (2% average)"
+      }
+    },
+    "value_engineering_process": {
+      "1_design_stage_VE": {
+        "phase": "Schematic Design (SD)",
+        "potential_savings": "15-20% (highest impact phase)",
+        "focus_areas": [
+          "Structural system selection (frame vs wall vs hybrid)",
+          "Grid optimization and span rationalization",
+          "Foundation type based on detailed soil investigation",
+          "Building height optimization (balance floors vs height)"
+        ],
+        "process": "Multi-disciplinary workshop with architect, structural, MEP, contractor"
+      },
+      "2_DD_stage_VE": {
+        "phase": "Design Development (DD)",
+        "potential_savings": "8-12%",
+        "focus_areas": [
+          "Member sizing optimization",
+          "Material grade selection",
+          "Construction methodology review",
+          "Prefabrication opportunities"
+        ],
+        "process": "Iterative design optimization with cost tracking"
+      },
+      "3_CD_stage_VE": {
+        "phase": "Construction Documents (CD)",
+        "potential_savings": "3-5%",
+        "focus_areas": [
+          "Bar detailing optimization (curtailment)",
+          "Specification review (avoid over-specification)",
+          "Constructability review",
+          "Value alternatives in bid documents"
+        ],
+        "process": "Final review before tender"
+      },
+      "total_VE_potential": "$750000 (15% cumulative across all phases)"
+    },
+    "lifecycle_cost_optimization": {
+      "durability_upgrade": {
+        "investment": "Add 5-8% upfront for better materials",
+        "benefit": "50% reduction in maintenance over 50 years",
+        "lifecycle_saving": "20-30% total lifecycle cost",
+        "measures": [
+          "Higher concrete grade (better durability)",
+          "Extra cover + epoxy coating in coastal areas",
+          "Integral waterproofing instead of membrane",
+          "Better quality sealants and expansion joints"
+        ],
+        "payback_period": "10-15 years"
+      },
+      "energy_efficiency": {
+        "investment": "5-10% for envelope optimization",
+        "benefit": "25-30% reduction in HVAC energy",
+        "lifecycle_saving": "Payback in 5-8 years",
+        "measures": [
+          "Thermal insulation (walls and roof)",
+          "High-performance glazing (low-E, double-glazed)",
+          "Shading devices (external, movable)",
+          "Thermal mass optimization"
+        ],
+        "annual_energy_saving": "$10000/year"
+      },
+      "adaptability": {
+        "investment": "2-4% for flexible design",
+        "benefit": "Easier future modifications, higher resale value",
+        "measures": [
+          "Larger spans for layout flexibility",
+          "Flat slab for reconfiguration ease",
+          "Extra capacity in MEP systems (20% headroom)",
+          "Modular partition systems"
+        ],
+        "value_addition": "10-15% higher property value"
+      }
+    },
+    "optimization_summary": {
+      "first_cost_savings": {
+        "design": "$400000 (8%)",
+        "materials": "$250000 (5%)",
+        "construction": "$500000 (10%)",
+        "value_engineering": "$750000 (15%)",
+        "subtotal": "$1900000 (38% of first cost)"
+      },
+      "lifecycle_savings": {
+        "durability_upgrade_savings": "$1250000",
+        "energy_efficiency_savings": "$1250000",
+        "adaptability_value_addition": "$625000",
+        "subtotal": "$3125000 (over 50-year life)"
+      },
+      "total_optimization_potential": "$5025000",
+      "note": "Actual savings depend on project specifics, market conditions, and execution quality"
+    },
+    "implementation_roadmap": {
+      "schematic_design": [
+        "✓ Optimize structural system selection",
+        "✓ Rationalize grid layout",
+        "✓ Select foundation type based on soil report",
+        "✓ Conduct VE workshop #1"
+      ],
+      "design_development": [
+        "✓ Optimize member sizes (beams, columns, slabs)",
+        "✓ Select material grades",
+        "✓ Evaluate precast opportunities",
+        "✓ Conduct VE workshop #2"
+      ],
+      "construction_documents": [
+        "✓ Optimize bar detailing and curtailment",
+        "✓ Review specifications (avoid over-spec)",
+        "✓ Prepare constructability review",
+        "✓ Finalize bid alternates"
+      ],
+      "procurement": [
+        "✓ Early contractor involvement (if design-build)",
+        "✓ Bulk material procurement for better rates",
+        "✓ Pre-qualification of suppliers",
+        "✓ Negotiate price escalation clauses"
+      ],
+      "construction": [
+        "✓ Use modern formwork systems",
+        "✓ Implement robust QC procedures",
+        "✓ Monitor and control material waste",
+        "✓ Optimize construction sequencing"
+      ]
+    },
+    "key_recommendations": [
+      "Start VE from schematic design - biggest impact",
+      "Use higher-strength materials strategically (not everywhere)",
+      "Invest in good formwork for repetitive work",
+      "Don't compromise on durability - lifecycle cost matters",
+      "Engage contractor early if possible (design-build/CM)",
+      "Use BIM for clash detection and quantity optimization",
+      "Regular design reviews with cost tracking",
+      "Consider both first cost and lifecycle cost"
+    ],
+    "risk_mitigation": [
+      "Don't over-optimize - maintain adequate safety factors",
+      "Peer review critical optimizations",
+      "Avoid unfamiliar technologies without proper expertise",
+      "Budget 10-15% contingency for uncertainties",
+      "Document all optimization decisions and assumptions"
+    ]
+  }
+}

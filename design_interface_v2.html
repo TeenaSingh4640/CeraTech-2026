@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Structural Design Engine</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        header {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .content {
+            display: flex;
+            min-height: 600px;
+        }
+
+        .input-panel {
+            flex: 1;
+            padding: 30px;
+            background: #f8f9fa;
+            border-right: 2px solid #ddd;
+            overflow-y: auto;
+            max-height: 800px;
+        }
+
+        .output-panel {
+            flex: 1.5;
+            padding: 30px;
+            overflow-y: auto;
+            max-height: 800px;
+        }
+
+        h2 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #2c3e50;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 1em;
+            transition: border-color 0.3s;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #3498db;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 5px;
+            font-size: 1.1em;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4);
+        }
+
+        .btn:disabled {
+            background: #95a5a6;
+            cursor: not-allowed;
+        }
+
+        .output-section {
+            margin-bottom: 30px;
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 5px solid #3498db;
+        }
+
+        .output-section h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 1.4em;
+        }
+
+        .output-section h4 {
+            color: #34495e;
+            margin: 15px 0 10px 0;
+            font-size: 1.1em;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 10px 0;
+        }
+
+        table th, table td {
+            text-align: left;
+            padding: 12px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        table th {
+            background: #34495e;
+            color: white;
+            font-weight: bold;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #7f8c8d;
+        }
+
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #3498db;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .highlight {
+            background: #fff3cd;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-weight: bold;
+        }
+
+        .success {
+            color: #28a745;
+            font-weight: bold;
+        }
+
+        .warning {
+            color: #dc3545;
+            font-weight: bold;
+        }
+
+        footer {
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        @media (max-width: 1024px) {
+            .content {
+                flex-direction: column;
+            }
+            
+            .input-panel {
+                border-right: none;
+                border-bottom: 2px solid #ddd;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🏗️ AI-Driven Structural Design Engine</h1>
+            <p>Professional Architectural & Structural Design Consultant</p>
+        </header>
+
+        <div class="content">
+            <div class="input-panel">
+                <h2>Project Parameters</h2>
+                
+                <form id="design-form">
+                    <div class="form-group">
+                        <label>📏 Plot Dimensions</label>
+                        <div class="form-row">
+                            <input type="number" id="plot-length" placeholder="Length (m)" value="50" required>
+                            <input type="number" id="plot-width" placeholder="Width (m)" value="30" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>📍 Location & Climate</label>
+                        <input type="text" id="location" placeholder="City name" value="Mumbai" required>
+                        <select id="climate-zone" required>
+                            <option value="Tropical" selected>Tropical</option>
+                            <option value="Arid">Arid (Desert)</option>
+                            <option value="Temperate">Temperate</option>
+                            <option value="Cold">Cold</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>🏢 Building Type</label>
+                        <select id="building-type" required>
+                            <option value="Residential" selected>Residential</option>
+                            <option value="Commercial">Commercial</option>
+                            <option value="Institutional">Institutional</option>
+                            <option value="Industrial">Industrial</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>🔢 Number of Floors</label>
+                        <input type="number" id="num-floors" placeholder="Enter number" value="10" min="1" max="100" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>📊 FAR Allowed</label>
+                        <input type="number" id="far" placeholder="e.g., 2.5" value="2.5" step="0.1" min="0.5" max="10" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>💰 Budget Range (USD)</label>
+                        <div class="form-row">
+                            <input type="number" id="budget-min" placeholder="Minimum" value="1000000" required>
+                            <input type="number" id="budget-max" placeholder="Maximum" value="1500000" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>🌍 Soil Type</label>
+                        <select id="soil-type" required>
+                            <option value="Rock">Rock (Hard)</option>
+                            <option value="Sand" selected>Sand (Medium)</option>
+                            <option value="Clay">Clay (Soft)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>🌋 Seismic Zone</label>
+                        <select id="seismic-zone" required>
+                            <option value="I">Zone I (Lowest risk)</option>
+                            <option value="II">Zone II (Low risk)</option>
+                            <option value="III" selected>Zone III (Moderate risk)</option>
+                            <option value="IV">Zone IV (High risk)</option>
+                            <option value="V">Zone V (Highest risk)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>🎨 Architectural Style</label>
+                        <select id="architectural-style" required>
+                            <option value="Modern" selected>Modern</option>
+                            <option value="Contemporary">Contemporary</option>
+                            <option value="Brutalist">Brutalist</option>
+                            <option value="Glass">Glass/High-tech</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="btn" id="generate-btn">
+                        🚀 Generate Complete Design
+                    </button>
+                </form>
+            </div>
+
+            <div class="output-panel" id="output-panel">
+                <h2>Design Output</h2>
+                <div class="loading">
+                    <p>Fill in the project parameters and click "Generate Complete Design"</p>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>AI Structural Design Engine - Professional Engineering Consultation System</p>
+            <p>© 2026 - Generate complete conceptual designs in seconds</p>
+        </footer>
+    </div>
+
+    <script>
+        let currentDesignData = null;
+
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('design-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const btn = document.getElementById('generate-btn');
+                const output = document.getElementById('output-panel');
+                
+                output.innerHTML = `
+                    <h2>Design Output</h2>
+                    <div class="loading">
+                        <div class="spinner"></div>
+                        <p><strong>Generating complete structural design...</strong></p>
+                    </div>
+                `;
+                
+                btn.disabled = true;
+                btn.textContent = '⏳ Generating...';
+                
+                const formData = {
+                    plot_length: parseFloat(document.getElementById('plot-length').value),
+                    plot_width: parseFloat(document.getElementById('plot-width').value),
+                    location: document.getElementById('location').value,
+                    climate_zone: document.getElementById('climate-zone').value,
+                    building_type: document.getElementById('building-type').value,
+                    num_floors: parseInt(document.getElementById('num-floors').value),
+                    far_allowed: parseFloat(document.getElementById('far').value),
+                    budget_min: parseFloat(document.getElementById('budget-min').value),
+                    budget_max: parseFloat(document.getElementById('budget-max').value),
+                    soil_type: document.getElementById('soil-type').value,
+                    seismic_zone: document.getElementById('seismic-zone').value,
+                    architectural_style: document.getElementById('architectural-style').value
+                };
+                
+                setTimeout(() => {
+                    generateDesignOutput(formData);
+                    btn.disabled = false;
+                    btn.textContent = '🚀 Generate Complete Design';
+                }, 1500);
+            });
+        });
+
+        function generateDesignOutput(data) {
+            currentDesignData = data;
+            
+            const plotArea = data.plot_length * data.plot_width;
+            const builtArea = plotArea * data.far_allowed;
+            const baySize = data.building_type === 'Residential' ? 4.5 : 6.0;
+            const buildingHeight = data.num_floors * 3.5;
+            
+            const output = document.getElementById('output-panel');
+            
+            output.innerHTML = `
+                <h2>✅ Design Output Complete</h2>
+                
+                <div class="output-section">
+                    <h3>📋 Project Summary</h3>
+                    <table>
+                        <tr><th>Parameter</th><th>Value</th></tr>
+                        <tr><td>Project ID</td><td>SD_${Date.now()}</td></tr>
+                        <tr><td>Location</td><td>${data.location} (${data.climate_zone})</td></tr>
+                        <tr><td>Building Type</td><td>${data.building_type}</td></tr>
+                        <tr><td>Plot Area</td><td>${plotArea.toFixed(2)} m²</td></tr>
+                        <tr><td>Total Built Area</td><td>${builtArea.toFixed(2)} m²</td></tr>
+                        <tr><td>Number of Floors</td><td>${data.num_floors} (≈${buildingHeight.toFixed(1)}m height)</td></tr>
+                        <tr><td>Structural Grid</td><td>${baySize}m × ${baySize}m</td></tr>
+                        <tr><td>Architectural Style</td><td>${data.architectural_style}</td></tr>
+                    </table>
+                </div>
+                
+                <div class="output-section">
+                    <h3>1️⃣ Structural System</h3>
+                    <h4>Primary System:</h4>
+                    <p><span class="success">${data.num_floors <= 7 ? 'RC moment-resisting frame' : 'RC frame with shear walls'}</span></p>
+                    <h4>Materials:</h4>
+                    <ul>
+                        <li>Concrete: M${data.num_floors <= 7 ? '25-M30' : '30-M40'}</li>
+                        <li>Steel: Fe ${data.num_floors <= 7 ? '415/500' : '500/550'}</li>
+                        <li>Column Grid: ${baySize}m × ${baySize}m bay spacing</li>
+                        <li>Column Sizes: ${data.num_floors <= 7 ? '300×450mm lower, 300×300mm upper' : '450×600mm lower, 300×450mm upper'}</li>
+                    </ul>
+                </div>
+                
+                <div class="output-section">
+                    <h3>2️⃣ Foundation System</h3>
+                    <p><span class="highlight">${data.soil_type === 'Rock' || (data.num_floors <= 7 && data.soil_type === 'Sand') ? 'Isolated footings with tie beams' : 'Raft foundation (mat)'}</span></p>
+                    <ul>
+                        <li>Soil Type: ${data.soil_type}</li>
+                        <li>Bearing Capacity: ${data.soil_type === 'Rock' ? '500' : data.soil_type === 'Sand' ? '200' : '100'} kN/m²</li>
+                        <li>Foundation Depth: ${data.num_floors <= 7 ? '2.5-3.5m' : '4.0-6.0m'} below ground</li>
+                    </ul>
+                </div>
+                
+                <div class="output-section">
+                    <h3>3️⃣ Material Quantities</h3>
+                    <h4>Concrete:</h4>
+                    <p><span class="highlight">${((builtArea * 0.175 * 1.35) * 1.05).toFixed(2)} m³</span> (including wastage)</p>
+                    <p>Cost: $${((builtArea * 0.175 * 1.35 * 1.05) * 175).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")} @ $175/m³</p>
+                    
+                    <h4>Steel Reinforcement:</h4>
+                    <p><span class="highlight">${((builtArea * 0.175 * 1.35) * 0.015 * 7850 / 1000).toFixed(2)} tonnes</span></p>
+                    <p>Cost: $${(((builtArea * 0.175 * 1.35) * 0.015 * 7850) * 1.35).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")} @ $1.35/kg</p>
+                    
+                    <h4>Total Structural Cost:</h4>
+                    <p style="font-size:1.3em;"><strong>$${((((builtArea * 0.175 * 1.35) * 1.05) * 175) + (((builtArea * 0.175 * 1.35) * 0.015 * 7850) * 1.35)).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</strong></p>
+                </div>
+                
+                <div class="output-section">
+                    <h3>4️⃣ Climate Strategy (${data.climate_zone})</h3>
+                    ${getClimateStrategy(data.climate_zone)}
+                </div>
+                
+                <div class="output-section" style="background: #d4edda; border-left-color: #28a745;">
+                    <h3>✅ Design Complete</h3>
+                    <p><strong>Construction Duration:</strong> ${Math.ceil(data.num_floors * 0.8 + 6)} months (estimated)</p>
+                    <p style="margin-top: 10px;"><em>This is a conceptual design. Professional structural engineering review required.</em></p>
+                </div>
+                
+                <button class="btn" onclick="downloadReport()">📥 Download PDF Report</button>
+                <button class="btn" onclick="exportJSON()" style="background: linear-gradient(135deg, #27ae60 0%, #229954 100%);">💾 Export JSON Data</button>
+                <button class="btn" onclick="generateRenderingPrompts()" style="background: linear-gradient(135deg, #9c27b0 0%, #7b1fa2 100%);">🎨 Generate AI Rendering Prompts</button>
+                <button class="btn" onclick="generateArchitecturalImages()" style="background: linear-gradient(135deg, #e67e22 0%, #d35400 100%);">🏗️ Generate Architectural Images</button>
+            `;
+        }
+
+        function getClimateStrategy(zone) {
+            const strategies = {
+                'Tropical': `
+                    <ul>
+                        <li><strong>Orientation:</strong> North-South axis for minimal east-west exposure</li>
+                        <li><strong>Shading:</strong> Deep 1.5-2m overhangs, vertical fins</li>
+                        <li><strong>Ventilation:</strong> Cross ventilation, stack effect</li>
+                        <li><strong>Glazing:</strong> 30-40% WWR, double glazed low-E</li>
+                    </ul>`,
+                'Arid': `
+                    <ul>
+                        <li><strong>Orientation:</strong> Compact form to minimize surface area</li>
+                        <li><strong>Shading:</strong> Minimal glazing, deep recessed windows</li>
+                        <li><strong>Ventilation:</strong> Night ventilation with thermal mass</li>
+                        <li><strong>Insulation:</strong> R-4.0 walls, R-6.0 roof</li>
+                    </ul>`,
+                'Temperate': `
+                    <ul>
+                        <li><strong>Orientation:</strong> South facing for solar gain</li>
+                        <li><strong>Shading:</strong> Adjustable shading systems</li>
+                        <li><strong>Ventilation:</strong> Balanced mechanical + natural</li>
+                        <li><strong>Glazing:</strong> 40-50% WWR, double glazed</li>
+                    </ul>`,
+                'Cold': `
+                    <ul>
+                        <li><strong>Form:</strong> Compact building for heat retention</li>
+                        <li><strong>Insulation:</strong> R-6.0 walls, R-8.0 roof</li>
+                        <li><strong>Glazing:</strong> Triple glazed, argon filled</li>
+                        <li><strong>Entrance:</strong> Vestibules to prevent heat loss</li>
+                    </ul>`
+            };
+            return strategies[zone] || strategies['Temperate'];
+        }
+
+        function downloadReport() {
+            if (!currentDesignData) {
+                alert('Please generate a design first!');
+                return;
+            }
+            
+            const reportWindow = window.open('', '_blank');
+            reportWindow.document.write(`
+                <!DOCTYPE html>
+                <html>
+                <head>
+                    <title>Structural Design Report - ${currentDesignData.location}</title>
+                    <style>
+                        body { font-family: Arial, sans-serif; padding: 40px; max-width: 900px; margin: 0 auto; }
+                        h1 { color: #2c3e50; }
+                        @media print { .no-print { display: none; } }
+                    </style>
+                </head>
+                <body>
+                    <h1>🏗️ Structural Design Report</h1>
+                    <p><strong>Project:</strong> ${currentDesignData.building_type} Building in ${currentDesignData.location}</p>
+                    <p><strong>Generated:</strong> ${new Date().toLocaleString()}</p>
+                    <hr>
+                    ${document.getElementById('output-panel').innerHTML}
+                    <div class="no-print" style="margin-top: 30px; text-align: center;">
+                        <button onclick="window.print()" style="padding: 15px 30px; font-size: 16px; cursor: pointer;">Print / Save as PDF</button>
+                        <button onclick="window.close()" style="padding: 15px 30px; font-size: 16px; cursor: pointer; margin-left: 10px;">Close</button>
+                    </div>
+                </body>
+                </html>
+            `);
+            reportWindow.document.close();
+        }
+
+        function exportJSON() {
+            if (!currentDesignData) {
+                alert('Please generate a design first!');
+                return;
+            }
+            
+            const exportData = {
+                ...currentDesignData,
+                project_id: `SD_${Date.now()}`,
+                generated_date: new Date().toISOString(),
+                plot_area: currentDesignData.plot_length * currentDesignData.plot_width
+            };
+            
+            const dataStr = JSON.stringify(exportData, null, 2);
+            const dataBlob = new Blob([dataStr], {type: 'application/json'});
+            const url = URL.createObjectURL(dataBlob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = `design_${currentDesignData.location}_${Date.now()}.json`;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            URL.revokeObjectURL(url);
+        }
+
+        function generateRenderingPrompts() {
+            if (!currentDesignData) {
+                alert('Please generate a design first!');
+                return;
+            }
+            
+            const data = currentDesignData;
+            const baySize = data.building_type === 'Residential' ? '4.5m' : '6.0m';
+            const plotDim = `${data.plot_length}m × ${data.plot_width}m`;
+            
+            const prompt = `Ultra-realistic 3D architectural rendering of a ${data.num_floors}-storey ${data.building_type.toLowerCase()} building on a ${plotDim} site in ${data.location}, modern reinforced concrete structural frame with ${baySize} × ${baySize} column grid clearly visible, ${data.climate_zone.toLowerCase()} climate-responsive facade, ${data.architectural_style.toLowerCase()} style, fair-faced concrete with glass curtain walls, ${data.building_type === 'Residential' ? 'recessed balconies with glass railings' : 'floor-to-floor glass with aluminum mullions'}, ground floor entrance lobby with full glazing, people for scale, professional architectural visualization, natural golden hour lighting, photorealistic, 4K resolution, eye-level corner perspective.`;
+            
+            const promptWindow = window.open('', '_blank');
+            promptWindow.document.write(`
+                <!DOCTYPE html>
+                <html>
+                <head>
+                    <title>AI Rendering Prompt - ${data.location}</title>
+                    <style>
+                        body { font-family: Arial, sans-serif; padding: 40px; max-width: 1000px; margin: 0 auto; background: #f5f5f5; }
+                        h1 { color: #9c27b0; }
+                        .prompt { background: white; padding: 25px; border-radius: 10px; margin: 20px 0; font-family: monospace; font-size: 1.1em; line-height: 1.8; }
+                       .btn { background: #9c27b0; color: white; border: none; padding: 15px 30px; font-size: 16px; cursor: pointer; border-radius: 5px; margin: 10px 5px; }
+                        .btn:hover { background: #7b1fa2; }
+                    </style>
+                </head>
+                <body>
+                    <h1>🎨 AI Rendering Prompt</h1>
+                    <h3>Project: ${data.building_type} - ${data.location}</h3>
+                    <div class="prompt">${prompt}</div>
+                    <button class="btn" onclick="navigator.clipboard.writeText(\`${prompt.replace(/`/g, '\\`')}\`).then(() => alert('Copied!'))">📋 Copy Prompt</button>
+                    <button class="btn" onclick="window.close()">Close</button>
+                    <hr>
+                    <p><strong>Usage:</strong> Use this prompt with Midjourney, DALL-E 3, Stable Diffusion XL, or any AI image generator.</p>
+                    <p><strong>For Midjourney:</strong> Add --ar 16:9 --style raw --v 6</p>
+                </body>
+                </html>
+            `);
+            promptWindow.document.close();
+        }
+
+        function generateArchitecturalImages() {
+            if (!currentDesignData) {
+                alert('Please generate a design first!');
+                return;
+            }
+            
+            // Save design data as JSON
+            const timestamp = Date.now();
+            const filename = `design_data_${timestamp}.json`;
+            const exportData = {
+                ...currentDesignData,
+                project_id: `SD_${timestamp}`,
+                generated_date: new Date().toISOString(),
+                plot_area: currentDesignData.plot_length * currentDesignData.plot_width
+            };
+            
+            const dataStr = JSON.stringify(exportData, null, 2);
+            const dataBlob = new Blob([dataStr], {type: 'application/json'});
+            const url = URL.createObjectURL(dataBlob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = filename;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            URL.revokeObjectURL(url);
+            
+            // Show instructions window
+            const instructionsWindow = window.open('', '_blank', 'width=900,height=700');
+            instructionsWindow.document.write(`
+                <!DOCTYPE html>
+                <html>
+                <head>
+                    <title>Generate Architectural Images</title>
+                    <style>
+                        body {
+                            font-family: 'Segoe UI', Arial, sans-serif;
+                            padding: 40px;
+                            max-width: 850px;
+                            margin: 0 auto;
+                            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                            color: white;
+                        }
+                        .container {
+                            background: white;
+                            color: #2c3e50;
+                            padding: 30px;
+                            border-radius: 15px;
+                            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+                        }
+                        h1 { color: #e67e22; margin-bottom: 10px; }
+                        h2 { color: #3498db; margin-top: 25px; }
+                        .step {
+                            background: #ecf0f1;
+                            padding: 15px;
+                            margin: 15px 0;
+                            border-radius: 8px;
+                            border-left: 5px solid #3498db;
+                        }
+                        .command {
+                            background: #2c3e50;
+                            color: #2ecc71;
+                            padding: 15px;
+                            border-radius: 5px;
+                            font-family: 'Consolas', monospace;
+                            margin: 10px 0;
+                            overflow-x: auto;
+                        }
+                        .btn {
+                            background: #e67e22;
+                            color: white;
+                            border: none;
+                            padding: 12px 25px;
+                            font-size: 16px;
+                            cursor: pointer;
+                            border-radius: 5px;
+                            margin: 10px 5px;
+                            font-weight: bold;
+                        }
+                        .btn:hover { background: #d35400; }
+                        .note {
+                            background: #fff3cd;
+                            border-left: 5px solid #ffc107;
+                            padding: 15px;
+                            margin: 15px 0;
+                            border-radius: 5px;
+                            color: #856404;
+                        }
+                        .success {
+                            background: #d4edda;
+                            border-left: 5px solid #28a745;
+                            padding: 15px;
+                            margin: 15px 0;
+                            border-radius: 5px;
+                            color: #155724;
+                        }
+                        ul { margin: 10px 0; padding-left: 25px; }
+                        li { margin: 8px 0; }
+                        code {
+                            background: #e8e8e8;
+                            padding: 2px 6px;
+                            border-radius: 3px;
+                            font-family: 'Consolas', monospace;
+                            color: #c7254e;
+                        }
+                    </style>
+                </head>
+                <body>
+                    <div class="container">
+                        <h1>🏗️ Generate Professional Architectural Images</h1>
+                        <p style="font-size: 1.1em;">Design data saved as <strong>${filename}</strong></p>
+                        
+                        <div class="success">
+                            <strong>✅ JSON file downloaded successfully!</strong> You can now generate professional architectural renderings.
+                        </div>
+                        
+                        <h2>📋 Step-by-Step Instructions:</h2>
+                        
+                        <div class="step">
+                            <strong>Step 1:</strong> Open PowerShell in the project directory
+                            <div class="command">cd C:\\Users\\lpste\\Desktop\\ceratech\\Structured3D</div>
+                        </div>
+                        
+                        <div class="step">
+                            <strong>Step 2:</strong> Activate the virtual environment
+                            <div class="command">& ../.venv/Scripts/Activate.ps1</div>
+                        </div>
+                        
+                        <div class="step">
+                            <strong>Step 3:</strong> Run the image generation script
+                            <div class="command">python generate_architectural_images.py "${filename}"</div>
+                        </div>
+                        
+                        <div class="note">
+                            <strong>⚡ Quick Option:</strong> Copy and paste this single command:<br><br>
+                            <div class="command">cd C:\\Users\\lpste\\Desktop\\ceratech\\Structured3D; & ../.venv/Scripts/Activate.ps1; python generate_architectural_images.py "${filename}"</div>
+                        </div>
+                        
+                        <h2>🎨 What Gets Generated:</h2>
+                        <ul>
+                            <li><strong>Site Plan</strong> - Complete plot layout with setbacks and landscape</li>
+                            <li><strong>Ground Floor Plan</strong> - Detailed layout with structural grid and rooms</li>
+                            <li><strong>Typical Floor Plan</strong> - Standard floor configuration</li>
+                            <li><strong>Front Elevation</strong> - Building facade with dimensions</li>
+                            <li><strong>3D Isometric View</strong> - Three-dimensional perspective</li>
+                        </ul>
+                        
+                        <div class="success">
+                            <strong>📁 Output Location:</strong> All images will be saved in <code>exports/design_YYYYMMDD_HHMMSS/</code> folder with high resolution (300 DPI).
+                        </div>
+                        
+                        <h2>🔧 Requirements:</h2>
+                        <p>The following Python packages need to be installed (usually already available):</p>
+                        <ul>
+                            <li>matplotlib</li>
+                            <li>numpy</li>
+                            <li>pillow (PIL)</li>
+                        </ul>
+                        
+                        <div class="note">
+                            <strong>💡 Tip:</strong> If you get import errors, run: <code>pip install matplotlib numpy pillow</code>
+                        </div>
+                        
+                        <button class="btn" onclick="navigator.clipboard.writeText('cd C:\\\\Users\\\\lpste\\\\Desktop\\\\ceratech\\\\Structured3D; & ../.venv/Scripts/Activate.ps1; python generate_architectural_images.py \\'${filename}\\'').then(() => alert('Command copied to clipboard!'))">
+                            📋 Copy Full Command
+                        </button>
+                        <button class="btn" onclick="window.close()" style="background: #95a5a6;">Close</button>
+                    </div>
+                </body>
+                </html>
+            `);
+            instructionsWindow.document.close();
+        }
+    </script>
+</body>
+</html>
