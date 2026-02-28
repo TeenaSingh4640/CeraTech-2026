@@ -1,9 +1,7 @@
-# 🏗️ CeraTech Design Suite v2.0
+# 🏗️ CeraTech 2026
 
-**Professional Structural Design & Analysis Tool with AI Assistant**
-
-A comprehensive web-based structural engineering platform that provides automated design calculations, 3D visualization, cost estimation, and architectural rendering capabilities for building projects.
-
+Problem statemnet 3 : AI-Driven generative design & Autonomous Construction 
+Site Execution
 ---
 
 ## 🌟 Features
