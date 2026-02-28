@@ -156,10 +156,4 @@ The design engine performs:
 - ✅ Real-time cost database updates
 - ✅ Machine learning-based optimization
 
-
-
-[🌐 Live Demo](http://localhost:8000/Structured3D/FINAL_WORKING.html) | [📖 Documentation](HOW_TO_USE.md) | [🐛 Report Bug](https://github.com/TeenaSingh4640/CeraTech-2026/issues)
-
-⭐ **Star this repo if you find it useful!** ⭐
-
 </div>
