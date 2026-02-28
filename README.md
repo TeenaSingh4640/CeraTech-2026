@@ -34,64 +34,6 @@ A comprehensive web-based structural engineering platform that provides automate
 - **3D Models**: Export to CAD-compatible formats
 - **Rendering Prompts**: AI-ready architectural visualization prompts
 
----
-
-## 🚀 Quick Start
-
-### Prerequisites
-- **Python 3.x** (for running local server)
-- **Modern Web Browser** (Chrome, Edge, Firefox)
-- **Internet Connection** (for CDN resources: Font Awesome, Google Fonts)
-
-### Installation & Setup
-
-1. **Clone the Repository**
-   ```bash
-   git clone https://github.com/TeenaSingh4640/CeraTech-2026.git
-   cd CeraTech-2026
-   ```
-
-2. **Start the Local Server**
-   ```bash
-   python -m http.server 8000
-   ```
-
-3. **Open the Application**
-   - Navigate to: `http://localhost:8000/Structured3D/FINAL_WORKING.html`
-   - Or simply open the link in your browser after starting the server
-
----
-
-## 📖 How to Use
-
-### Step 1: Enter Project Details
-Fill in the configuration form with your project parameters:
-- **Plot Dimensions**: Length and width in meters
-- **Number of Floors**: Total floors in the building
-- **FAR (Floor Area Ratio)**: Local building code requirement
-- **Building Type**: Residential, Commercial, or Industrial
-- **Soil Type**: Select from available soil conditions
-
-### Step 2: Generate Design
-- Click the **"Generate Design"** button
-- The system will calculate:
-  - Total plot area and built-up area
-  - Concrete and steel quantities
-  - Detailed cost breakdown
-  - Structural recommendations
-
-### Step 3: View Results
-The dashboard displays:
-- **4 Key Stats Cards**: Built Area, Floors, Concrete Volume, Total Cost
-- **Project Details Table**: All input parameters and calculations
-- **Cost Breakdown**: Material-wise cost analysis with totals
-
-### Step 4: Visualize & Export
-- **View Drawings**: Click to see 6 architectural views in a popup window
-- **Export JSON**: Download complete design data for further analysis
-- **Generate 3D Models**: Use Python scripts for advanced 3D visualization
-
----
 
 ## 📁 Project Structure
 
@@ -202,22 +144,6 @@ The design engine performs:
 
 ---
 
-## 📝 Sample Projects
-
-Check the `/dummy_dataset/` folder for sample project data:
-- **scene_00000**: Residential building example
-- **scene_00001**: Commercial complex
-- **scene_00002**: Multi-floor apartment
-- **scene_00003**: Industrial facility
-
-Each scene includes:
-- Project parameters and configurations
-- Complete structural analysis
-- Cost estimation reports
-- 3D model data
-
----
-
 ## 🚧 Roadmap
 
 ### Coming Soon
@@ -229,31 +155,6 @@ Each scene includes:
 - ✅ BIM integration
 - ✅ Real-time cost database updates
 - ✅ Machine learning-based optimization
-
----
-
-## 🤝 Contributing
-
-This project was developed for the **2026 Design Competition**. 
-
-For suggestions or improvements:
-1. Fork the repository
-2. Create a feature branch
-3. Submit a pull request
-
----
-
-## 📄 License
-
-This project is part of CeraTech Design Suite v2.0
-
----
-
-## 👥 Author
-
-**Teena Singh**
-- GitHub: [@TeenaSingh4640](https://github.com/TeenaSingh4640)
-- Email: teenasingh4640@gmail.com
 
 
 
